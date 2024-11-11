@@ -1,2 +1,3 @@
-# ZenThemes
-A repository of all my Zen mods
+# Zen Themes
+
+A personal collection of my CSS Mods for [Zen Browser](https://zen-browser.app/).
