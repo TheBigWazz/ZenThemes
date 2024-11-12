@@ -4,4 +4,4 @@
 
 
 # Move Essentials to Bottom
-Moves your essentials to the bottom on the Sidebar.
+Moves your Essentials to the bottom on the Sidebar.
