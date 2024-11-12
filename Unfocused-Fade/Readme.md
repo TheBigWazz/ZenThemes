@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/e4dbdc6a-b550-49e9-b321-db38be6c1662" alt="Wazz's custom image"/>
+  <img src="https://github.com/user-attachments/assets/413dcbe1-d3cc-42b0-afd2-847310b7705c" alt="Wazz's custom image"/>
 </p>
 
 
