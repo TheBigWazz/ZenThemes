@@ -1,5 +1,20 @@
-/* Move #zen-essentials-container to the bottom of the sidebar */
-#zen-essentials-container {
-    margin-top: auto; /* Pushes #zen-essentials-container to the bottom */
-    order: 999; /* In case flexbox is used, ensure it's last */
- }
+/* === Move #zen-essentials-container to the bottom of the sidebar === */
+    #zen-essentials-container {
+      margin-top: auto; /* Pushes #zen-essentials-container to the bottom */
+      order: 999; /* In case flexbox is used, ensure it's last */
+    }
+
+    /* Set Essentials Container with Padding values */
+    #zen-essentials-container {
+      overflow: hidden;
+      transition: max-height 0.3s ease-out;
+      opacity: 1;
+      grid-template-columns: repeat(auto-fit, minmax(var(--tab-pinned-min-width-expanded), auto));
+      overflow-y: auto;
+      overflow-x: hidden;
+      scrollbar-width: thin;
+      display: grid;
+      padding-bottom: 5px !important;
+      padding-left: 0px !important;
+      padding-right: 0px !important;
+    }
