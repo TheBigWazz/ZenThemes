@@ -1,0 +1,209 @@
+/* === Personal Modifications === */
+
+/* --- Hide the Workspace Indicator --- */
+#zen-current-workspace-indicator {
+    display: none !important;
+}
+
+/* --- Inactive Window Theming --- */
+.tab-stack:-moz-window-inactive,
+#urlbar:-moz-window-inactive {
+    opacity: 0.5 !important;
+}
+
+#browser:-moz-window-inactive {
+    background-color: rgba(255, 255, 255, 0.1) !important; /* Lighter background when inactive */
+}
+
+/* --- Sidebar Essentials Container --- */
+#zen-essentials-container {
+    margin-top: auto; /* Push to the bottom */
+    order: 999; /* Ensure it's last */
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+    opacity: 1;
+    grid-template-columns: repeat(auto-fit, minmax(var(--tab-pinned-min-width-expanded), auto));
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    display: grid;
+    padding: 0 0 5px !important;
+}
+
+/* === Cohesion (Start) === */
+
+/* --- Integrated URL Bar & Webview Styles --- */
+@media not (-moz-bool-pref:"zen.view.compact") {
+  #browser:has(#navigator-toolbox[zen-expanded="true"]):not(:has(.zen-split-view-splitter)) { 
+    --urlbar-min-width: 28px !important;
+
+    #nav-bar {
+      --zen-toolbar-height: 36px;
+      background-color: rgba(0, 0, 0, 0.2) !important;
+      border-radius: 10px 10px 0 0 !important;
+      padding-left: 6px !important;
+      margin: 6px 6px 0 1px !important;
+    }
+
+    .browserContainer {
+      &:not([urlbar-exceeds-toolbar-bounds]) {
+        backdrop-filter: blur(10px) saturate(1.5);
+      }
+    }
+
+    .browserSidebarContainer {
+      background-color: rgba(0, 0, 0, 0.12) !important;
+    }
+  }
+
+  /* Border-radius adjustments based on sidebar state */
+  
+  /* When the sidebar is NOT displayed */
+  #browser:has(#navigator-toolbox[zen-expanded="true"]):not(:has(#sidebar-box[checked="true"])):not(:has(.zen-split-view-splitter)) .browserContainer { 
+    border-radius: 0 0 10px 10px !important; /* Rounded bottom corners only */
+  }
+
+  /* Sidebar displayed and its order is NOT '1' */
+  #browser:has(#navigator-toolbox[zen-expanded="true"]):has(#sidebar-box[checked="true"]:not([style*="order: 1"])):not(:has(.zen-split-view-splitter)) .browserContainer {
+    border-radius: 0 0 0 10px !important; /* Rounded bottom-left corner only */
+  }
+
+  /* Sidebar displayed and its order IS '1' */
+  #browser:has(#navigator-toolbox[zen-expanded="true"]):has(#sidebar-box[checked="true"][style*="order: 1"]):not(:has(.zen-split-view-splitter)) .browserContainer {
+    border-radius: 0 0 10px 0 !important; /* Rounded bottom-right corner only */
+  }
+}
+
+/* --- Transparent Sidebar Styles --- */
+#sidebar-box {
+  background-color: rgba(0, 0, 0, 0.2) !important;
+  border: none !important;
+}
+
+.sidebar-panel[lwt-sidebar] {
+  background-color: transparent !important;
+  border: none !important;
+}
+
+:root[lwt-sidebar] {
+  background-color: rgba(0, 0, 0, 0) !important;
+}
+
+/* Hide the Close button for a cleaner look */
+#sidebar-close {
+  display: none !important;
+}
+
+/* Change the Sidebar header style */
+#sidebar-header {
+  font-size: 1.333em;
+  padding: 5px !important;
+  border-bottom: 0 solid var(--sidebar-border-color) !important;
+}
+
+/* Right Sidebar Styles */
+:has(#sidebar-box[checked]:not([style*="order: 1"])) {
+  #tabbrowser-tabpanels {
+    padding-right: 0 !important;
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+  }
+  
+  #sidebar-box {
+    border-bottom-left-radius: 0 !important;
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+    box-shadow: none !important;
+  }
+  
+  #sidebar-splitter {
+    margin-right: -4px !important;
+    background-color: rgba(0, 0, 0, 0.2) !important;
+  }
+}
+
+/* Left Sidebar Styles */
+:has(#sidebar-box[checked][style*="order: 1"]) {
+  #tabbrowser-tabpanels {
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 10 !important;
+    border-bottom-left-radius: 0 !important;
+    border-top-left-radius: 0 !important;
+    box-shadow: none !important;
+  }
+  
+  #sidebar-box {
+    border-bottom-right-radius: 0 !important;
+    border-bottom-left-radius: 10 !important;
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+    box-shadow: none !important;
+  }
+  
+  #sidebar-splitter {
+    margin-right: -1px !important;
+    background-color: rgba(0, 0, 0, 0.2) !important;
+  }
+}
+
+/* --- Drop shadow to remove border --- */
+@-moz-document url-prefix("chrome:") {
+  & #tabbrowser-tabbox #tabbrowser-tabpanels .browserSidebarContainer {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1) !important;
+    --uc-tweak-rounded-corners-shadow-color: #141515 !important;
+  }
+
+  #tabbrowser-tabpanels[zen-split-view='true'] .browserSidebarContainer.deck-selected {
+    outline: 2px solid color-mix(in srgb, var(--zen-primary-color) 50%, transparent) !important;
+  }
+}
+
+
+/* === Cohesion (End) === */
+
+
+
+/* === Community Modifications === */
+
+/* --- Mini Container in URL --- */
+@-moz-document url-prefix('chrome://') {
+    #urlbar-container #page-action-buttons #userContext-icons {
+        position: relative;
+        order: 2;
+        height: 8px;
+        width: 8px;
+        background-color: var(--identity-icon-color);
+        border-radius: 32px;
+        margin-left: 12px !important;
+
+        & image,
+        & label {
+            display: none;
+        }
+    }
+}
+
+/* --- URL Bar Loading Highlight --- */
+#nav-bar {
+    #urlbar:not([breakout-extend="true"]) #urlbar-background::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(90deg, #ff6b6b66, #4ecdc466, #ff6b6b66);
+        background-size: 200% 100%;
+        animation: urlbar-loading-gradient 1s linear reverse infinite;
+        animation-play-state: paused;
+        opacity: 0;
+        transition: opacity 0.25s;
+    }
+
+    &:has(#reload-button[displaystop="true"]) #urlbar-background::before {
+        animation-play-state: running;
+        opacity: 1;
+    }
+}
+
+@keyframes urlbar-loading-gradient {
+    0% { background-position: 0% 0%; }
+    100% { background-position: 200% 0%; }
+}
