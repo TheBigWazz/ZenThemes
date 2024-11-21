@@ -1,0 +1,130 @@
+/* === Cohesion (Start) === */
+
+/* --- Integrated URL Bar & Webview Styles --- */
+@media not (-moz-bool-pref:"zen.view.compact") {
+  #browser:has(#navigator-toolbox[zen-expanded="true"]):not(:has(.zen-split-view-splitter)) { 
+    --urlbar-min-width: 28px !important;
+
+    #nav-bar {
+      --zen-toolbar-height: 36px;
+      background-color: rgba(0, 0, 0, 0.2) !important;
+      border-radius: 10px 10px 0 0 !important;
+      padding-left: 6px !important;
+      margin: 6px 6px 0 1px !important;
+    }
+
+    .browserContainer {
+      &:not([urlbar-exceeds-toolbar-bounds]) {
+        backdrop-filter: blur(10px) saturate(1.5);
+      }
+    }
+
+    .browserSidebarContainer {
+      background-color: rgba(0, 0, 0, 0.12) !important;
+    }
+  }
+
+  /* Border-radius adjustments based on sidebar state */
+  
+  /* When the sidebar is NOT displayed */
+  #browser:has(#navigator-toolbox[zen-expanded="true"]):not(:has(#sidebar-box[checked="true"])):not(:has(.zen-split-view-splitter)) .browserContainer { 
+    border-radius: 0 0 10px 10px !important; /* Rounded bottom corners only */
+  }
+
+  /* Sidebar displayed and its order is NOT '1' */
+  #browser:has(#navigator-toolbox[zen-expanded="true"]):has(#sidebar-box[checked="true"]:not([style*="order: 1"])):not(:has(.zen-split-view-splitter)) .browserContainer {
+    border-radius: 0 0 0 10px !important; /* Rounded bottom-left corner only */
+  }
+
+  /* Sidebar displayed and its order IS '1' */
+  #browser:has(#navigator-toolbox[zen-expanded="true"]):has(#sidebar-box[checked="true"][style*="order: 1"]):not(:has(.zen-split-view-splitter)) .browserContainer {
+    border-radius: 0 0 10px 0 !important; /* Rounded bottom-right corner only */
+  }
+}
+
+/* --- Transparent Sidebar Styles --- */
+#sidebar-box {
+  background-color: rgba(0, 0, 0, 0.2) !important;
+  border: none !important;
+}
+
+.sidebar-panel[lwt-sidebar] {
+  background-color: transparent !important;
+  border: none !important;
+}
+
+:root[lwt-sidebar] {
+  background-color: rgba(0, 0, 0, 0) !important;
+}
+
+/* Hide the Close button for a cleaner look */
+#sidebar-close {
+  display: none !important;
+}
+
+/* Change the Sidebar header style */
+#sidebar-header {
+  font-size: 1.333em;
+  padding: 5px !important;
+  border-bottom: 0 solid var(--sidebar-border-color) !important;
+}
+
+/* Right Sidebar Styles */
+:has(#sidebar-box[checked]:not([style*="order: 1"])) {
+  #tabbrowser-tabpanels {
+    padding-right: 0 !important;
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+  }
+  
+  #sidebar-box {
+    border-bottom-left-radius: 0 !important;
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+    box-shadow: none !important;
+  }
+  
+  #sidebar-splitter {
+    margin-right: -4px !important;
+    background-color: rgba(0, 0, 0, 0.2) !important;
+  }
+}
+
+/* Left Sidebar Styles */
+:has(#sidebar-box[checked][style*="order: 1"]) {
+  #tabbrowser-tabpanels {
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 10 !important;
+    border-bottom-left-radius: 0 !important;
+    border-top-left-radius: 0 !important;
+    box-shadow: none !important;
+  }
+  
+  #sidebar-box {
+    border-bottom-right-radius: 0 !important;
+    border-bottom-left-radius: 10 !important;
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+    box-shadow: none !important;
+  }
+  
+  #sidebar-splitter {
+    margin-right: -1px !important;
+    background-color: rgba(0, 0, 0, 0.2) !important;
+  }
+}
+
+/* --- Drop shadow to remove border --- */
+@-moz-document url-prefix("chrome:") {
+  & #tabbrowser-tabbox #tabbrowser-tabpanels .browserSidebarContainer {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1) !important;
+    --uc-tweak-rounded-corners-shadow-color: #141515 !important;
+  }
+
+  #tabbrowser-tabpanels[zen-split-view='true'] .browserSidebarContainer.deck-selected {
+    outline: 2px solid color-mix(in srgb, var(--zen-primary-color) 50%, transparent) !important;
+  }
+}
+
+
+/* === Cohesion (End) === */
