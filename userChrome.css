@@ -85,9 +85,8 @@
   border: none !important;
 }
 
-#template-container.content-scrollable{
-    background-color: rgba(0, 0, 0, 0) !important;
-    --lwt-sidebar-background-color: rgba(0, 0, 0, 0.2) !important;
+:root[lwt-sidebar] {
+  background-color: rgba(0, 0, 0, 0) !important;
 }
 
 /* Hide the Close button for a cleaner look */
@@ -119,6 +118,30 @@
   
   #sidebar-splitter {
     margin-right: -4px !important;
+    background-color: rgba(0, 0, 0, 0.2) !important;
+  }
+}
+
+/* Left Sidebar Styles */
+:has(#sidebar-box[checked][style*="order: 1"]) {
+  #tabbrowser-tabpanels {
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 10 !important;
+    border-bottom-left-radius: 0 !important;
+    border-top-left-radius: 0 !important;
+    box-shadow: none !important;
+  }
+  
+  #sidebar-box {
+    border-bottom-right-radius: 0 !important;
+    border-bottom-left-radius: 10 !important;
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+    box-shadow: none !important;
+  }
+  
+  #sidebar-splitter {
+    margin-right: -1px !important;
     background-color: rgba(0, 0, 0, 0.2) !important;
   }
 }
