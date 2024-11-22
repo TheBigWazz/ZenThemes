@@ -1,10 +1,9 @@
-/* === Cohesion (Start) === */
-
 /* --- Integrated URL Bar & Webview Styles --- */
 @media not (-moz-bool-pref:"zen.view.compact") {
-  #browser:has(#navigator-toolbox[zen-expanded="true"]):not(:has(.zen-split-view-splitter)) { 
+  #browser { 
     --urlbar-min-width: 28px !important;
 
+    /* Nav bar style and transparency level */
     #nav-bar {
       --zen-toolbar-height: 36px;
       background-color: rgba(0, 0, 0, 0.2) !important;
@@ -13,70 +12,112 @@
       margin: 6px 6px 0 1px !important;
     }
 
+    /* BrowserContainer blur style */
     .browserContainer {
       &:not([urlbar-exceeds-toolbar-bounds]) {
         backdrop-filter: blur(10px) saturate(1.5);
       }
     }
 
+    /* Browser transparency level */
     .browserSidebarContainer {
       background-color: rgba(0, 0, 0, 0.12) !important;
     }
   }
 
-  /* Border-radius adjustments based on sidebar state */
+  /* --- Border-radius adjustments based on sidebar state --- */
   
-  /* When the sidebar is NOT displayed */
-  #browser:has(#navigator-toolbox[zen-expanded="true"]):not(:has(#sidebar-box[checked="true"])):not(:has(.zen-split-view-splitter)) .browserContainer { 
-    border-radius: 0 0 10px 10px !important; /* Rounded bottom corners only */
-  }
-
-  /* Sidebar displayed and its order is NOT '1' */
-  #browser:has(#navigator-toolbox[zen-expanded="true"]):has(#sidebar-box[checked="true"]:not([style*="order: 1"])):not(:has(.zen-split-view-splitter)) .browserContainer {
-    border-radius: 0 0 0 10px !important; /* Rounded bottom-left corner only */
-  }
-
-  /* Sidebar displayed and its order IS '1' */
-  #browser:has(#navigator-toolbox[zen-expanded="true"]):has(#sidebar-box[checked="true"][style*="order: 1"]):not(:has(.zen-split-view-splitter)) .browserContainer {
-    border-radius: 0 0 10px 0 !important; /* Rounded bottom-right corner only */
-  }
+  /* Base state - No sidebars displayed */
+#browser:has(#navigator-toolbox[zen-expanded="true"]):not(:has(#sidebar-box[checked="true"])):not(:has(.zen-sidebar-web-panel)) .browserContainer {
+  border-radius: 0 0 10px 10px !important;
 }
 
-/* --- Transparent Sidebar Styles --- */
+/* Single Sidebar States */
+
+/* Only regular sidebar displayed with order 1 */
+#browser:has(#navigator-toolbox[zen-expanded="true"]):has(#sidebar-box[checked="true"][style*="order: 1"]):not(:has(.zen-sidebar-web-panel)) .browserContainer {
+  border-radius: 0 0 10px 0 !important;
+}
+
+/* Only regular sidebar displayed with order not 1 */
+#browser:has(#navigator-toolbox[zen-expanded="true"]):has(#sidebar-box[checked="true"]:not([style*="order: 1"])):not(:has(.zen-sidebar-web-panel)) .browserContainer {
+  border-radius: 0 0 0 10px !important;
+}
+
+/* Only zen-sidebar displayed with order 1 */
+#browser:has(#navigator-toolbox[zen-expanded="true"]):has(.zen-sidebar-web-panel[style*="order: 1"]):not(:has(#sidebar-box[checked="true"])) .browserContainer {
+  border-radius: 0 0 0px 0 !important;
+}
+
+/* Only zen-sidebar displayed with order not 1 */
+#browser:has(#navigator-toolbox[zen-expanded="true"]):has(.zen-sidebar-web-panel:not([style*="order: 1"])):not(:has(#sidebar-box[checked="true"])) .browserContainer {
+  border-radius: 0 0 0 10px !important;
+}
+
+/* Both Sidebars States */
+
+/* Both sidebars with order 1 */
+#browser:has(#navigator-toolbox[zen-expanded="true"]):has(#sidebar-box[checked="true"][style*="order: 1"]):has(.zen-sidebar-web-panel[style*="order: 1"]) .browserContainer {
+  border-radius: 0 0 10px 0 !important;
+}
+
+/* Both sidebars with order not 1 */
+#browser:has(#navigator-toolbox[zen-expanded="true"]):has(#sidebar-box[checked="true"]:not([style*="order: 1"])):has(.zen-sidebar-web-panel:not([style*="order: 1"])) .browserContainer {
+  border-radius: 0 0 0 10px !important;
+}
+
+/* Mixed order states - No rounded corners */
+#browser:has(#navigator-toolbox[zen-expanded="true"]):has(#sidebar-box[checked="true"][style*="order: 1"]):has(.zen-sidebar-web-panel:not([style*="order: 1"])) .browserContainer,
+#browser:has(#navigator-toolbox[zen-expanded="true"]):has(#sidebar-box[checked="true"]:not([style*="order: 1"])):has(.zen-sidebar-web-panel[style*="order: 1"]) .browserContainer {
+  border-radius: 0 !important;
+}
+
+/* --- Transparent Styles --- */
+
+/* Sidebar header */
 #sidebar-box {
   background-color: rgba(0, 0, 0, 0.2) !important;
   border: none !important;
 }
 
+/* Sidebar body */
 .sidebar-panel[lwt-sidebar] {
   background-color: transparent !important;
   border: none !important;
 }
 
+/* Synced Tabs page */
 :root[lwt-sidebar] {
   background-color: rgba(0, 0, 0, 0) !important;
 }
 
-/* Hide the Close button for a cleaner look */
-#sidebar-close {
-  display: none !important;
+/* Bookmark bar */
+#PersonalToolbar:not([collapsed="true"]) {
+  padding-bottom: 6px;
+  margin-right: 6px !important;
+  margin-left: 1px !important;
+  background: rgba(0, 0, 0, 0.27) !important;
 }
 
-/* Change the Sidebar header style */
-#sidebar-header {
-  font-size: 1.333em;
-  padding: 5px !important;
-  border-bottom: 0 solid var(--sidebar-border-color) !important;
-}
+/* Findbar */
+findbar {
+	background: none !important;
+  border-top: none !important;
+ 	}
+
+/* Left and Right State styles */
 
 /* Right Sidebar Styles */
 :has(#sidebar-box[checked]:not([style*="order: 1"])) {
+  
+  /* Browser radius settings */
   #tabbrowser-tabpanels {
     padding-right: 0 !important;
     border-top-right-radius: 0 !important;
     border-bottom-right-radius: 0 !important;
   }
   
+  /* Sidebar radius settings */
   #sidebar-box {
     border-bottom-left-radius: 0 !important;
     border-top-left-radius: 0 !important;
@@ -84,6 +125,7 @@
     box-shadow: none !important;
   }
   
+  /* Splitter style */
   #sidebar-splitter {
     margin-right: -4px !important;
     background-color: rgba(0, 0, 0, 0.2) !important;
@@ -92,26 +134,89 @@
 
 /* Left Sidebar Styles */
 :has(#sidebar-box[checked][style*="order: 1"]) {
+  
+  /* Browser radius settings */
   #tabbrowser-tabpanels {
-    border-top-right-radius: 0 !important;
-    border-bottom-right-radius: 10 !important;
-    border-bottom-left-radius: 0 !important;
-    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0px !important;
+    border-bottom-right-radius: 10px !important;
+    border-bottom-left-radius: 0px !important;
+    border-top-left-radius: 0px !important;
     box-shadow: none !important;
   }
-  
+  /* Sidebar radius settings */
   #sidebar-box {
     border-bottom-right-radius: 0 !important;
     border-bottom-left-radius: 10 !important;
     border-top-left-radius: 0 !important;
     border-top-right-radius: 0 !important;
     box-shadow: none !important;
+    margin-left: 1px !important;
   }
-  
+  /* Splitter style */
   #sidebar-splitter {
     margin-right: -1px !important;
     background-color: rgba(0, 0, 0, 0.2) !important;
   }
+}
+
+/* --- Zen Sidebar styles --- */
+
+/* Main Zen Sidebar Left Style */ 
+:has(#zen-sidebar-web-panel:not([hidden])) {
+  
+  /* Zen Sidebar main style */
+  #zen-sidebar-web-panel {
+    padding-right: 0px !important;
+    margin-left: -5px !important;
+    border-radius: 0px 0px 0px 10px !important;
+    border: 0px solid var(--zen-colors-border) !important;
+    background-color: rgba(0, 0, 0, 0.2) !important;
+    box-shadow: none !important;
+  }
+  /* Browser style changes */
+  #tabbrowser-tabpanels {
+    border-bottom-left-radius: 0px !important;
+    margin-left: -3px !important;
+    box-shadow: none !important;
+    padding-left: 0px !important;
+  }
+  
+  /* Zen Sidebar header style */
+  #zen-sidebar-web-header {
+    border: 0px !important;
+    box-shadow: none !important;
+  }
+  
+  /* Zen Sidebar footer style */
+  #zen-sidebar-panels-wrapper {
+  border-top-width: 0px !important;
+  border-bottom-width: 0px !important;
+  }
+  
+  #sidebar-box {
+    margin-left: -4px !important;
+  }
+}
+
+/* Zen Sidebar Splitter */
+#zen-sidebar-web-panel-splitter {
+  background-color: rgba(0, 0, 0, 0.0) !important;
+  margin-right: 1px !important;
+}
+
+
+/* --- Clean up styles --- */
+
+/* Hide the Close button */
+#sidebar-close {
+  display: none !important;
+}
+
+/* Hide the Border */
+#sidebar-header {
+  font-size: 1.333em;
+  padding: 5px !important;
+  border-bottom: 0 solid var(--sidebar-border-color) !important;
 }
 
 /* --- Drop shadow to remove border --- */
@@ -125,6 +230,3 @@
     outline: 2px solid color-mix(in srgb, var(--zen-primary-color) 50%, transparent) !important;
   }
 }
-
-
-/* === Cohesion (End) === */
