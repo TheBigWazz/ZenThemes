@@ -70,25 +70,40 @@
 #browser:has(#navigator-toolbox[zen-expanded="true"]):has(#sidebar-box[checked="true"][style*="order: 1"]):has(.zen-sidebar-web-panel:not([style*="order: 1"])) .browserContainer,
 #browser:has(#navigator-toolbox[zen-expanded="true"]):has(#sidebar-box[checked="true"]:not([style*="order: 1"])):has(.zen-sidebar-web-panel[style*="order: 1"]) .browserContainer {
   border-radius: 0 !important;
+  
 }
 
 /* --- Transparent Styles --- */
 
-/* Sidebar header */
+/* Clean & Transparent Sidebar */
 #sidebar-box {
-  background-color: rgba(0, 0, 0, 0.2) !important;
+  background-color: rgba(0, 0, 0, 0.2) !important; !important;
   border: none !important;
+  & #sidebar-header {
+    border-bottom: none !important;
+  }
 }
 
-/* Sidebar body */
-.sidebar-panel[lwt-sidebar] {
+#sidebar-search-container > #search-box,
+#viewButton {
+  padding: 4px 8px !important;
+
+  appearance: none !important;
   background-color: transparent !important;
+  border-radius: 10px !important;
   border: none !important;
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+  }
+  &:active {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+  }
 }
-
+  
 /* Synced Tabs page */
 :root[lwt-sidebar] {
   background-color: rgba(0, 0, 0, 0) !important;
+  
 }
 
 /* Bookmark bar */
@@ -96,7 +111,7 @@
   padding-bottom: 6px;
   margin-right: 6px !important;
   margin-left: 1px !important;
-  background: rgba(0, 0, 0, 0.27) !important;
+  background: rgba(0, 0, 0, 0.25) !important;
 }
 
 /* Findbar */
@@ -194,7 +209,7 @@ findbar {
   }
   
   #sidebar-box {
-    margin-left: -4px !important;
+    margin-left: -0px !important;
   }
 }
 
@@ -203,7 +218,6 @@ findbar {
   background-color: rgba(0, 0, 0, 0.0) !important;
   margin-right: 1px !important;
 }
-
 
 /* --- Clean up styles --- */
 
