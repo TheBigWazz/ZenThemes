@@ -9,10 +9,16 @@ Below are all my customizations, mods, layouts, extensions, and theme colors.
 
 https://github.com/user-attachments/assets/b44f2895-1bf6-412a-bb20-cf43fc8fb56c
 
-## About:Config options
-```browser.tabs.allow_transparent_browser``` = ```true```
+## About:Config Options
+```browser.tabs.allow_transparent_browser``` = ```true```*
 
 ```zen.workspaces.show-workspace-indicator``` = ```true```
+
+In Zen settings, set New Tabs to ```Blank Page```
+
+**Websites without a background will display the browser UI underneath the content.*
+
+*Extensions like [Dark Reader](https://addons.mozilla.org/en-US/firefox/addon/darkreader/?utm_source=addons.mozilla.org&utm_medium=referral&utm_content=search) fix this by setting their own background.*
 
 ## Toolbar Layout
 ![image](https://github.com/user-attachments/assets/bf7919db-9e69-4aa5-8bfb-2a21d8da7813)
@@ -20,8 +26,8 @@ https://github.com/user-attachments/assets/b44f2895-1bf6-412a-bb20-cf43fc8fb56c
 
 ## Extensions
 * [Copy Tab URL](https://addons.mozilla.org/en-US/firefox/addon/zen-copy-tab-url/)
-
 * [Proton Pass](https://addons.mozilla.org/en-US/firefox/addon/proton-pass/)
+* [Dark Reader](https://addons.mozilla.org/en-US/firefox/addon/darkreader/?utm_source=addons.mozilla.org&utm_medium=referral&utm_content=search)
 
 ## Mods
 * [Cohesion](https://github.com/TheBigWazz/ZenThemes/tree/main/Cohesion) (*Included with ```current-userChrome.css```*)
