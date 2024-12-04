@@ -14,8 +14,7 @@ Set ```browser.tabs.allow_transparent_browser``` = ```true```
 
 In Zen settings > Home, set New Tabs to ```Blank Page```
 
-### V-0.0.1
-
+## V-0.0.1
 
 #### Known Issues:
 
