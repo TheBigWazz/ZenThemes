@@ -9,15 +9,24 @@ A cohesive, transparent, and integrated style for Multiple Toolbar layout in [Ze
 
 https://github.com/user-attachments/assets/df5f3a31-9d01-4969-961c-9c0aa331e2e2
 
+## Config
+Set ```browser.tabs.allow_transparent_browser``` = ```true```
 
+In Zen settings > Home, set New Tabs to ```Blank Page```
 
 ### V-0.0.1
 
 
 #### Known Issues:
 
+*-Twilight not supported*
+
 *-Currently not compatible with [Zen Sidebar At Right Side](https://zen-browser.app/mods/dd4f5461-1564-4e56-9f9d-f81e3c18f93c)*
 
 *-Floating Zen Sidebar is transparent*
 
 *-Synced Tabs page in Normal Sidebar is not transparent*
+
+*-Websites without a background will display the browser UI underneath the content.*
+
+*(Extensions like [Dark Reader](https://addons.mozilla.org/en-US/firefox/addon/darkreader/?utm_source=addons.mozilla.org&utm_medium=referral&utm_content=search) fix this by setting their own background.)*
