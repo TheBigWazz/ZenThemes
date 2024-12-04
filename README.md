@@ -12,7 +12,7 @@ https://github.com/user-attachments/assets/b44f2895-1bf6-412a-bb20-cf43fc8fb56c
 ## About:Config Options
 ```browser.tabs.allow_transparent_browser``` = ```true```*
 
-```zen.workspaces.show-workspace-indicator``` = ```true```
+```zen.workspaces.show-workspace-indicator``` = ```false```
 
 In Zen settings, set New Tabs to ```Blank Page```
 
