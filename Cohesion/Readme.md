@@ -18,13 +18,15 @@ In Zen settings > Home, set New Tabs to ```Blank Page```
 
 #### Known Issues:
 
-*-Twilight not supported*
+*-Twilight not supported (See my [Twilight Customizations](https://github.com/TheBigWazz/ZenThemes/blob/main/Twilight-Themes/Current-setup/Readme.md) for a Twilight solution)* 
 
 *-Currently not compatible with [Zen Sidebar At Right Side](https://zen-browser.app/mods/dd4f5461-1564-4e56-9f9d-f81e3c18f93c)*
 
 *-Floating Zen Sidebar is transparent*
 
 *-Synced Tabs page in Normal Sidebar is not transparent*
+
+*-Compact Mode has top left and right squared corners*
 
 *-Websites without a background will display the browser UI underneath the content.*
 
