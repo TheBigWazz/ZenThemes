@@ -6,6 +6,7 @@
 
 A cohesive, transparent, and integrated style for Multiple Toolbar layout in [Zen Browser](https://zen-browser.app/)
 
+# Not working on zen b.0 - update coming soon
 
 https://github.com/user-attachments/assets/df5f3a31-9d01-4969-961c-9c0aa331e2e2
 
