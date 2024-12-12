@@ -5,11 +5,15 @@ A personal collection of my CSS Mods for [Zen Browser](https://zen-browser.app/)
 Below are all my customizations, mods, layouts, extensions, and theme colors.
 
 # Current CSS Preview
-**Not compatible with Twilight*
 
-https://github.com/user-attachments/assets/b44f2895-1bf6-412a-bb20-cf43fc8fb56c
+**Transparent UI by [MicaForEveryone](https://github.com/MicaForEveryone/MicaForEveryone)*
 
-## About:Config Options
+**Transparent New Tab and Integrated URL Style by [Cohesion](https://github.com/TheBigWazz/ZenThemes/tree/main/Cohesion)*
+
+![image](https://github.com/user-attachments/assets/b88310d9-296a-4c3d-a15b-d7ab2a7f5711)
+
+
+## ```about:config``` Options
 ```browser.tabs.allow_transparent_browser``` = ```true```*
 
 ```zen.workspaces.show-workspace-indicator``` = ```false```
@@ -58,5 +62,6 @@ In Zen Settings > Home, set New Tabs to ```Blank Page```
   * [x] Always open websites in a new tab when using url bar
 
 ## Gradient
-![image](https://github.com/user-attachments/assets/be6ffcff-4507-408e-853c-f54962e4a288)
+![image](https://github.com/user-attachments/assets/e1b90e37-0394-4c19-b0b7-81c6bf8eab4f)
+
 
