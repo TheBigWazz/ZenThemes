@@ -15,19 +15,22 @@ Set ```browser.tabs.allow_transparent_browser``` = ```true```
 
 In Zen settings > Home, set New Tabs to ```Blank Page```
 
-## V-0.0.1
+## V-0.0.2
+#### Changes:
+
+*-Add Twilight support*
+
+*-Add Beta support*
+
+*-Fixed Compact Mode top left and right corner radius*
 
 #### Known Issues:
-
-*-Twilight not supported (See my [Twilight Customizations](https://github.com/TheBigWazz/ZenThemes/blob/main/Twilight-Themes/Current-setup/Readme.md) for a Twilight solution)* 
 
 *-Currently not compatible with [Zen Sidebar At Right Side](https://zen-browser.app/mods/dd4f5461-1564-4e56-9f9d-f81e3c18f93c)*
 
 *-Floating Zen Sidebar is transparent*
 
-*-Synced Tabs page in Normal Sidebar is not transparent*
-
-*-Compact Mode has top left and right squared corners*
+*Normal Sidebar is not transparent (Bookmarks, History, Synced Tabs)*
 
 *-Websites without a background will display the browser UI underneath the content.*
 
