@@ -32,6 +32,8 @@ In Zen settings > Home, set New Tabs to ```Blank Page```
 
 *Normal Sidebar is not transparent (Bookmarks, History, Synced Tabs)*
 
+*Some HDR displays render an incorrect Alpha value for certian elements, even though they are consistant within the userChrome.css file. This is believed to be a Windows HDR bug.*
+
 *-Websites without a background will display the browser UI underneath the content.*
 
 *(Extensions like [Dark Reader](https://addons.mozilla.org/en-US/firefox/addon/darkreader/?utm_source=addons.mozilla.org&utm_medium=referral&utm_content=search) fix this by setting their own background.)*
