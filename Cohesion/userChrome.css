@@ -2,24 +2,26 @@
 
 /* --- Style adjustments based on sidebar states --- */
 
-/* Base state - No sidebars displayed */
-#browser:has(#navigator-toolbox[zen-expanded="true"]):not(:has(#sidebar-box[checked="true"])):not(:has(#zen-sidebar-web-panel:not([hidden]))) 
-  .browserContainer {
-    border-radius: 0 0 10px 10px !important;
-  }
+/* Base state - No sidebars displayed - non-compact */
+@media not (-moz-bool-pref: "zen.view.compact") {
+  #browser:not(:has(#sidebar-box[checked="true"])):not(:has(#zen-sidebar-web-panel:not([hidden]))) 
+    .browserSidebarContainer {
+      border-radius: 0 0 10px 10px !important;
+    }
+}
 
 /* Only Normal Sidebar on Left */
-#browser:has(#navigator-toolbox[zen-expanded="true"]):has(#sidebar-box[checked="true"][style*="order: 1"]):not(:has(#zen-sidebar-web-panel:not([hidden]))) {
+#browser:has(#sidebar-box[checked="true"][style*="order: 1"]):not(:has(#zen-sidebar-web-panel:not([hidden]))) {
   
   /* Browser page style */
-  .browserContainer {
-    border-radius: 0 0 10px 0 !important;
+  .browserSidebarContainer {
+    border-radius: 0px 0px 10px 0px !important;
   }
   
   /* Browser page style */
   #tabbrowser-tabpanels {
-    border-bottom-left-radius: 0px !important;
-    margin-left: -3px !important;
+    border-radius: 0px 0px 0px 0px !important;
+    margin-left: 0px !important;
     box-shadow: none !important;
     padding-left: 0px !important;
   }
@@ -29,7 +31,8 @@
     border-radius: 0px 0px 0px 10px !important;
     box-shadow: none !important;
     margin-left: 1px !important;
-    margin-right: 4px !important;
+    margin-right: 0px !important;
+    margin-bottom: 1px !important;
   }
   
   /* Splitter style */
@@ -40,18 +43,18 @@
 }
 
 /* Only Normal Sidebar on Right */
-#browser:has(#navigator-toolbox[zen-expanded="true"]):has(#sidebar-box[checked="true"]:not([style*="order: 1"])):not(:has(#zen-sidebar-web-panel:not([hidden]))) {
+#browser:has(#sidebar-box[checked="true"]:not([style*="order: 1"])):not(:has(#zen-sidebar-web-panel:not([hidden]))) {
   
   /* Browser page style */
-  .browserContainer {
+  .browserSidebarContainer {
     border-radius: 0px 0px 0px 10px !important;
   }
   
   /* Browser page style */
   #tabbrowser-tabpanels {
-    padding-right: 0 !important;
-    border-top-right-radius: 0 !important;
-    border-bottom-right-radius: 0 !important;
+    padding-right: 0px !important;
+    border-radius: 0px 0px 0px 0px !important;
+    
   }
   
   /* Normal Sidebar style */
@@ -59,7 +62,9 @@
     border-radius: 0px 0px 10px 0px !important;
     box-shadow: none !important;
     margin-left: -4px !important;
-    margin-right: 6px !important;
+    margin-right: 0px !important;
+    margin-bottom: 1px !important;
+    background-color: rgba(0, 0, 0, 0.2) !important;
   }
   
   /* Splitter style */
@@ -70,28 +75,29 @@
 }
 
 /* Only zen-sidebar on Left */
-#browser:has(#navigator-toolbox[zen-expanded="true"]):has(#zen-sidebar-web-panel:not([hidden])):not(:has(#sidebar-box[checked="true"])) {
+#browser:has(#zen-sidebar-web-panel:not([hidden])):not(:has(#sidebar-box[checked="true"])) {
   
   /* Browser page style */
-  .browserContainer {
+  .browserSidebarContainer {
     border-radius: 0 0 10px 0 !important;
   }
   
   /* Browser page style */
   #tabbrowser-tabpanels {
     border-bottom-left-radius: 0px !important;
-    margin-left: -3px !important;
+    margin-left: -10px !important;
     box-shadow: none !important;
     padding-left: 0px !important;
   } 
   
   #zen-sidebar-web-panel {
     padding-right: 0px !important;
-    margin-left: -5px !important;
+    margin-left: 1px !important;
     border-radius: 0px 0px 0px 10px !important;
     border: 0px solid var(--zen-colors-border) !important;
     background-color: rgba(0, 0, 0, 0.2) !important;
     box-shadow: none !important;
+    margin-bottom: 1px !important;
   }
   
   /* Zen Sidebar header style */
@@ -108,13 +114,13 @@
 } 
 
 /* Both sidebars displayed - normal on left */
-#browser:has(#navigator-toolbox[zen-expanded="true"])
-        :has(#sidebar-box[checked="true"][style*="order: 1"])
+#browser:has(#sidebar-box[checked="true"][style*="order: 1"])
         :has(#zen-sidebar-web-panel:not([hidden])) {
   
   /* Browser page style */
-  .browserContainer {
+  .browserSidebarContainer {
     border-radius: 0px 0px 10px 0px !important;
+    margin-left: -9px !important;
   }
   
   /* Browser page style */
@@ -125,10 +131,11 @@
   
   /* Normal Sidebar style */
   #sidebar-box {
-    border-radius: 0px 0px 0px 0px !important;
+    border-radius: 0px 0px 0px 10px !important;
     box-shadow: none !important;
-    margin-left: -3px !important;
-    margin-right: -1px !important;
+    margin-left: 1px !important;
+    margin-right: 5px !important;
+    margin-bottom: 1px !important;
   }
   
   /* Splitter style */
@@ -141,10 +148,11 @@
   #zen-sidebar-web-panel {
     padding-right: 0px !important;
     margin-left: -5px !important;
-    border-radius: 0px 0px 0px 10px !important;
+    border-radius: 0px 0px 0px 0px !important;
     border: 0px solid var(--zen-colors-border) !important;
     background-color: rgba(0, 0, 0, 0.2) !important;
     box-shadow: none !important;
+    margin-bottom: 1px !important;
   }
   
   /* Zen Sidebar header style */
@@ -161,27 +169,28 @@
 }
 
 /* Both sidebars displayed - normal on Right */
-#browser:has(#navigator-toolbox[zen-expanded="true"])
-        :has(#sidebar-box[checked="true"]:not([style*="order: 1"]))
+#browser:has(#sidebar-box[checked="true"]:not([style*="order: 1"]))
         :has(#zen-sidebar-web-panel:not([hidden])) {
           
   /* Browser page style */
-  .browserContainer {
+  .browserSidebarContainer {
     border-radius: 0px 0px 0px 0px !important;
   }
   
   /* Browser page style */
   #tabbrowser-tabpanels {
     box-shadow : none !important;
-    margin-right: -10px !important;
-    margin-left: -4px !important;
+    margin-right: 0px !important;
+    margin-left: 0px !important;
   }
   
   /* Normal Sidebar style */
   #sidebar-box {
     border-radius: 0px 0px 10px 0px !important;
     box-shadow: none !important;
-    margin-left: 0px !important;
+    margin-left: -4px !important;
+    margin-bottom: 1px !important;
+    background-color: rgba(0, 0, 0, 0.26) !important;
   }
   
   /* Splitter style */
@@ -193,7 +202,9 @@
   /* zen-sidebar style */
   #zen-sidebar-web-panel {
     padding-right: 0px !important;
-    margin-left: -5px !important;
+    margin-left: 1px !important;
+    margin-right: -10px !important;
+    margin-bottom: 1px !important;
     border-radius: 0px 0px 0px 10px !important;
     border: 0px solid var(--zen-colors-border) !important;
     background-color: rgba(0, 0, 0, 0.2) !important;
@@ -229,19 +240,31 @@
     border-radius: 10px 10px 0 0 !important;
     padding-left: 6px !important;
     margin: 6px 6px 0 1px !important;
-  }
+    box-shadow: none !important;
+  }  
+}
 
-  /* BrowserContainer blur style */
-  .browserContainer {
-    &:not([urlbar-exceeds-toolbar-bounds]) {
-      backdrop-filter: blur(10px) saturate(1.5);
-    }
-  }
-
-  /* Browser transparency level */
+  /* Browser styling with semi-transparent background and rounded corners (non-compact mode) */
+@media not (-moz-bool-pref: "zen.view.compact") {
   .browserSidebarContainer {
-    background-color: rgba(0, 0, 0, 0.12) !important;
+    background-color: rgba(0, 0, 0, 0.2) !important;
+    margin-top: 0px !important;
+    margin-right: 0px !important;
+    box-shadow: none !important;
+    border-radius: 10px 10px 10px 10px !important;
   }
+}
+
+  /* Browser styling with semi-transparent background and rounded corners (non-compact mode) */
+@media (-moz-bool-pref: "zen.view.compact") {
+  .browserSidebarContainer {
+    background-color: rgba(0, 0, 0, 0.2) !important;
+    margin-top: 0px !important;
+    margin-right: 0px !important;
+    box-shadow: none !important;
+    border-radius: 10px 10px 10px 10px !important;
+  }
+}
   
   /* Toolbar spacing */
   #navigator-toolbox {
@@ -252,8 +275,8 @@
 /* --- Transparent Styles --- */
 
 /* Transparent Normal Sidebar background */
-.sidebar-panel[lwt-sidebar] {
-  background-color: rgba(255, 255, 255, 0.0) !important;
+#sidebar-box {
+  background: rgba(255, 255, 255, 0.0) !important;
   }
 
 /* Transparent Bookmark bar */
@@ -261,7 +284,7 @@
   padding-bottom: 6px;
   margin-right: 6px !important;
   margin-left: 1px !important;
-  background: rgba(0, 0, 0, 0.25) !important;
+  background: rgba(0, 0, 0, 0.2) !important;
 }
  
 /* Transparent Findbar */
@@ -272,7 +295,7 @@ findbar {
 
   /* Cleaned & Transparent Sidebar */
 #sidebar-box {
-  background-color: rgba(0, 0, 0, 0.2) !important;
+  background-color: rgba(0, 0, 0, .2) !important;
   border: none !important;
   & #sidebar-header {
     border-bottom: none !important;
@@ -304,18 +327,6 @@ findbar {
   font-size: 1.333em;
   padding: 5px !important;
   border-bottom: 0 solid var(--sidebar-border-color) !important;
-}
-
-/* --- Drop shadow effect to remove border --- */
-@-moz-document url-prefix("chrome:") {
-  & #tabbrowser-tabbox #tabbrowser-tabpanels .browserSidebarContainer {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1) !important;
-    --uc-tweak-rounded-corners-shadow-color: #141515 !important;
-  }
-
-  #tabbrowser-tabpanels[zen-split-view='true'] .browserSidebarContainer.deck-selected {
-    outline: 2px solid color-mix(in srgb, var(--zen-primary-color) 50%, transparent) !important;
-  }
 }
 
 /* === Cohesion (End) === */
