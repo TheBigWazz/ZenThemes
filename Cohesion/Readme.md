@@ -6,6 +6,7 @@
 
 A cohesive, transparent, and integrated style for Multiple Toolbar layout in [Zen Browser](https://zen-browser.app/)
 
+# Partly working on zen b.0 - more updates coming soon
 
 https://github.com/user-attachments/assets/df5f3a31-9d01-4969-961c-9c0aa331e2e2
 
@@ -14,17 +15,24 @@ Set ```browser.tabs.allow_transparent_browser``` = ```true```
 
 In Zen settings > Home, set New Tabs to ```Blank Page```
 
-## V-0.0.1
+## V-0.0.2
+#### Changes:
+
+*-Add Twilight support*
+
+*-Add Beta support*
+
+*-Fixed Compact Mode top left and right corner radius*
 
 #### Known Issues:
-
-*-Twilight not supported*
 
 *-Currently not compatible with [Zen Sidebar At Right Side](https://zen-browser.app/mods/dd4f5461-1564-4e56-9f9d-f81e3c18f93c)*
 
 *-Floating Zen Sidebar is transparent*
 
-*-Synced Tabs page in Normal Sidebar is not transparent*
+*-Normal Sidebar is not transparent (Bookmarks, History, Synced Tabs)*
+
+*-Some HDR displays render an incorrect Alpha value for certian elements, even though they are consistant within the userChrome.css file. This is believed to be a Windows HDR bug.*
 
 *-Websites without a background will display the browser UI underneath the content.*
 
