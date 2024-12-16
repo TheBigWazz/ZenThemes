@@ -144,7 +144,6 @@ These are all the mods I use:
   **Super URL Bar Settings:**
   * [x] Adjusts the border radius of the url bar and its items
   * Centeres the text inside the URL Bar: ```Always Centered```
-  * [x] Move 1 button that's directly next to the url bar (you can do that by using 'Customize Toolbar') into the url bar
   * Enable a background blur when the URL bar is focused & select its intensity: ```Really Strong```
   * [x] Always open websites in a new tab when using url bar
 
