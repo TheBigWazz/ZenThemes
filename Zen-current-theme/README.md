@@ -18,9 +18,9 @@ __Step 2__ : [Toolbar Layout](https://github.com/TheBigWazz/ZenThemes/tree/main/
 
 __Step 3__ : [Extensions](https://github.com/TheBigWazz/ZenThemes/tree/main/Zen-current-theme#extensions)
 
-__Step 4__ : [userChrome.css](https://github.com/TheBigWazz/ZenThemes/tree/main/Zen-current-theme#userchrome.css)
+__Step 4__ : [userChrome.css](https://github.com/TheBigWazz/ZenThemes/tree/main/Zen-current-theme#userchromecss)
 
-__Step 5__ : [userContent.css](https://github.com/TheBigWazz/ZenThemes/tree/main/Zen-current-theme#usercontent.css)
+__Step 5__ : [userContent.css](https://github.com/TheBigWazz/ZenThemes/tree/main/Zen-current-theme#usercontentcss)
 
 __Step 6__ : [Mica For Everyone](https://github.com/TheBigWazz/ZenThemes/tree/main/Zen-current-theme#mica-for-everyone)
 
