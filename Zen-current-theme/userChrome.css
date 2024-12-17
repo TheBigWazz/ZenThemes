@@ -45,6 +45,623 @@
 
 /* === Community Style Changes === */
 
+/* URL results Animation */
+/* Credit https://github.com/greeeen-dev/natsumi-browser/ */
+
+/* Animations */
+
+@keyframes urlbar-appear {
+  0% {
+    margin-top: calc(var(--zen-toolbar-height) * -2);
+  }
+  75% {
+    margin-top: 20px;
+  }
+  100% {
+    margin-top: 0;
+  }
+}
+
+@keyframes urlbar-appear-sideways {
+  0% {
+    margin-left: -28vw;
+  }
+  75% {
+    margin-left: 20px;
+  }
+  100% {
+    margin-left: calc(-1 * var(--urlbar-margin-inline));
+  }
+}
+
+@keyframes results-appear {
+  0% {
+    opacity: 0;
+    margin-top: -90vh;
+  }
+  50% {
+    opacity: 0;
+    margin-top: -90vh;
+  }
+  75% {
+    opacity: 0;
+    margin-top: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes individual-result-appear {
+  0%   {
+    opacity: 0;
+    scale: 0.5;
+    background: var(--zen-colors-tertiary);
+  }
+  50% {
+    opacity: 1;
+  }
+  60% {
+    opacity: 1;
+    scale: 1.1;
+    background: light-dark(var(--zen-primary-color), var(--zen-colors-primary));
+  }
+  100% {
+    opacity: 1;
+    scale: 1;
+    background: transparent;
+  }
+}
+
+@keyframes individual-result-appear-subtle {
+  0%   {
+    opacity: 1;
+    scale: 1;
+    background: transparent;
+  }
+  60% {
+    scale: 1.05;
+    background: light-dark(var(--zen-primary-color), var(--zen-colors-primary));
+  }
+  100% {
+    opacity: 1;
+    scale: 1;
+    background: transparent;
+  }
+}
+
+@keyframes pinned-icon-appear {
+  0% {
+    opacity: 0;
+    scale: 0.5
+  }
+  50% {
+    opacity: 1;
+  }
+  60% {
+    opacity: 1;
+    scale: 1.1;
+  }
+  100% {
+    opacity: 1;
+    scale: 1;
+  }
+}
+
+/* Adds new URLbar style if missing */
+
+@media (-moz-bool-pref: "natsumi.debug.legacy") {
+  * {
+    --urlbarView-item-inline-padding: 8px !important;
+    --urlbarView-item-block-padding: 12px !important;
+  }
+
+  #urlbar[breakout-extend] {
+    #identity-permission-box, #tracking-protection-icon-container, #page-action-buttons {
+      display: none !important;
+    }
+
+    #identity-icon-box {
+      margin-right: 8px !important;
+      padding-left: 9px !important;
+      padding-right: 3px !important;
+    }
+
+    #identity-box {
+      margin: 0 !important;
+    }
+
+    #urlbar-input {
+      
+      margin-left: 5px !important;
+      margin-right: 5px !important;
+    }
+  }
+  
+  .urlbarView-row-inner {
+    border-radius: calc(var(--urlbarView-row-gutter) + var(--toolbarbutton-border-radius));
+  }
+
+  .urlbarView-title, .urlbarView-title-separator, .urlbarView-action, .urlbarView-url {
+    margin-top: auto !important;
+    margin-bottom: auto !important;
+  }
+
+  .urlbarView-title {
+  }
+
+  .urlbarView-url, .urlbarView-title-separator::before {
+    color: #aaa !important;
+  }
+
+  .urlbarView-favicon {
+    margin-left: 0 !important;
+    margin-right: 12px !important;
+    padding: 6px !important;
+    border-radius: 6px !important;
+  }
+
+  .urlbarView-row[has-action]:is([type="switchtab"], [type="remotetab"], [type="clipboard"]) .urlbarView-action {
+    margin-left: auto !important;
+    margin-right: 0 !important;
+  }
+
+  .urlbarView-row:hover, .urlbarView-row-inner[selected] {
+    background-color: var(--zen-colors-primary) !important;
+
+    .urlbarView-favicon {
+      background-color: white !important;
+    }
+
+    .urlbarView-url, .urlbarView-title-separator::before {
+      color: color-mix(in srgb, var(--zen-colors-primary) 30%, lightgray) !important;
+    }
+  }
+  
+  .urlbarView-row:hover {
+    background: transparent;
+
+    .urlbarView-row-inner {
+      background: var(--zen-colors-primary) !important;
+    }
+  }
+}
+
+/* URLbar styling */
+
+@media not (-moz-bool-pref: "natsumi.urlbar.disabled") {
+  * {
+    --urlbarView-item-block-padding: 4px !important;
+    --urlbarView-item-inline-padding: 4px !important;
+  }
+
+  #urlbar #urlbar-background {
+    backdrop-filter: none;
+    background: color-mix(in srgb, var(--zen-branding-bg) 75%, transparent);
+    transition: backdrop-filter 0s ease, background 0s ease;
+    
+    @media (-moz-bool-pref: "natsumi.urlbar.disable-transparency") {
+      background: var(--zen-branding-bg);
+      transition: none;
+    }
+  }
+
+  #urlbar {
+    .urlbarView {
+      overflow: initial !important;
+    }
+    
+    &[breakout-extend] {
+      @media not (-moz-bool-pref: "natsumi.urlbar.light") {
+        /* URLbar animations, toggleable to make things lighter. */
+        
+        animation-name: urlbar-appear;
+        animation-duration: var(--animation-duration);
+        
+        @media (-moz-bool-pref: "zen.view.use-single-toolbar") {
+          animation-name: urlbar-appear-sideways;
+        }
+        
+        #urlbar-results {
+          animation-name: results-appear;
+          animation-duration: var(--animation-duration);
+
+          .urlbarView-row {
+            animation-name: individual-result-appear;
+            animation-duration: var(--animation-duration);
+            animation-fill-mode: forwards; 
+            opacity: 0;
+
+            .urlbarView-type-icon {
+              animation-name: pinned-icon-appear;
+              animation-duration: 0.5s;
+              animation-fill-mode: forwards; 
+              opacity: 0;
+            }
+          }
+
+          .urlbarView-row:nth-child(1) {
+            animation-delay: calc((var(--animation-delay) * 0) + var(--animation-delay-offset));
+
+            .urlbarView-type-icon {
+              animation-delay: calc((var(--animation-delay) * 0) + var(--animation-delay-offset) + var(--animation-duration));
+            }
+          }
+
+          .urlbarView-row:nth-child(2) {
+            animation-delay: calc((var(--animation-delay) * 1) + var(--animation-delay-offset));
+
+            .urlbarView-type-icon {
+              animation-delay: calc((var(--animation-delay) * 1) + var(--animation-delay-offset) + var(--animation-duration));
+            }
+          }
+
+          .urlbarView-row:nth-child(3) {
+            animation-delay: calc((var(--animation-delay) * 2) + var(--animation-delay-offset));
+
+            .urlbarView-type-icon {
+              animation-delay: calc((var(--animation-delay) * 2) + var(--animation-delay-offset) + var(--animation-duration));
+            }
+          }
+
+          .urlbarView-row:nth-child(4) {
+            animation-delay: calc((var(--animation-delay) * 3) + var(--animation-delay-offset));
+
+            .urlbarView-type-icon {
+              animation-delay: calc((var(--animation-delay) * 3) + var(--animation-delay-offset) + var(--animation-duration));
+            }
+          }
+
+          .urlbarView-row:nth-child(5) {
+            animation-delay: calc((var(--animation-delay) * 4) + var(--animation-delay-offset));
+
+            .urlbarView-type-icon {
+              animation-delay: calc((var(--animation-delay) * 4) + var(--animation-delay-offset) + var(--animation-duration));
+            }
+          }
+
+          .urlbarView-row:nth-child(6) {
+            animation-delay: calc((var(--animation-delay) * 5) + var(--animation-delay-offset));
+
+            .urlbarView-type-icon {
+              animation-delay: calc((var(--animation-delay) * 5) + var(--animation-delay-offset) + var(--animation-duration));
+            }
+          }
+
+          .urlbarView-row:nth-child(7) {
+            animation-delay: calc((var(--animation-delay) * 6) + var(--animation-delay-offset));
+
+            .urlbarView-type-icon {
+              animation-delay: calc((var(--animation-delay) * 6) + var(--animation-delay-offset) + var(--animation-duration));
+            }
+          }
+
+          .urlbarView-row:nth-child(8) {
+            animation-delay: calc((var(--animation-delay) * 7) + var(--animation-delay-offset));
+
+            .urlbarView-type-icon {
+              animation-delay: calc((var(--animation-delay) * 7) + var(--animation-delay-offset) + var(--animation-duration));
+            }
+          }
+
+          .urlbarView-row:nth-child(9) {
+            animation-delay: calc((var(--animation-delay) * 8) + var(--animation-delay-offset));
+
+            .urlbarView-type-icon {
+              animation-delay: calc((var(--animation-delay) * 8) + var(--animation-delay-offset) + var(--animation-duration));
+            }
+          }
+          
+          .urlbarView-row:nth-child(10) {
+            animation-delay: calc((var(--animation-delay) * 9) + var(--animation-delay-offset));
+
+            .urlbarView-type-icon {
+              animation-delay: calc((var(--animation-delay) * 9) + var(--animation-delay-offset) + var(--animation-duration));
+            }
+          }
+        }
+      }
+
+      #urlbar-input {
+        
+        margin-left: 2px !important;
+        margin-right: 0 !important;
+        
+        @media (-moz-bool-pref: "zen.view.use-single-toolbar") {
+          margin-left: 4px !important;
+        }
+        
+        &::-moz-selection {
+          background: light-dark(var(--zen-primary-color), color-mix(in srgb, var(--zen-colors-primary) 60%, white)) !important;
+        }
+      }
+
+      #identity-permission-box, #tracking-protection-icon-container, #page-action-buttons {
+        display: none !important;
+      }
+
+      #identity-icon-box {
+        margin-left: 1px !important;
+        padding-left: 6px !important;
+        padding-right: 6px !important;
+        border-radius: var(--urlbar-icon-border-radius) !important;
+        
+        @media (-moz-bool-pref: "zen.view.use-single-toolbar") {
+          margin-left: 3px !important;
+        }
+      }
+
+      .verifiedDomain {
+        image {
+          list-style-image: url('chrome://browser/skin/zen-icons/link.svg') !important;
+        }
+      }
+
+      #identity-box {
+        &:is([pageproxystate="invalid"]).verifiedDomain {
+          image {
+            list-style-image: url('chrome://global/skin/icons/search-glass.svg') !important;
+          }
+        }
+      }
+
+      #urlbar-background {
+        backdrop-filter: blur(10px);
+        background: color-mix(in srgb, var(--zen-colors-secondary) 75%, transparent) !important;
+        transition: backdrop-filter 0.5s ease, background 0.5s ease;
+        
+        @media (-moz-bool-pref: "natsumi.urlbar.disable-transparency") {
+          transition: none;
+          backdrop-filter: none;
+          background: var(--zen-colors-secondary) !important;
+        }
+      }
+      
+      @media not (-moz-bool-pref: "natsumi.debug.legacy") {
+        #identity-box {
+          margin-right: 10px !important;
+        }
+        
+        .urlbar-input-container {
+          padding-inline: calc(var(--urlbar-margin-inline) + var(--urlbar-container-padding) - 2px) !important;
+        }
+      }
+      
+      @media (-moz-bool-pref: "natsumi.urlbar.force-nowrap") {
+        .urlbarView-no-wrap {
+          flex-basis: unset !important;
+        }
+
+        .urlbarView-row-inner {
+          flex-wrap: nowrap !important;
+        }
+
+        .urlbarView-title-separator {
+          display: flex !important;
+        }
+
+        .urlbarView-url {
+          margin-left: 0 !important;
+        }
+      }
+      
+      &:not([zen-floating-urlbar="true"]) {
+        @media not (-moz-bool-pref: "natsumi.debug.legacy") {
+          animation: none !important;
+        }
+        
+        #identity-icon-box {
+          margin-left: 10px !important;
+        }
+
+        @media (-moz-bool-pref: "zen.view.use-single-toolbar") {
+          #identity-icon-box {
+            margin-left: 12px !important;
+          }
+
+          #urlbar-input {
+            margin-left: 4px !important;
+          }
+        }
+      }
+    }
+    
+    &:is([pageproxystate='invalid']):is([usertyping]) {
+      .urlbarView-row, .urlbarView-row .urlbarView-type-icon {
+        animation: none !important;
+        opacity: 1 !important;
+      }
+      
+      /*
+      this is still in the oven
+      
+      .urlbarView-row {
+        animation-name: individual-result-appear-subtle !important;
+        animation-duration: var(--animation-duration-subtle) !important;
+        animation-delay: 0s !important;
+      }
+      */
+    }
+  }
+
+  .urlbarView-row {
+    transition: transform 0.2s ease;
+
+    .urlbarView-row-inner {
+      border-radius: 8px !important;
+      transition: background 0.2s ease;
+    }
+
+    .urlbarView-title, .urlbarView-url {
+      font-weight: 500 !important;
+      margin-top: auto !important;
+      margin-bottom: auto !important;
+    }
+
+    .urlbarView-title-separator {
+      margin-top: auto !important;
+      margin-bottom: auto !important;
+    }
+
+    .urlbarView-button {
+      display: inline-block !important;
+      min-width: 0 !important;
+      min-height: 0 !important;
+      width: 0 !important;
+      height: 0 !important;
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+      opacity: 0;
+      transition: width 0.2s ease, height 0.2s ease, opacity 0.2s ease, margin 0.2s ease, background-color 0.2s ease !important;
+    }
+
+    .urlbarView-favicon {
+      transition: background-color 0.2s ease !important;
+    }
+
+    &:active {
+      transform: scale(0.95, 0.95);
+    }
+    
+    &[selected] {
+      background: transparent !important;
+    }
+
+    &:hover {    
+      background: transparent !important;
+      
+      .urlbarView-row-inner {
+        background: var(--urlbarView-hover-background) !important;
+      }
+      
+      .urlbarView-button {
+        max-width: 24px !important;
+        max-height: 24px !important;
+        width: 24px !important;
+        height: 24px !important;
+        opacity: 1;
+        margin-left: 2px !important;
+        margin-right: 2px !important;
+      }
+    }
+
+    .urlbarView-row-inner[selected] {
+      background: var(--urlbarView-hover-background) !important;
+    }
+  }
+  
+  .urlbarView-title-separator::before {
+    color: rgba(20, 20, 20, 0.2) !important;
+    opacity: 1 !important;
+
+    @media (prefers-color-scheme: dark) {
+      color: rgba(235, 235, 235, 0.2) !important;
+    }
+  }
+  
+  .urlbarView-row[has-action]:is([type="switchtab"], [type="remotetab"], [type="clipboard"]) {
+    .urlbarView-action {
+      margin-left: 8px !important;
+    }
+    
+    .urlbarView-title-separator::before {
+      opacity: 0 !important;
+    }
+  }
+
+  .urlbarView-row-inner .urlbarView-url {
+    color: light-dark(var(--zen-colors-primary), var(--zen-colors-primary-foreground)) !important;
+  }
+
+  .urlbarView-row:hover .urlbarView-row-inner, .urlbarView-row-inner[selected] {
+    .urlbarView-no-wrap .urlbarView-favicon {
+      background-color: color-mix(in srgb, light-dark(var(--zen-primary-color), var(--zen-colors-primary-foreground)) 50%, transparent) !important;
+    }
+
+    .urlbarView-url {
+      color: light-dark(var(--zen-colors-primary), var(--zen-colors-primary-foreground)) !important;
+    }
+  }
+
+  .urlbarView-action, .urlbarView-button,
+  .searchbar-engine-one-off-item {
+    --urlbar-box-focus-bgcolor: color-mix(in srgb, currentColor 16%, transparent);
+    transition: background-color 0.2s ease !important;
+  }
+  
+  /* Results URL display */
+  
+  .urlbarView-url {
+    --urlbarView-second-line-indent: calc(var(--urlbarView-icon-margin-start) + var(--urlbarView-icon-margin-end) + var(--urlbarView-favicon-width) + 2px);
+    color: var(--zen-colors-primary-foreground) !important;
+  }
+  
+  /* Wrapped indents fix */
+  
+  .urlbarView-action {
+    --urlbarView-second-line-indent: calc(var(--urlbarView-icon-margin-start) + var(--urlbarView-icon-margin-end) + var(--urlbarView-favicon-width) + 2px);
+  }
+  
+  /* Make borders more visible */
+  
+  .urlbarView-body-inner, .search-one-offs {
+    border-top: 1px solid light-dark(rgba(20, 20, 20, 0.2), rgba(235, 235, 235, 0.2)) !important;
+  }
+}
+
+/* URL bar appear animation */
+#urlbar {
+  --animation-duration: 0.25s;
+}
+
+/* Results appear animation */
+#urlbar-results {
+  --animation-duration: 0.5s;
+}
+
+/* Individual result appear animation */
+.urlbarView-row {
+  --animation-duration: 1.0s;
+  --animation-duration-subtle: 0.5s; /* WIP, this won't change anything for now */
+  --animation-delay: 0.1s;
+  --animation-delay-offset: 0.3s;
+}
+
+/* Reload border animation */
+browser, .browserSidebarContainer.deck-selected {
+  --animation-duration: 0.2s;
+  --animation-rotation-duration: 2.0s;
+  --animation-exit-duration: 1.0s;
+  --browser-margin: 4px;
+}
+
+
+/* URL bar appear animation */
+#urlbar {
+  --animation-duration: 0.25s;
+}
+
+/* Results appear animation */
+#urlbar-results {
+  --animation-duration: 0.5s;
+}
+
+/* Individual result appear animation */
+.urlbarView-row {
+  --animation-duration: 1.0s;
+  --animation-duration-subtle: 0.5s; /* WIP, this won't change anything for now */
+  --animation-delay: 0.1s;
+  --animation-delay-offset: 0.3s;
+}
+
+/* Reload border animation */
+browser, .browserSidebarContainer.deck-selected {
+  --animation-duration: 0.2s;
+  --animation-rotation-duration: 2.0s;
+  --animation-exit-duration: 1.0s;
+  --browser-margin: 4px;
+}
+
 /* Tab Group Styling */
 /* Credit: @asev on Discord / @lunar-os on Github */
 tab-group {
