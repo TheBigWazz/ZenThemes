@@ -4,7 +4,7 @@ Personal collection of CSS Mods for [Zen Browser](https://zen-browser.app/).
 
 ## Current Beta Style
 
-[See here for complete set up](https://github.com/TheBigWazz/ZenThemes/tree/main/Zen-current-setup)
+[See here for complete set up](https://github.com/TheBigWazz/ZenThemes/tree/main/Zen-current-theme)
 
 ![image](https://github.com/user-attachments/assets/3a479829-3679-4744-bbd2-fee5d6d26ff5)
 
