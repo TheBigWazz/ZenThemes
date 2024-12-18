@@ -4,7 +4,13 @@ Below are my customizations, mods, toolbar layout, extensions, and theme colors.
 
 **This exact set up has only been tested/used on Windows 11.*
 
-![image](https://github.com/user-attachments/assets/6cf3eba9-db78-41f1-8ea3-8d193d096f61)
+ 
+
+https://github.com/user-attachments/assets/1e880c38-5c36-4667-9d56-2ac59b9aaaff
+
+
+
+
 
 ## Step-by-step
 
