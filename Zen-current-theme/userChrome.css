@@ -1,5 +1,10 @@
 /* === Personal Style changes === */
 
+/* Hide the Bookmarks Toolbar Chevron */
+#PlacesChevron {
+  display: none;
+}
+
 /* Hide the reset button for pinned tabs */
 .tab-reset-button {
     display: none !important;
