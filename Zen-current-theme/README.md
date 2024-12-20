@@ -1,4 +1,4 @@
-# Wazz CSS for Zen
+# My Personal CSS for Zen
 
 Below are my customizations, mods, toolbar layout, extensions, and theme colors.
 
