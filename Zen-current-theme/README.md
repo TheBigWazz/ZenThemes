@@ -2,7 +2,9 @@
 
 Below are my customizations, mods, toolbar layout, extensions, and theme colors.
 
-**I have only tested this exact set up on Windows 11.*
+**I have only tested this on Windows 11.*
+
+*[uCL](https://github.com/greeeen-dev/userchrome-loader) Structure supported*
 
 https://github.com/user-attachments/assets/1e880c38-5c36-4667-9d56-2ac59b9aaaff
 
@@ -16,7 +18,7 @@ __3.__ : [Toolbar Layout](https://github.com/TheBigWazz/ZenThemes/tree/main/Zen-
 
 __4.__ : [Extensions](https://github.com/TheBigWazz/ZenThemes/tree/main/Zen-current-theme#extensions)
 
-__5.__ : [Install with uCL](https://github.com/TheBigWazz/ZenThemes/tree/main/Zen-current-theme#userchromecss)
+__5.__ : [Install via uCL](https://github.com/TheBigWazz/ZenThemes/tree/main/Zen-current-theme#userchromecss)
 
 __6.__ : [userContent.css](https://github.com/TheBigWazz/ZenThemes/tree/main/Zen-current-theme#usercontentcss)
 
@@ -99,7 +101,7 @@ __9.__ : [Gradients](https://github.com/TheBigWazz/ZenThemes/tree/main/Zen-curre
 * [Proton Pass](https://addons.mozilla.org/en-US/firefox/addon/proton-pass/) *Is the purple diamond at the far left of the URL bar.*
 * [Dark Reader](https://addons.mozilla.org/en-US/firefox/addon/darkreader/?utm_source=addons.mozilla.org&utm_medium=referral&utm_content=search) *Fixes missing backgrounds on websites.*
 
-## 5. Install with uCL
+## 5. Install via uCL
 ### What is uCL?
 - [uCL (userChrome-Loader)](https://github.com/greeeen-dev/userchrome-loader) is an alternitive method of structuring custom CSS to make it easier for users to swap in and out specific Modules of code from the community. This method is more similar to how Zen Browser already structrues its Mods. In addition to being a simpler setup process, it's a much easier structure to debug and maintain. 
 
@@ -130,8 +132,8 @@ __9.__ : [Gradients](https://github.com/TheBigWazz/ZenThemes/tree/main/Zen-curre
 
 > [!Note]
 > - Remove any of my personal CSS / Cohesion CSS from your **userChrome.css** file if you have previously used it.
-> - It's now all being called via the `@import "Wazz/Wazz.css";` statement in your **userChrome.css** file.
-> - You may still add custom CSS to your userChrome.css underneath the imports.
+> - It's now all being called via the import statements in your **userChrome.css** file.
+> - You may still add other custom CSS to your userChrome.css underneath the imports.
 > - You can Live Edit mod files, just search for the Module name in the Style Browser (Ctrl+Alt+Shift+I)
 
 ### What it does:
