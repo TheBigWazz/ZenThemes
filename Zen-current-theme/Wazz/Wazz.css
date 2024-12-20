@@ -1,0 +1,1956 @@
+/* === Personal Style changes === */
+
+/* Hide the Bookmarks Toolbar Chevron */
+#PlacesChevron {
+  display: none;
+}
+
+/* Hide the reset button for pinned tabs */
+.tab-reset-button {
+    display: none !important;
+}
+
+/* Workspace Button Styling */
+#zen-workspaces-button {
+    background-color: rgba(255, 255, 255, 0.04) !important;
+    box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.1) !important;
+    border-radius: 8px !important;
+    border: 1px solid #ffffff0c !important;
+}
+
+/* Selected Workspace highlight */
+#zen-workspaces-button .subviewbutton {
+    /* Active workspace button styling */
+    &[active="true"] {
+        background: rgba(255, 255, 255, 0.1) !important;
+        transition: 0.3s !important;
+        border: 1px solid #ffffff0a !important;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.062) !important;
+    }
+
+    /* Hover effect for workspace buttons */
+    &:hover {
+        background: rgba(255, 255, 255, 0.2) !important;
+        transition: 0.3s !important;
+    }
+
+    /* Remove default after pseudo-element */
+    &:after {
+        display: none !important;
+    }
+}
+
+/* Hide current workspace indicator */
+#zen-current-workspace-indicator {
+    display: none !important;
+    padding: 10px calc(4px + var(--tab-inline-padding)) !important;
+    font-weight: 500 !important; 
+}
+
+
+/* === Community Style Changes === */
+
+/* - URL Bar Loading Animation - */
+/* Credit: https://github.com/wysh3/Zen-Mods */
+#urlbar:not([breakout-extend="true"]) { /* Unless urlbar is opened */
+  .urlbar-input-container::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(25deg, #4e4ac233, #4ecdc433, #4e4ac233);
+    background-size: 200% 100%;
+    animation: urlbar-loading-gradient 1s linear reverse infinite;
+    animation-play-state: paused;
+    opacity: 0;
+    transition: opacity 0.25s;
+  }
+}
+
+&:has(#reload-button[displaystop="true"]) { /* When 'Stop' button is shown isntead of 'Reload' */
+  .urlbar-input-container::before {
+    animation-play-state: running;
+    opacity: 1;
+  }
+}  
+
+@keyframes urlbar-loading-gradient {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 200% 0%; }
+}
+
+/* Mini Container Indicator in URL Bar */
+/* Credit: @anjerodev on Github */
+@-moz-document url-prefix('chrome://') {
+    #urlbar-container #page-action-buttons #userContext-icons {
+        position: relative;
+        order: 2;
+        height: 8px;
+        width: 8px;
+        background-color: var(--identity-icon-color);
+        border-radius: 32px;
+        margin-left: 12px !important;
+
+        /* Hide default icon and label */
+        & image,
+        & label {
+            display: none;
+        }
+    }
+}
+
+
+
+
+
+
+/* === Natsumi Browser (Start) === */
+/* These are features pulled from Natsumi v1.2.0 */
+/* https://github.com/greeeen-dev/natsumi-browser/releases/tag/v1.2.0 */
+
+/* ==== Config ==== */
+
+/*
+Feel free to change these values to whatever you want, as long
+as they use the correct format.
+*/
+
+/* URL bar appear animation */
+#urlbar {
+  --animation-duration: 0.5s;
+}
+
+/* Results appear animation */
+#urlbar-results {
+  --animation-duration: 0s;
+}
+
+/* Individual result appear animation */
+.urlbarView-row {
+  --animation-duration: .5s;
+  --animation-duration-subtle: 0.5s; /* WIP, this won't change anything for now */
+  --animation-delay: 0.05s;
+  --animation-delay-offset: 0s;
+}
+
+/* Reload border animation */
+browser, .browserSidebarContainer.deck-selected {
+  --animation-duration: 0.2s;
+  --animation-rotation-duration: 2.0s;
+  --animation-exit-duration: 1.0s;
+  --browser-margin: 4px;
+}
+
+/* Reload URLbar animation */
+#urlbar-background {
+  --fadein-duration: 0.5s;
+  --animation-duration: 1s;
+}
+
+/* Container tabs gradient */
+.tabbrowser-tab {
+  --container-gradient-width: 50%;
+  --container-gradient-width-expanded: 50%;
+}
+
+
+/* ==== Pre-style patches ==== */
+
+/* Allow URLbar and Zen Sidebar blurring */
+/* Disable this through config if too much GPU is being used */
+
+@media not (-moz-bool-pref: "natsumi.theme.disable-blur") {
+  browser {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%) !important;
+  }
+}
+
+:root {
+  &:is([inDOMFullscreen="true"]) {
+    /* Patches collapsed view */
+    #navigator-toolbox {
+      padding-top: 0px !important;
+    }
+
+    #zen-sidebar-top-buttons-customization-target {
+      padding-top: 3px !important;
+    }
+
+    @media not (-moz-bool-pref: "natsumi.theme.disable-blur") {
+      browser {
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%) !important;
+        border-radius: 0 !important;
+      }
+    }
+  }
+}
+
+/* ==== Base UI (Sidebars and tabs) ==== */
+/* Based on https://github.com/lunar-os/ZenCss with my own tweaks added */
+
+.browserSidebarContainer {
+  background-color: rgba(0, 0, 0, 0.226) !important; /* Browser Container transparency */
+}
+
+@media (-moz-bool-pref: "natsumi.sidebar.blur-zen-sidebar") {
+  #zen-sidebar-web-panel[pinned] {
+    /* Zen Sidebar transparency. May cause lag when URLbar is also opened. */
+    
+    background: color-mix(in srgb, var(--zen-colors-tertiary) 80%, transparent) !important;
+    backdrop-filter: blur(10px);
+  }
+}
+
+/* Add borders for pinned tabs (including Essentials) */
+
+.tabbrowser-tab[pinned] .tab-background {
+	border-top: 1px solid #ffffff1f !important;
+	border-bottom: 1px solid #0000001f !important;
+}
+
+.tab-icon-overlay {
+  display: none !important;
+}
+
+#TabsToolbar #firefox-view-button[open] > .toolbarbutton-icon, .tab-background:is([selected], [multiselected]) {
+	box-shadow: none !important;
+  border-top: 1px solid #ffffff2d !important;
+	border-bottom: 1px solid #0000002d !important;
+  background-color: rgba(255, 255, 255, 0.17);
+  
+  @media (prefers-color-scheme: light) {
+    border-top: 1px solid #8888882d !important;
+    background-color: var(--tab-selected-bgcolor) !important;
+  }
+}
+
+.tabbrowser-tab[pinned] .tab-background:is([selected], [multiselected]) {
+	border-top: 1px solid #ffffff1f !important;
+	border-bottom: 1px solid #0000001f !important;
+}
+
+.tabbrowser-tab .tab-background{
+  transition: background-color 0.2s ease;
+}
+
+.tabbrowser-tab[pinned]:not([zen-essential="true"]) .tab-stack .tab-background {
+  border: px solid #ffffff26 !important;
+}
+
+.tabbrowser-tab[pinned]:not([zen-essential="true"]) .tab-stack .tab-background:is([selected], [multiselected]) {
+  border-top: 1px solid #ffffff2d !important;
+	border-bottom: 1px solid #0000002d !important;
+  border-left: 0 !important;
+  border-right: 0 !important;
+  background-color: rgba(255, 255, 255, 0.17) !important;
+  
+  @media (prefers-color-scheme: light) {
+    border-top: 1px solid #8888882d !important;
+    background-color: var(--tab-selected-bgcolor) !important;
+  }
+}
+
+#zen-workspaces-button {
+  background-color: rgba(255, 255, 255, 0.04) !important;
+  box-shadow: 0px 1px 10px rgba(0,0,0,0.1) !important;
+  border-radius: 8px !important;
+  border: 1px solid #ffffff0c !important;
+}
+
+#zen-workspaces-button {
+  .subviewbutton {
+    transition: background 0.3s !important;
+    &[active="true"] {
+      background: rgba(255, 255, 255, 0.1) !important;
+      transition: 0.3s !important;
+      border: 1px solid #ffffff0a !important;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.062) !important;
+
+      @media (prefers-color-scheme: light) {
+        background: rgba(255, 255, 255, 0.7) !important;
+      }
+    }
+
+    &:hover {
+      background: rgba(255, 255, 255, 1) !important;
+      transition: 0.3s !important;
+    }
+
+    &:after {
+      display: none !important;
+    }
+  }
+}
+
+#zen-current-workspace-indicator {
+  padding: 10px calc(4px + var(--tab-inline-padding)) !important;
+  font-weight: 500 !important; 
+}
+
+.tab-label:not([fadein]){
+  display: flex !important;
+}
+
+#urlbar-background {
+	border: 1px solid #ffffff13 !important;
+}
+
+/* Shrink on click */
+/* Zen already has this, but this increases the shrink magnitude */
+
+.tabbrowser-tab {
+  & .tab-stack {
+    opacity: 1;
+    transition: transform 0.2s ease;
+    
+    & .tab-background, .tab-content .tab-icon-stack, .tab-content .tab-label-container {
+      opacity: 1 !important;
+      transition: background 0.2s ease, opacity 0.2s ease;
+    }
+  }
+}
+
+.tabbrowser-tab:active {
+  scale: unset !important;
+  
+  & .tab-stack {
+    transform: scale(0.95, 0.95) !important;
+    
+    &:has(.tab-close-button:active) {
+      & .tab-background, .tab-content .tab-icon-stack, .tab-content .tab-label-container {
+        opacity: 0.3 !important;
+      }
+      
+      transform: unset !important;
+    }
+  }
+}
+
+/* Shrink essentials more */
+
+#zen-essentials-container .tabbrowser-tab:active {
+  & .tab-stack {
+    transform: scale(0.90, 0.90) !important;
+  }
+}
+
+/* Reset pinned tabs icon transition */
+
+.reset-icon {
+	transition: background-color 0.1s ease-out;
+}
+
+.reset-icon:hover {
+	transition: background-color 0.1s ease-in;
+}
+
+/* Firefox sidebar panel transparency */
+
+@media not (-moz-bool-pref: "natsumi.sidebar.disable-panel-transparency") {
+  #sidebar-box {
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+
+    #sidebar-header {
+      border-bottom: none !important;
+    }
+  }
+}
+
+/* Multiple toolbars patch */
+
+@media not (-moz-bool-pref: "zen.view.use-single-toolbar") {
+  #identity-box {
+    margin-inline-end: 5px !important;
+  }
+}
+
+/* Patch and restore List all tabs button */
+
+#alltabs-button {
+  display: flex !important;
+  
+  & .toolbarbutton-badge {
+    display: none !important;
+  }
+  
+  & .toolbarbutton-badge-stack {
+    background-color: transparent !important;
+  }
+}
+
+/* Toolbar patches */
+
+@media (-moz-bool-pref: "zen.view.sidebar-expanded") {
+  #zen-sidebar-top-buttons-customization-target {
+    toolbarbutton {
+      margin: 1px !important;
+    }
+    toolbarbutton:first-child {
+      margin-left: 5px !important;
+    }
+  }
+}
+
+#PersonalToolbar {
+  padding-left: 0 !important;
+}
+
+@media (-moz-bool-pref: "natsumi.theme.better-findbar-addon") {
+  findbar {
+    opacity: 1;
+    transition: opacity 0.1s ease, scale 0.1s ease, left 0.1s ease !important;
+  }
+
+  findbar[hidden] {
+    opacity: 0;
+    left: 33.5% !important;
+    scale: 0.5 0.5;
+  }
+}
+
+.toolbarbutton-badge-stack, toolbarbutton image {
+  transition: background-color 0.2s ease, transform 0.2s ease !important;
+}
+
+toolbarbutton:active {
+  transition: background-color 0.2s ease, transform 0.2s ease !important;
+}
+
+toolbarbutton[open] {
+  transition: background-color 0.2s ease, transform 0.2s ease !important;
+}
+
+/* ==== Tab groups ==== */
+/* Based on code by https://github.com/vicky5124 with my own tweaks added */
+
+/* Make groups workspace specific */
+
+tab-group:has(tab[hidden]) {
+  display: none !important;
+}
+
+/* Tab groups on vertical tabs */
+
+@media (-moz-bool-pref: "zen.tabs.vertical") {
+  tab-group {
+    display: grid !important;
+    background: color-mix(in srgb, var(--tab-group-color-invert) 12%, transparent) !important;
+    border-radius: calc(var(--border-radius-medium) + 2px) !important;
+    margin-top: 2px !important;
+    margin-bottom: 1px !important;
+    margin-inline: 2px !important;
+    border: 2px solid color-mix(in srgb, var(--tab-group-color) 50%, transparent) !important;
+    transition: background 0.2s ease;
+    overflow: hidden !important;
+    
+    & .tab-group-label-container {
+      border-radius: calc(var(--border-radius-medium) + 2px) !important;
+      transition: transform 0.2s ease;
+      
+      &:hover {
+        background-color: var(--tab-hover-background-color) !important;
+      }
+      
+      &:active {
+        transform: scale(0.95, 0.95) !important;
+      }
+    }
+
+    & .tab-group-label-container{
+      margin-inline: 0px !important;
+      width: 100%;
+
+      &:after{
+        display: none;
+        padding: 0px !important;
+        transform: scaleX(1) !important;
+        background-color: color-mix(in srgb, var(--tab-group-color) 50%, transparent) !important;
+        transition: transform 0.2s ease-out !important;
+      }
+
+      & > label{
+        max-width: 100% !important;
+        padding-top: 5px !important;;
+        padding-bottom: 6px !important;;
+        padding-inline: 0.9em !important;
+        background: transparent !important;
+        border: unset !important;
+        font-weight: 600 !important;
+        text-align: unset !important;
+        color: var(--sidebar-text-color) !important;
+        padding-left: 29px !important;
+      }
+      
+      &>label::before {
+        content: "" !important;
+        position: absolute !important;
+        left: 7px !important;
+        top: 25%;
+        width: 16px !important;
+        height: 16px !important;
+        background-color: var(--sidebar-text-color);
+        mask-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjAgMCAyNCAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMjAgOS41MDJWOC43NWEyLjI1IDIuMjUgMCAwIDAtMi4yNS0yLjI1aC01LjcyNWwtMi4zOC0xLjk4QTIuMjUgMi4yNSAwIDAgMCA4LjIwNCA0SDQuMjVBMi4yNSAyLjI1IDAgMCAwIDIgNi4yNWwtLjAwNCAxMS41QTIuMjUgMi4yNSAwIDAgMCA0LjI0NiAyMEgxOC40N2ExLjc1IDEuNzUgMCAwIDAgMS42OTgtMS4zMjVsMS43NS02Ljk5OGExLjc1IDEuNzUgMCAwIDAtMS42OTgtMi4xNzVIMjBaTTQuMjUgNS41aDMuOTU2YS43NS43NSAwIDAgMSAuNDguMTczbDIuNTg4IDIuMTU0YS43NS43NSAwIDAgMCAuNDguMTczaDUuOTk2YS43NS43NSAwIDAgMSAuNzUuNzV2Ljc1Mkg2LjQyNGEyLjI1IDIuMjUgMCAwIDAtMi4xODMgMS43MDRsLS43NDQgMi45NzhMMy41IDYuMjVhLjc1Ljc1IDAgMCAxIC43NS0uNzVabTEuNDQ3IDYuMDdhLjc1Ljc1IDAgMCAxIC43MjctLjU2OEgyMC4yMmEuMjUuMjUgMCAwIDEgLjI0Mi4zMWwtMS43NSA2Ljk5OWEuMjUuMjUgMCAwIDEtLjI0Mi4xODlINC4yODVhLjI1LjI1IDAgMCAxLS4yNDMtLjMxbDEuNjU1LTYuNjJaIiBmaWxsPSIjMDAwMDAwIi8+PC9zdmc+');
+        mask-size: contain;
+        mask-repeat: no-repeat;
+        background-size: contain !important;
+        background-repeat: no-repeat !important;
+      }
+    }
+
+    & tab {
+      opacity: 1 !important;
+      font-size: 1 !important;
+      max-height: 5em !important;
+      margin-left: 8px !important;
+      transition: font-size 0.25s,
+                  margin 0.25s,
+                  padding 0.25s,
+                  opacity 0.25s !important;
+      
+      @media not (-moz-bool-pref: "zen.view.sidebar-expanded") {
+        margin-left: 0 !important;
+      }
+    }
+
+    &[collapsed] {
+      height: auto !important;
+      overflow: hidden !important;
+
+      & .tab-group-label-container {
+        &:after {
+          content: "" !important;
+          height: 2px !important;
+          position: absolute !important;
+          inset: auto 0 0 !important;
+          transform: scaleX(0) !important;
+          transition: transform 0.2s ease-in !important;
+        }
+      }
+
+      & tab{
+        display: flex !important;
+        opacity: 0 !important;
+        padding: 0 !important;
+        font-size: 0 !important;
+        margin: 0 !important;
+        transition: opacity 0.25s ease-in,
+                    font-size 0.25s ease-out,
+                    margin 0.25s ease-out,
+                    padding 0.25s ease-out !important;
+      }
+      
+      & .tab-group-label-container > label::before {
+        content: "" !important;
+        position: absolute !important;
+        left: 7px !important;
+        top: 25%; 
+        width: 16px !important;
+        height: 16px !important;
+        background-color: var(--sidebar-text-color);
+        mask-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjAgMCAyNCAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNOC4yMDcgNGMuNDYgMCAuOTA4LjE0MSAxLjI4NC40MDJsLjE1Ni4xMkwxMi4wMjIgNi41aDcuNzI4YTIuMjUgMi4yNSAwIDAgMSAyLjIyOSAxLjkzOGwuMDE2LjE1OC4wMDUuMTU0djlhMi4yNSAyLjI1IDAgMCAxLTIuMDk2IDIuMjQ1TDE5Ljc1IDIwSDQuMjVhMi4yNSAyLjI1IDAgMCAxLTIuMjQ1LTIuMDk2TDIgMTcuNzVWNi4yNWEyLjI1IDIuMjUgMCAwIDEgMi4wOTYtMi4yNDVMNC4yNSA0aDMuOTU3Wm0xLjQ0IDUuOTc5YTIuMjUgMi4yNSAwIDAgMS0xLjI0NC41MTJsLS4xOTYuMDA5LTQuNzA3LS4wMDF2Ny4yNTFjMCAuMzguMjgyLjY5NC42NDguNzQzbC4xMDIuMDA3aDE1LjVhLjc1Ljc1IDAgMCAwIC43NDMtLjY0OGwuMDA3LS4xMDJ2LTlhLjc1Ljc1IDAgMCAwLS42NDgtLjc0M0wxOS43NSA4aC03LjcyOUw5LjY0NyA5Ljk3OVpNOC4yMDcgNS41SDQuMjVhLjc1Ljc1IDAgMCAwLS43NDMuNjQ4TDMuNSA2LjI1djIuNzQ5TDguMjA3IDlhLjc1Ljc1IDAgMCAwIC4zOTUtLjExM2wuMDg1LS4wNiAxLjg5MS0xLjU3OC0xLjg5LTEuNTc1YS43NS43NSAwIDAgMC0uMzc3LS4xNjdMOC4yMDcgNS41WiIgZmlsbD0iIzAwMDAwMCIvPjwvc3ZnPg==');
+        mask-size: contain;
+        mask-repeat: no-repeat;
+        background-size: contain !important;
+        background-repeat: no-repeat !important;
+        
+        @media not (-moz-bool-pref: "zen.view.sidebar-expanded") {
+          left: 9px !important;
+        }
+      }
+    }
+  }
+
+  tab-group:hover {
+    background: color-mix(in srgb, var(--tab-group-color-invert) 30%, transparent) !important;
+    transition: background 0.2s ease;
+  }
+}
+
+/* Tab groups on horizontal tabs */
+
+@media not (-moz-bool-pref: "zen.tabs.vertical") {
+  tab:not([fadein]) {
+    display: none;
+  }
+  
+  tab-group {
+    & tab {
+      background: color-mix(in srgb, var(--tab-group-color-invert) 12%, transparent) !important;
+      border: 2px solid color-mix(in srgb, var(--tab-group-color) 50%, transparent) !important;
+      border-radius: 0 !important;
+      border-left: 0 !important;
+      border-right: 0 !important;
+    }
+    
+    & tab:last-child {
+      border: 2px solid color-mix(in srgb, var(--tab-group-color) 50%, transparent) !important;
+      border-left: 0 !important;
+      border-radius: 0 calc(var(--border-radius-medium) + 2px) calc(var(--border-radius-medium) + 2px) 0 !important;
+    }
+    
+    & .tab-group-label-container {
+      transition: transform 0.2s ease;
+      background: color-mix(in srgb, var(--tab-group-color-invert) 12%, transparent) !important;
+      border: 2px solid color-mix(in srgb, var(--tab-group-color) 50%, transparent) !important;
+      border-radius: calc(var(--border-radius-medium) + 2px) 0 0 calc(var(--border-radius-medium) + 2px) !important;
+      border-right: 0 !important;
+      
+      &:hover {
+        background-color: var(--tab-hover-background-color) !important;
+      }
+      
+      &:active {
+        transform: scale(0.95, 0.95) !important;
+      }
+    }
+    
+    & .tab-group-label-container{
+      margin-inline: 0px !important;
+
+      &:after{
+        display: none;
+        padding: 0px !important;
+        transform: scaleX(1) !important;
+        background-color: color-mix(in srgb, var(--tab-group-color) 50%, transparent) !important;
+        transition: transform 0.2s ease-out !important;
+      }
+
+      & > label{
+        max-width: 100% !important;
+        padding-top: 5px !important;;
+        padding-bottom: 6px !important;;
+        padding-inline: 0.9em !important;
+        background: transparent !important;
+        border: unset !important;
+        font-weight: 600 !important;
+        text-align: unset !important;
+        color: var(--sidebar-text-color) !important;
+        padding-left: 29px !important;
+      }
+      
+      &>label::before {
+        content: "" !important;
+        position: absolute !important;
+        left: 7px !important;
+        top: 25%;
+        width: 16px !important;
+        height: 16px !important;
+        background-color: var(--sidebar-text-color);
+        mask-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjAgMCAyNCAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMjAgOS41MDJWOC43NWEyLjI1IDIuMjUgMCAwIDAtMi4yNS0yLjI1aC01LjcyNWwtMi4zOC0xLjk4QTIuMjUgMi4yNSAwIDAgMCA4LjIwNCA0SDQuMjVBMi4yNSAyLjI1IDAgMCAwIDIgNi4yNWwtLjAwNCAxMS41QTIuMjUgMi4yNSAwIDAgMCA0LjI0NiAyMEgxOC40N2ExLjc1IDEuNzUgMCAwIDAgMS42OTgtMS4zMjVsMS43NS02Ljk5OGExLjc1IDEuNzUgMCAwIDAtMS42OTgtMi4xNzVIMjBaTTQuMjUgNS41aDMuOTU2YS43NS43NSAwIDAgMSAuNDguMTczbDIuNTg4IDIuMTU0YS43NS43NSAwIDAgMCAuNDguMTczaDUuOTk2YS43NS43NSAwIDAgMSAuNzUuNzV2Ljc1Mkg2LjQyNGEyLjI1IDIuMjUgMCAwIDAtMi4xODMgMS43MDRsLS43NDQgMi45NzhMMy41IDYuMjVhLjc1Ljc1IDAgMCAxIC43NS0uNzVabTEuNDQ3IDYuMDdhLjc1Ljc1IDAgMCAxIC43MjctLjU2OEgyMC4yMmEuMjUuMjUgMCAwIDEgLjI0Mi4zMWwtMS43NSA2Ljk5OWEuMjUuMjUgMCAwIDEtLjI0Mi4xODlINC4yODVhLjI1LjI1IDAgMCAxLS4yNDMtLjMxbDEuNjU1LTYuNjJaIiBmaWxsPSIjMDAwMDAwIi8+PC9zdmc+');
+        mask-size: contain;
+        mask-repeat: no-repeat;
+        background-size: contain !important;
+        background-repeat: no-repeat !important;
+      }
+    }
+    &[collapsed] {
+      & .tab-group-label-container {
+        border-radius: calc(var(--border-radius-medium) + 2px) !important;
+        border: 2px solid color-mix(in srgb, var(--tab-group-color) 50%, transparent) !important;
+      }
+      & tab {
+        display: none;
+      }
+      
+      & .tab-group-label-container > label::before {
+        content: "" !important;
+        position: absolute !important;
+        left: 7px !important;
+        top: 25%; 
+        width: 16px !important;
+        height: 16px !important;
+        background-color: var(--sidebar-text-color);
+        mask-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjAgMCAyNCAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNOC4yMDcgNGMuNDYgMCAuOTA4LjE0MSAxLjI4NC40MDJsLjE1Ni4xMkwxMi4wMjIgNi41aDcuNzI4YTIuMjUgMi4yNSAwIDAgMSAyLjIyOSAxLjkzOGwuMDE2LjE1OC4wMDUuMTU0djlhMi4yNSAyLjI1IDAgMCAxLTIuMDk2IDIuMjQ1TDE5Ljc1IDIwSDQuMjVhMi4yNSAyLjI1IDAgMCAxLTIuMjQ1LTIuMDk2TDIgMTcuNzVWNi4yNWEyLjI1IDIuMjUgMCAwIDEgMi4wOTYtMi4yNDVMNC4yNSA0aDMuOTU3Wm0xLjQ0IDUuOTc5YTIuMjUgMi4yNSAwIDAgMS0xLjI0NC41MTJsLS4xOTYuMDA5LTQuNzA3LS4wMDF2Ny4yNTFjMCAuMzguMjgyLjY5NC42NDguNzQzbC4xMDIuMDA3aDE1LjVhLjc1Ljc1IDAgMCAwIC43NDMtLjY0OGwuMDA3LS4xMDJ2LTlhLjc1Ljc1IDAgMCAwLS42NDgtLjc0M0wxOS43NSA4aC03LjcyOUw5LjY0NyA5Ljk3OVpNOC4yMDcgNS41SDQuMjVhLjc1Ljc1IDAgMCAwLS43NDMuNjQ4TDMuNSA2LjI1djIuNzQ5TDguMjA3IDlhLjc1Ljc1IDAgMCAwIC4zOTUtLjExM2wuMDg1LS4wNiAxLjg5MS0xLjU3OC0xLjg5LTEuNTc1YS43NS43NSAwIDAgMC0uMzc3LS4xNjdMOC4yMDcgNS41WiIgZmlsbD0iIzAwMDAwMCIvPjwvc3ZnPg==');
+        mask-size: contain;
+        mask-repeat: no-repeat;
+        background-size: contain !important;
+        background-repeat: no-repeat !important;
+      }
+    }
+  }
+}
+
+tab-group:not(:has(tab)) {
+  display: none !important;
+}
+
+/* ==== Horizontal tabs patches ==== */
+
+@media not (-moz-bool-pref: "zen.tabs.vertical") {
+  #zen-essentials-container, #vertical-pinned-tabs-container, #tabbrowser-arrowscrollbox {
+    min-height: 36px;
+  }
+  
+  .tabbrowser-tab[selected] {
+    flex: 2 1 150px !important;
+  }
+  #tabbrowser-arrowscrollbox .tabbrowser-tab[selected] {
+    flex: 2 0 150px !important;
+    transition: scale 0.1s ease-in-out, flex 0.2s ease !important;
+  }
+  #urlbar-container {
+    margin-top: 5px;
+  }
+  #zen-essentials-container .tabbrowser-tab {
+    --tab-min-height: 10px !important;
+  }
+  
+  #vertical-pinned-tabs-container .tab-icon-image {
+    margin-inline-end: calc(var(--toolbarbutton-inner-padding) / 4) !important;
+  }
+  #nav-bar {
+    min-width: 300px !important;
+  }
+  
+  #tabbrowser-tabs {
+    display: flex !important;
+  }
+}
+
+/* ==== Natsumi URLbar ==== */
+
+/* Animations */
+
+@keyframes urlbar-appear {
+  0% {
+    margin-top: calc(var(--zen-toolbar-height) * -2);
+  }
+  75% {
+    margin-top: 20px;
+  }
+  100% {
+    margin-top: 0;
+  }
+}
+
+@keyframes urlbar-appear-sideways {
+  0% {
+    margin-left: -28vw;
+  }
+  75% {
+    margin-left: 20px;
+  }
+  100% {
+    margin-left: calc(-1 * var(--urlbar-margin-inline));
+  }
+}
+
+@keyframes results-appear {
+  0% {
+    opacity: 0;
+    margin-top: -90vh;
+  }
+  50% {
+    opacity: 0;
+    margin-top: -90vh;
+  }
+  75% {
+    opacity: 0;
+    margin-top: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes individual-result-appear {
+  0%   {
+    opacity: 0;
+    scale: 0.5;
+    background: var(--zen-colors-tertiary);
+  }
+  50% {
+    opacity: 1;
+  }
+  60% {
+    opacity: 1;
+    scale: 1.1;
+    background: light-dark(var(--zen-primary-color), var(--zen-colors-primary));
+  }
+  100% {
+    opacity: 1;
+    scale: 1;
+    background: transparent;
+  }
+}
+
+@keyframes individual-result-appear-subtle {
+  0%   {
+    opacity: 1;
+    scale: 1;
+    background: transparent;
+  }
+  60% {
+    scale: 1.05;
+    background: light-dark(var(--zen-primary-color), var(--zen-colors-primary));
+  }
+  100% {
+    opacity: 1;
+    scale: 1;
+    background: transparent;
+  }
+}
+
+@keyframes pinned-icon-appear {
+  0% {
+    opacity: 0;
+    scale: 0.5
+  }
+  50% {
+    opacity: 1;
+  }
+  60% {
+    opacity: 1;
+    scale: 1.1;
+  }
+  100% {
+    opacity: 1;
+    scale: 1;
+  }
+}
+
+/* Adds new URLbar style if missing */
+
+@media (-moz-bool-pref: "natsumi.debug.legacy") {
+  * {
+    --urlbarView-item-inline-padding: 8px !important;
+    --urlbarView-item-block-padding: 12px !important;
+  }
+
+  #urlbar[breakout-extend] {
+    #identity-permission-box, #tracking-protection-icon-container, #page-action-buttons {
+      display: none !important;
+    }
+
+    #identity-icon-box {
+      margin-right: 8px !important;
+      padding-left: 9px !important;
+      padding-right: 3px !important;
+    }
+
+    #identity-box {
+      margin: 0 !important;
+    }
+
+    #urlbar-input {
+      font-size: 20px !important;
+      margin-left: 5px !important;
+      margin-right: 5px !important;
+    }
+  }
+  
+  .urlbarView-row-inner {
+    border-radius: calc(var(--urlbarView-row-gutter) + var(--toolbarbutton-border-radius));
+  }
+
+  .urlbarView-title, .urlbarView-title-separator, .urlbarView-action, .urlbarView-url {
+    margin-top: auto !important;
+    margin-bottom: auto !important;
+  }
+
+  .urlbarView-title {
+    font-size: 14px !important;
+    font-weight: 500 !important;
+  }
+
+  .urlbarView-url, .urlbarView-title-separator::before {
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    color: #aaa !important;
+  }
+
+  .urlbarView-favicon {
+    margin-left: 0 !important;
+    margin-right: 12px !important;
+    padding: 6px !important;
+    border-radius: 6px !important;
+  }
+
+  .urlbarView-row[has-action]:is([type="switchtab"], [type="remotetab"], [type="clipboard"]) .urlbarView-action {
+    margin-left: auto !important;
+    margin-right: 0 !important;
+  }
+
+  .urlbarView-row:hover, .urlbarView-row-inner[selected] {
+    background-color: var(--zen-colors-primary) !important;
+
+    .urlbarView-favicon {
+      background-color: white !important;
+    }
+
+    .urlbarView-url, .urlbarView-title-separator::before {
+      color: color-mix(in srgb, var(--zen-colors-primary) 30%, lightgray) !important;
+    }
+  }
+  
+  .urlbarView-row:hover {
+    background: transparent;
+
+    .urlbarView-row-inner {
+      background: var(--zen-colors-primary) !important;
+    }
+  }
+}
+
+/* URLbar styling */
+
+@media not (-moz-bool-pref: "natsumi.urlbar.disabled") {
+  * {
+    --urlbarView-item-block-padding: 4px !important;
+    --urlbarView-item-inline-padding: 4px !important;
+  }
+
+  #urlbar #urlbar-background {
+    backdrop-filter: none;
+    background: color-mix(in srgb, var(--zen-branding-bg) 75%, transparent);
+    transition: backdrop-filter 0s ease, background 0s ease;
+    
+    @media (-moz-bool-pref: "natsumi.urlbar.disable-transparency") {
+      background: var(--zen-branding-bg);
+      transition: none;
+    }
+  }
+
+  #urlbar {
+    .urlbarView {
+      overflow: initial !important;
+    }
+    
+    &[breakout-extend] {
+      @media not (-moz-bool-pref: "natsumi.urlbar.light") {
+        /* URLbar animations, toggleable to make things lighter. */
+        
+        animation-name: urlbar-appear;
+        animation-duration: var(--animation-duration);
+        
+        @media (-moz-bool-pref: "zen.view.use-single-toolbar") {
+          animation-name: urlbar-appear-sideways;
+        }
+        
+        #urlbar-results {
+          animation-name: results-appear;
+          animation-duration: var(--animation-duration);
+          counter-reset: results 0;
+
+          .urlbarView-row {
+            animation-name: individual-result-appear;
+            animation-duration: var(--animation-duration);
+            animation-fill-mode: forwards; 
+            opacity: 0;
+
+            .urlbarView-type-icon {
+              animation-name: pinned-icon-appear;
+              animation-duration: 0.5s;
+              animation-fill-mode: forwards; 
+              opacity: 0;
+            }
+          }
+
+          .urlbarView-row:nth-child(1) {
+            animation-delay: calc((var(--animation-delay) * 0) + var(--animation-delay-offset));
+
+            .urlbarView-type-icon {
+              animation-delay: calc((var(--animation-delay) * 0) + var(--animation-delay-offset) + var(--animation-duration));
+            }
+          }
+
+          .urlbarView-row:nth-child(2) {
+            animation-delay: calc((var(--animation-delay) * 1) + var(--animation-delay-offset));
+
+            .urlbarView-type-icon {
+              animation-delay: calc((var(--animation-delay) * 1) + var(--animation-delay-offset) + var(--animation-duration));
+            }
+          }
+
+          .urlbarView-row:nth-child(3) {
+            animation-delay: calc((var(--animation-delay) * 2) + var(--animation-delay-offset));
+
+            .urlbarView-type-icon {
+              animation-delay: calc((var(--animation-delay) * 2) + var(--animation-delay-offset) + var(--animation-duration));
+            }
+          }
+
+          .urlbarView-row:nth-child(4) {
+            animation-delay: calc((var(--animation-delay) * 3) + var(--animation-delay-offset));
+
+            .urlbarView-type-icon {
+              animation-delay: calc((var(--animation-delay) * 3) + var(--animation-delay-offset) + var(--animation-duration));
+            }
+          }
+
+          .urlbarView-row:nth-child(5) {
+            animation-delay: calc((var(--animation-delay) * 4) + var(--animation-delay-offset));
+
+            .urlbarView-type-icon {
+              animation-delay: calc((var(--animation-delay) * 4) + var(--animation-delay-offset) + var(--animation-duration));
+            }
+          }
+
+          .urlbarView-row:nth-child(6) {
+            animation-delay: calc((var(--animation-delay) * 5) + var(--animation-delay-offset));
+
+            .urlbarView-type-icon {
+              animation-delay: calc((var(--animation-delay) * 5) + var(--animation-delay-offset) + var(--animation-duration));
+            }
+          }
+
+          .urlbarView-row:nth-child(7) {
+            animation-delay: calc((var(--animation-delay) * 6) + var(--animation-delay-offset));
+
+            .urlbarView-type-icon {
+              animation-delay: calc((var(--animation-delay) * 6) + var(--animation-delay-offset) + var(--animation-duration));
+            }
+          }
+
+          .urlbarView-row:nth-child(8) {
+            animation-delay: calc((var(--animation-delay) * 7) + var(--animation-delay-offset));
+
+            .urlbarView-type-icon {
+              animation-delay: calc((var(--animation-delay) * 7) + var(--animation-delay-offset) + var(--animation-duration));
+            }
+          }
+
+          .urlbarView-row:nth-child(9) {
+            animation-delay: calc((var(--animation-delay) * 8) + var(--animation-delay-offset));
+
+            .urlbarView-type-icon {
+              animation-delay: calc((var(--animation-delay) * 8) + var(--animation-delay-offset) + var(--animation-duration));
+            }
+          }
+          
+          .urlbarView-row:nth-child(10) {
+            animation-delay: calc((var(--animation-delay) * 9) + var(--animation-delay-offset));
+
+            .urlbarView-type-icon {
+              animation-delay: calc((var(--animation-delay) * 9) + var(--animation-delay-offset) + var(--animation-duration));
+            }
+          }
+          
+          .urlbarView-row:nth-child(n+11) {
+            animation-delay: calc((var(--animation-delay) * 10) + var(--animation-delay-offset));
+
+            .urlbarView-type-icon {
+              animation-delay: calc((var(--animation-delay) * 10) + var(--animation-delay-offset) + var(--animation-duration));
+            }
+          }
+        }
+      }
+
+      #urlbar-input {
+        margin-left: 2px !important;
+        margin-right: 0 !important;
+        
+        @media (-moz-bool-pref: "zen.view.use-single-toolbar") {
+          margin-left: 4px !important;
+        }
+        
+        &::-moz-selection {
+          background: light-dark(var(--zen-primary-color), color-mix(in srgb, var(--zen-colors-primary) 60%, white)) !important;
+        }
+      }
+
+      #identity-permission-box, #tracking-protection-icon-container, #page-action-buttons {
+        display: none !important;
+      }
+
+      #identity-icon-box {
+        margin-left: 1px !important;
+        padding-left: 6px !important;
+        padding-right: 6px !important;
+        border-radius: var(--urlbar-icon-border-radius) !important;
+        
+        @media (-moz-bool-pref: "zen.view.use-single-toolbar") {
+          margin-left: 3px !important;
+        }
+      }
+
+      .verifiedDomain {
+        image {
+          list-style-image: url('chrome://browser/skin/zen-icons/link.svg') !important;
+        }
+      }
+
+      #identity-box {
+        &:is([pageproxystate="invalid"]).verifiedDomain {
+          image {
+            list-style-image: url('chrome://global/skin/icons/search-glass.svg') !important;
+          }
+        }
+      }
+
+      #urlbar-background {
+        backdrop-filter: blur(10px);
+        background: color-mix(in srgb, var(--zen-colors-secondary) 75%, transparent) !important;
+        transition: backdrop-filter 0.5s ease, background 0.5s ease;
+        
+        @media (-moz-bool-pref: "natsumi.urlbar.disable-transparency") {
+          transition: none;
+          backdrop-filter: none;
+          background: var(--zen-colors-secondary) !important;
+        }
+      }
+      
+      @media not (-moz-bool-pref: "natsumi.debug.legacy") {
+        #identity-box {
+          margin-right: 10px !important;
+        }
+        
+        .urlbar-input-container {
+          padding-inline: calc(var(--urlbar-margin-inline) + var(--urlbar-container-padding) - 2px) !important;
+        }
+      }
+      
+      @media (-moz-bool-pref: "natsumi.urlbar.force-nowrap") {
+        .urlbarView-no-wrap {
+          flex-basis: unset !important;
+        }
+
+        .urlbarView-row-inner {
+          flex-wrap: nowrap !important;
+        }
+
+        .urlbarView-title-separator {
+          display: flex !important;
+        }
+
+        .urlbarView-url {
+          margin-left: 0 !important;
+        }
+      }
+      
+      &:not([zen-floating-urlbar="true"]) {
+        @media not (-moz-bool-pref: "natsumi.debug.legacy") {
+          animation: none !important;
+        }
+        
+        #identity-icon-box {
+          margin-left: 10px !important;
+        }
+
+        @media (-moz-bool-pref: "zen.view.use-single-toolbar") {
+          #identity-icon-box {
+            margin-left: 12px !important;
+          }
+
+          #urlbar-input {
+            margin-left: 4px !important;
+          }
+        }
+      }
+    }
+    
+    &:is([pageproxystate='invalid']):is([usertyping]) {
+      .urlbarView-row, .urlbarView-row .urlbarView-type-icon {
+        animation: none !important;
+        opacity: 1 !important;
+      }
+      
+      /*
+      this is still in the oven
+      
+      .urlbarView-row {
+        animation-name: individual-result-appear-subtle !important;
+        animation-duration: var(--animation-duration-subtle) !important;
+        animation-delay: 0s !important;
+      }
+      */
+    }
+    
+    /* URLbar hover animation */
+    
+    &:not([breakout-extend="true"]) {
+      #urlbar-background {
+        transition: background 0.2s ease;
+      }
+
+      &:hover #urlbar-background {
+        background: color-mix(in srgb, var(--zen-primary-color) 40%, transparent) !important;
+      }
+    }
+  }
+
+  .urlbarView-row {
+    transition: transform 0.2s ease;
+
+    .urlbarView-row-inner {
+      border-radius: 8px !important;
+      transition: background 0.2s ease;
+    }
+
+    .urlbarView-title, .urlbarView-url {
+      font-weight: 500 !important;
+      margin-top: auto !important;
+      margin-bottom: auto !important;
+    }
+
+    .urlbarView-title-separator {
+      margin-top: auto !important;
+      margin-bottom: auto !important;
+    }
+
+    .urlbarView-button {
+      display: inline-block !important;
+      min-width: 0 !important;
+      min-height: 0 !important;
+      width: 0 !important;
+      height: 0 !important;
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+      opacity: 0;
+      transition: width 0.2s ease, height 0.2s ease, opacity 0.2s ease, margin 0.2s ease, background-color 0.2s ease !important;
+    }
+
+    .urlbarView-favicon {
+      transition: background-color 0.2s ease !important;
+    }
+
+    &:active {
+      transform: scale(0.95, 0.95);
+    }
+    
+    &[selected] {
+      background: transparent !important;
+    }
+
+    &:hover {    
+      background: transparent !important;
+      
+      .urlbarView-row-inner {
+        background: var(--urlbarView-hover-background) !important;
+      }
+      
+      .urlbarView-button {
+        max-width: 24px !important;
+        max-height: 24px !important;
+        width: 24px !important;
+        height: 24px !important;
+        opacity: 1;
+        margin-left: 2px !important;
+        margin-right: 2px !important;
+      }
+    }
+
+    .urlbarView-row-inner[selected] {
+      background: var(--urlbarView-hover-background) !important;
+    }
+  }
+  
+  .urlbarView-title-separator::before {
+    color: rgba(20, 20, 20, 0.2) !important;
+    opacity: 1 !important;
+
+    @media (prefers-color-scheme: dark) {
+      color: rgba(235, 235, 235, 0.2) !important;
+    }
+  }
+  
+  .urlbarView-row[has-action]:is([type="switchtab"], [type="remotetab"], [type="clipboard"]) {
+    .urlbarView-action {
+      margin-left: 8px !important;
+    }
+    
+    .urlbarView-title-separator::before {
+      opacity: 0 !important;
+    }
+  }
+
+  .urlbarView-row-inner .urlbarView-url {
+    color: light-dark(var(--zen-colors-primary), var(--zen-colors-primary-foreground)) !important;
+  }
+
+  .urlbarView-row:hover .urlbarView-row-inner, .urlbarView-row-inner[selected] {
+    .urlbarView-no-wrap .urlbarView-favicon {
+      background-color: color-mix(in srgb, light-dark(var(--zen-primary-color), var(--zen-colors-primary-foreground)) 50%, transparent) !important;
+    }
+
+    .urlbarView-url {
+      color: light-dark(var(--zen-colors-primary), var(--zen-colors-primary-foreground)) !important;
+    }
+  }
+
+  .urlbarView-action, .urlbarView-button,
+  .searchbar-engine-one-off-item {
+    --urlbar-box-focus-bgcolor: color-mix(in srgb, currentColor 16%, transparent);
+    transition: background-color 0.2s ease !important;
+  }
+  
+  /* Results URL display */
+  
+  .urlbarView-url {
+    --urlbarView-second-line-indent: calc(var(--urlbarView-icon-margin-start) + var(--urlbarView-icon-margin-end) + var(--urlbarView-favicon-width) + 2px);
+    color: var(--zen-colors-primary-foreground) !important;
+  }
+  
+  /* Wrapped indents fix */
+  
+  .urlbarView-action {
+    --urlbarView-second-line-indent: calc(var(--urlbarView-icon-margin-start) + var(--urlbarView-icon-margin-end) + var(--urlbarView-favicon-width) + 2px);
+  }
+  
+  /* Make borders more visible */
+  
+  .urlbarView-body-inner, .search-one-offs {
+    border-top: 1px solid light-dark(rgba(20, 20, 20, 0.2), rgba(235, 235, 235, 0.2)) !important;
+  }
+}
+
+
+
+/* ==== Natsumi loading animation ==== */
+
+@media not (-moz-bool-pref: "natsumi.theme.disable-loading-animations") {
+  @keyframes browser-loading {
+    from {
+      transform: rotate(0);
+    }
+
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  @keyframes browser-urlbar-loading {
+    from {
+      transform: translateX(calc(var(--urlbar-width) * -2));
+    }
+
+    to {
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes browser-loading-stop {
+    0% {
+      opacity: 1;
+    }
+
+    100% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes browser-margin {
+    0% {
+      margin: 0;
+    }
+
+    70% {
+      margin: calc(var(--browser-margin) + 2px);
+    }
+
+    100% {
+      margin: calc(var(--browser-margin));
+    }
+  }
+
+  @keyframes browser-margin-reverse {
+    0% {
+      margin: var(--browser-margin);
+    }
+
+    70% {
+      margin: 1px;
+    }
+
+    100% {
+      margin: 0;
+    }
+  }
+  
+  @media (-moz-bool-pref: "natsumi.theme.enable-border-animation") {
+    :not(:has(hbox.zen-glance-background)):not(:has(hbox.zen-glance-overlay)) {
+      .browserStack browser {
+        animation-name: browser-margin-reverse;
+        animation-duration: var(--animation-exit-duration);
+        border-radius: var(--zen-border-radius);
+      }
+
+      .browserSidebarContainer.deck-selected {
+        &::before {
+          --size: max(140vw, 140vh);
+          --offset: calc(var(--size) / -4);
+          content: "";
+          position: absolute;
+          background-color: color-mix(in srgb, var(--zen-primary-color) 40%, transparent);
+          z-index: 0;
+          width: var(--size);
+          height: var(--size);
+          left: var(--offset);
+          top: var(--offset);
+          animation: browser-loading-stop var(--animation-exit-duration) linear;
+          animation-fill-mode: forwards;
+        }
+      }
+    }
+  }
+  
+  @media not (-moz-bool-pref: "natsumi.theme.disable-urlbar-animation") {
+    #urlbar-background {
+      overflow: hidden;
+
+      &::before {
+        content: "";
+        transition: opacity var(--fadein-duration) ease !important;
+        opacity: 0;
+        width: 300%;
+        height: 100%;
+        position: absolute;
+        background: light-dark(
+          var(--zen-primary-color),
+          color-mix(in srgb, var(--zen-primary-color) 60%, transparent)
+        ) !important;
+      }
+    }
+  }
+
+  :has(.tabbrowser-tab[selected][busy]):not(:has(hbox.zen-glance-background)):not(:has(hbox.zen-glance-overlay)) {
+    @media (-moz-bool-pref: "natsumi.theme.enable-border-animation") {
+      .browserSidebarContainer.deck-selected {
+        box-shadow: none !important;
+
+        &::before {
+          background: linear-gradient(
+            90deg,
+            var(--zen-primary-color) 0%,
+            var(--zen-colors-secondary) 100%
+          );
+          animation: browser-loading var(--animation-rotation-duration) linear infinite;
+          animation-fill-mode: forwards;
+        }
+
+        .browserStack browser {
+          animation-name: browser-margin;
+          animation-duration: var(--animation-duration);
+          animation-fill-mode: forwards;
+          border-radius: 8px;
+          background-color: #F9F9FB;
+          @media (prefers-color-scheme: dark) {
+            background-color: #2B2A33;
+          }
+        }
+      }
+    }
+    
+    @media not (-moz-bool-pref: "natsumi.theme.disable-urlbar-animation") {
+      #urlbar-background {
+        &::before {
+          animation: browser-urlbar-loading var(--animation-duration) linear infinite;
+          opacity: 1;
+          background: linear-gradient(
+            90deg,
+            light-dark(
+              var(--zen-primary-color),
+              color-mix(in srgb, var(--zen-primary-color) 60%, transparent)
+            ) 0%,
+            var(--zen-colors-secondary) 33%,
+            light-dark(
+              var(--zen-primary-color),
+              color-mix(in srgb, var(--zen-primary-color) 60%, transparent)
+            ) 66%,
+            var(--zen-colors-secondary) 100%
+          ) !important;
+          transform: translateX(calc(var(--urlbar-width) * -2));
+        }
+      }
+    }
+  }
+  
+  /* Disable animations for non-website elements */
+  
+  @media (-moz-bool-pref: "natsumi.theme.enable-border-animation") {
+    browser.dialogFrame {
+      animation-name: none !important;
+
+      &::before {
+        animation: none !important;
+        opacity: 0 !important;
+        display: none !important;
+        background: transparent !important;
+      }
+    }
+  }
+}
+
+
+
+/* ==== Easier to see tab labels ==== */
+@media not (-moz-bool-pref: "natsumi.sidebar.disable-bigger-tab-label") {
+  .tab-text {
+    font-size: 12px;
+  }
+}
+
+
+
+/* ==== Better Split View ==== */
+#zen-tabbox-wrapper:has(#tabbrowser-tabpanels[zen-split-view="true"]) {
+  margin-bottom: calc(var(--zen-element-separation) - calc(var(--zen-split-row-gap) / 2 + 1px)) !important;
+}
+
+.browserSidebarContainer[zen-split="true"] {
+  margin-bottom: calc(var(--zen-split-row-gap) / 2 + 1px) !important;
+}
+
+.zen-split-view-splitter {
+  &::before {
+    opacity: 0.4 !important;
+    transition: opacity 0.2s ease;
+    background: var(--zen-primary-color) !important;
+  }
+  
+  &:hover::before {
+    opacity: 1 !important;
+  }
+  
+  &:is([orient="horizontal"]) {
+    margin-top: calc(var(--zen-split-column-gap) / -1.4) !important;
+    height: calc(var(--zen-element-separation) * 2 - 3px) !important;
+    
+    &::before {
+      height: 3px;
+      width: 30px;
+      background: var(--zen-colors-border);
+      border-radius: 2px;
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      opacity: 0;
+      transition: opacity 0.1s ease-in-out;
+      pointer-events: none;
+    }
+  }
+}
+
+
+
+/* ==== Smoother workspace switching animation ==== */
+@keyframes custom-slide-in {
+  0% {
+    opacity: 0;
+    transform: translateX(200px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes custom-slide-in-reverse {
+  0% {
+    opacity: 0;
+    transform: translateX(-200px);
+  }
+  
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+#tabbrowser-tabs {
+  & .tabbrowser-tab {
+    &[fadein='true']:not([zen-essential='true']) {
+      #tabbrowser-tabs[zen-workspace-animation='previous'] & {
+        animation: custom-slide-in-reverse 0.2s ease !important;
+      }
+
+      #tabbrowser-tabs[zen-workspace-animation='next'] & {
+        animation: custom-slide-in 0.2s ease !important;
+      }
+    }
+  }
+}
+
+
+
+/* ==== Container tabs ==== */
+
+.tabbrowser-tab[usercontextid], .tabbrowser-tab[usercontextid][pinned]:not([zen-essential="true"]) {
+  --gradient-width: var(--container-gradient-width);
+  
+  .tab-background {
+    overflow: hidden !important;
+    
+    
+    @media (-moz-bool-pref: "natsumi.sidebar.containers-dashed-border") {
+      border: 1px dashed var(--identity-icon-color) !important;
+    }
+    
+    .tab-context-line {
+      --container-angle: 90deg;
+      --offset-margin: 0;
+      @media (-moz-bool-pref: "natsumi.sidebar.containers-right-gradient") {
+        --container-angle: 270deg;
+        --offset-margin: 95%;
+      }
+      transition: width 0.2s ease;
+      width: var(--gradient-width) !important;
+      height: 100% !important;
+      margin-left: var(--offset-margin) !important;
+      background: linear-gradient(
+        var(--container-angle),
+        color-mix(in srgb, var(--identity-icon-color) 50%, transparent) 0%,
+        transparent
+      ) !important;
+      
+      @media (-moz-bool-pref: "natsumi.sidebar.containers-thicker-gradient") {
+        background: linear-gradient(var(--container-angle), var(--identity-icon-color), var(--identity-icon-color), transparent) !important;
+      }
+    }
+  }
+  
+  &:hover {
+    --gradient-width: var(--container-gradient-width-expanded);
+  }
+  
+  &:is([selected="true"]) {
+    --gradient-width: var(--container-gradient-width-expanded);
+    
+    .tab-background {
+      border: 1px solid var(--identity-icon-color) !important;
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+/* === Cohesion (Start) === */
+
+/* --- Style adjustments based on sidebar states --- */
+
+/* Base state - No sidebars displayed - non-compact */
+@media not (-moz-bool-pref: "zen.view.compact") {
+  #browser:not(:has(#sidebar-box[checked="true"])):not(:has(#zen-sidebar-web-panel:not([hidden]))) 
+    .browserSidebarContainer {
+      border-radius: 0 0 10px 10px !important;
+    }
+}
+
+/* Only Normal Sidebar on Left */
+#browser:has(#sidebar-box[checked="true"][style*="order: 1"]):not(:has(#zen-sidebar-web-panel:not([hidden]))) {
+  
+  /* Browser page style */
+  .browserSidebarContainer {
+    border-radius: 0px 0px 10px 0px !important;
+  }
+  
+  /* Browser page style */
+  #tabbrowser-tabpanels {
+    border-radius: 0px 0px 0px 0px !important;
+    margin-left: 0px !important;
+    box-shadow: none !important;
+    padding-left: 0px !important;
+  }
+  
+  /* Normal Sidebar style */
+  #sidebar-box {
+    border-radius: 0px 0px 0px 10px !important;
+    box-shadow: none !important;
+    margin-left: 1px !important;
+    margin-right: 0px !important;
+    margin-bottom: 1px !important;
+  }
+  
+  /* Splitter style */
+  #sidebar-splitter {
+    margin-right: -1px !important;
+    background-color: rgba(0, 0, 0, 0.2) !important;
+  }
+}
+
+/* Only Normal Sidebar on Right */
+#browser:has(#sidebar-box[checked="true"]:not([style*="order: 1"])):not(:has(#zen-sidebar-web-panel:not([hidden]))) {
+  
+  /* Browser page style */
+  .browserSidebarContainer {
+    border-radius: 0px 0px 0px 10px !important;
+  }
+  
+  /* Browser page style */
+  #tabbrowser-tabpanels {
+    padding-right: 0px !important;
+    border-radius: 0px 0px 0px 0px !important;
+    
+  }
+  
+  /* Normal Sidebar style */
+  #sidebar-box {
+    border-radius: 0px 0px 10px 0px !important;
+    box-shadow: none !important;
+    margin-left: -4px !important;
+    margin-right: 0px !important;
+    margin-bottom: 1px !important;
+  }
+  
+  /* Splitter style */
+  #sidebar-splitter {
+    margin-right: 0px !important;
+    background-color: rgba(0, 0, 0, 0.2) !important;
+  }
+}
+
+/* Only zen-sidebar on Left */
+#browser:has(#zen-sidebar-web-panel:not([hidden])):not(:has(#sidebar-box[checked="true"])) {
+  
+  /* Browser page style */
+  .browserSidebarContainer {
+    border-radius: 0 0 10px 0 !important;
+  }
+  
+  /* Browser page style */
+  #tabbrowser-tabpanels {
+    border-bottom-left-radius: 0px !important;
+    margin-left: -10px !important;
+    box-shadow: none !important;
+    padding-left: 0px !important;
+  } 
+  
+  #zen-sidebar-web-panel {
+    padding-right: 0px !important;
+    margin-left: 1px !important;
+    border-radius: 0px 0px 0px 10px !important;
+    border: 0px solid var(--zen-colors-border) !important;
+    background-color: rgba(0, 0, 0, 0.2) !important;
+    box-shadow: none !important;
+    margin-bottom: 1px !important;
+  }
+  
+  /* Zen Sidebar header style */
+  #zen-sidebar-web-header {
+    border: 0px !important;
+    box-shadow: none !important;
+  }
+  
+  /* Zen Sidebar footer style */
+  #zen-sidebar-panels-wrapper {
+  border-top-width: 0px !important;
+  border-bottom-width: 0px !important;
+  }  
+} 
+
+/* Both sidebars displayed - normal on left */
+#browser:has(#sidebar-box[checked="true"][style*="order: 1"])
+        :has(#zen-sidebar-web-panel:not([hidden])) {
+  
+  /* Browser page style */
+  .browserSidebarContainer {
+    border-radius: 0px 0px 10px 0px !important;
+    margin-left: -9px !important;
+  }
+  
+  /* Browser page style */
+  #tabbrowser-tabpanels {
+    box-shadow : none !important;
+    margin-right: 0px !important;
+  }
+  
+  /* Normal Sidebar style */
+  #sidebar-box {
+    border-radius: 0px 0px 0px 10px !important;
+    box-shadow: none !important;
+    margin-left: 1px !important;
+    margin-right: 5px !important;
+    margin-bottom: 1px !important;
+  }
+  
+  /* Splitter style */
+  #sidebar-splitter {
+    margin-right: 0px !important;
+    background-color: rgba(0, 0, 0, 0.2) !important;
+  }
+  
+  /* zen-sidebar style */        
+  #zen-sidebar-web-panel {
+    padding-right: 0px !important;
+    margin-left: -5px !important;
+    border-radius: 0px 0px 0px 0px !important;
+    border: 0px solid var(--zen-colors-border) !important;
+    background-color: rgba(0, 0, 0, 0.2) !important;
+    box-shadow: none !important;
+    margin-bottom: 1px !important;
+  }
+  
+  /* Zen Sidebar header style */
+  #zen-sidebar-web-header {
+    border: 0px !important;
+    box-shadow: none !important;
+  }
+  
+  /* Zen Sidebar footer style */
+  #zen-sidebar-panels-wrapper {
+  border-top-width: 0px !important;
+  border-bottom-width: 0px !important;
+  } 
+}
+
+/* Both sidebars displayed - normal on Right */
+#browser:has(#sidebar-box[checked="true"]:not([style*="order: 1"]))
+        :has(#zen-sidebar-web-panel:not([hidden])) {
+          
+  /* Browser page style */
+  .browserSidebarContainer {
+    border-radius: 0px 0px 0px 0px !important;
+  }
+  
+  /* Browser page style */
+  #tabbrowser-tabpanels {
+    box-shadow : none !important;
+    margin-right: -4px !important;
+    margin-left: -10px !important;
+    margin-bottom: -1px !important;
+  }
+  
+  /* Normal Sidebar style */
+  #sidebar-box {
+    border-radius: 0px 0px 10px 0px !important;
+    box-shadow: none !important;
+    margin-left: 0px !important;
+    margin-bottom: 0px !important;
+  }
+  
+  /* Splitter style */
+  #sidebar-splitter {
+    margin-right: 0px !important;
+    background-color: rgba(0, 0, 0, 0.2) !important;
+  }
+  
+  /* zen-sidebar style */
+  #zen-sidebar-web-panel {
+    padding-right: 0px !important;
+    margin-left: -5px !important;
+    border-radius: 0px 0px 0px 10px !important;
+    border: 0px solid var(--zen-colors-border) !important;
+    background-color: rgba(0, 0, 0, 0.2) !important;
+    box-shadow: none !important;
+  }
+  
+  /* Zen Sidebar header style */
+  #zen-sidebar-web-header {
+    border: 0px !important;
+    box-shadow: none !important;
+  }
+  
+  /* Zen Sidebar footer style */
+  #zen-sidebar-panels-wrapper {
+  border-top-width: 0px !important;
+  border-bottom-width: 0px !important;
+  } 
+          
+}
+
+/* --- Integrated URL Bar --- */
+
+/* Webview Styles */
+@media not (-moz-bool-pref:"zen.view.compact") {
+  #browser { 
+    --urlbar-min-width: 28px !important;
+  }
+
+  /* Nav bar style and transparency level */
+  #nav-bar {
+    --zen-toolbar-height: 45px;
+    background-color: rgba(0, 0, 0, 0.2) !important;
+    border-radius: 10px 10px 0 0 !important;
+    padding-left: 6px !important;
+    margin: 6px 6px 0 1px !important;
+    box-shadow: none !important;
+  }  
+}
+
+  /* Browser styling with semi-transparent background and rounded corners (non-compact mode) */
+@media not (-moz-bool-pref: "zen.view.compact") {
+  .browserSidebarContainer {
+    background-color: rgba(0, 0, 0, 0.2) !important;
+    margin-top: 0px !important;
+    margin-right: 0px !important;
+    box-shadow: none !important;
+    border-radius: 10px 10px 10px 10px !important;
+  }
+}
+
+  /* Browser styling with semi-transparent background and rounded corners (non-compact mode) */
+@media (-moz-bool-pref: "zen.view.compact") {
+  .browserSidebarContainer {
+    background-color: rgba(0, 0, 0, 0.2) !important;
+    margin-top: 0px !important;
+    margin-right: 0px !important;
+    box-shadow: none !important;
+    border-radius: 10px 10px 10px 10px !important;
+  }
+}
+  
+  /* Toolbar spacing */
+  #navigator-toolbox {
+    padding-top: 8px !important;
+  }
+
+/* --- Transparent Styles --- */
+
+/* Transparent Normal Sidebar background */
+.sidebar-placesTree[lwt-sidebar] {
+  background-color: rgba(255, 255, 255, 0.0) !important;
+  }
+
+/* Transparent Bookmark bar */
+#PersonalToolbar:not([collapsed="true"]) {
+  padding-bottom: 6px;
+  margin-right: 6px !important;
+  margin-left: 1px !important;
+  background: rgba(0, 0, 0, 0.2) !important;
+}
+ 
+/* Transparent Findbar */
+findbar {
+	background: none !important;
+  border-top: none !important;
+ 	}
+
+  /* Cleaned & Transparent Sidebar */
+#sidebar-box {
+  background-color: rgba(0, 0, 0, .2) !important;
+  border: none !important;
+  & #sidebar-header {
+    border-bottom: none !important;
+    & #sidebar-close {
+      display: none !important;
+    }
+  }
+}
+  
+/* Transparent Search box in sidebar */
+#sidebar-search-container > #search-box,
+#viewButton {
+  padding: 4px 8px !important;
+
+  appearance: none !important;
+  background-color: transparent !important;
+  border-radius: 10px !important;
+  border: none !important;
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+  }
+  &:active {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+  }
+}
+
+/* Hide the Normal Sidebard Border */
+#sidebar-header {
+  font-size: 1.333em;
+  padding: 5px !important;
+  border-bottom: 0 solid var(--sidebar-border-color) !important;
+}
+
+/* === Cohesion (End) === */

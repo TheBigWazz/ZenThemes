@@ -1,0 +1,78 @@
+/*
+
+Natsumi Browser - A userchrome for Zen Browser that makes things flow.
+
+Copyright (c) 2024 Green (@greeeen-dev)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+Natsumi Browser uses code from others. The link to the original projects or
+their author(s) have been provided above the used code.
+
+*/
+
+/* ==== Load config and Natsumi Browser ==== */
+
+@import "../natsumi-config.css";
+@import "modules/preload.css";
+@import "modules/patches.css";
+@import "modules/base-ui.css";
+@import "modules/tab-groups.css";
+@import "modules/horizontal-tabs.css";
+@import "modules/natsumi-urlbar.css";
+@import "modules/ui-tweaks.css";
+@import "modules/postload.css";
+/* @import "modules/natsumi-loading.css"; */
+
+
+
+/* ==== Natsumi Browser not installed warning ==== */
+
+* {
+  --natsumi-fail-display: flex;
+}
+
+@keyframes natsumi-not-installed-fadeout {
+  0% {opacity: 1;}
+  90% {opacity: 1;}
+  99% {opacity: 0; height: 20%;}
+  100% {opacity: 0; height: 0; display: none;}
+}
+
+#tabbrowser-arrowscrollbox::after {
+  display: var(--natsumi-fail-display);
+  box-sizing: border-box;
+  contain: size;
+  padding: 10px;
+  font-size: 12px;
+  color: black;
+  content: "WARNING: Natsumi Browser loader is installed but it could not load Natsumi Browser.\
+    Please add the natsumi-config.css file and natsumi folder to your profile's chrome folder, then restart Zen Browser!\
+  ";
+  width: 100%;
+  height: 20%;
+  border-radius: var(--border-radius-medium);
+  border: 1px solid;
+  background-color: #ffdd00;
+  text-align: center;
+  animation: natsumi-not-installed-fadeout ease 10s;
+  animation-fill-mode: forwards;
+}
+
+/* You can enter any additional CSS below this comment. */

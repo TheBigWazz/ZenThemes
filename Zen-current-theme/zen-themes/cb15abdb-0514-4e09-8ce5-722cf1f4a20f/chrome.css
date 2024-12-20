@@ -1,0 +1,1 @@
+@-moz-document url-prefix("chrome:") {    #urlbar #identity-box.extensionPage #identity-icon-label {    display: none !important;  }  }
