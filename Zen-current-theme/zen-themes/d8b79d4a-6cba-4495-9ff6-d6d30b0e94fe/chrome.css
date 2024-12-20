@@ -1,1 +1,0 @@
-@-moz-document url-prefix("chrome:") {  .tab-background {    position: relative;  }    .tab-background[selected='']::after {    content: '';    position: absolute;    width: 3px;    height: 100%;    background-color: var(--zen-primary-color);  }  }
