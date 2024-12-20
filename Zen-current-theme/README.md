@@ -1,4 +1,4 @@
-# Wazz CSS for Zen
+# My Personal CSS for Zen
 
 Below are my customizations, mods, toolbar layout, extensions, and theme colors.
 
@@ -113,9 +113,20 @@ __9.__ : [Gradients](https://github.com/TheBigWazz/ZenThemes/tree/main/Zen-curre
 
 1. If you have not already, follow the [Zen Live Editing](https://docs.zen-browser.app/guides/live-editing) guide to first make your own userChrome.css file.
 
-2. Download the **"Wazz"** folder from above and drop it into your **"chrome"** folder. 
+2. Download the **"Wazz"**, **"Cohesion"**, and **"natsumi-tweaks"** folders from above and drop them into your **"chrome"** folder. 
 
-3. Add: ```@import "Wazz/Wazz.css";``` to your **userChrome.css**
+3. Add these import statements to your **userChrome.css**:
+```
+/* Personal Changes */
+@import "Wazz/Wazz.css";
+
+/* Cohesion */
+@import "Cohesion/Cohesion.css";
+
+/* Natsumi */
+@import "natsumi-tweaks/natsumi-tweaks.css";
+```
+
 
 > [!Note]
 > - Remove any of my personal CSS / Cohesion CSS from your **userChrome.css** file if you have previously used it.
