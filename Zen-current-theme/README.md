@@ -1,12 +1,14 @@
 # My Personal CSS for Zen
 
+This is a combination of Cohesion and Natsumi-Tweaks for Cohesion.
+
 Below are my customizations, mods, toolbar layout, extensions, and theme colors.
 
 **I have only tested this on Windows 11.*
 
 *[uCL](https://github.com/greeeen-dev/userchrome-loader) Structure supported*
 
-https://github.com/user-attachments/assets/1e880c38-5c36-4667-9d56-2ac59b9aaaff
+https://github.com/user-attachments/assets/e19e1a3d-c3ea-42a1-a655-4b9353463ca5
 
 ## Step-by-step
 
@@ -63,7 +65,7 @@ __9.__ : [Gradients](https://github.com/TheBigWazz/ZenThemes/tree/main/Zen-curre
 
 ---
 
-### Natsumi Tweaks Options:
+### Natsumi-Tweaks Options:
 *These options need to be manually added in `about:config`*
 
 - ```natsumi.theme.clip-path-force-polygon``` = ```true```
@@ -105,9 +107,9 @@ __9.__ : [Gradients](https://github.com/TheBigWazz/ZenThemes/tree/main/Zen-curre
 ### What is uCL?
 - [uCL (userChrome-Loader)](https://github.com/greeeen-dev/userchrome-loader) is an alternitive method of structuring custom CSS to make it easier for users to swap in and out specific Modules of code from the community. This method is more similar to how Zen Browser already structrues its Mods. In addition to being a simpler setup process, it's a much easier structure to debug and maintain. 
 
-- Using uCL Structure allows an end user to simply drop a Mod folder into their **\chrome** folder to install a mod. 
+- Using uCL Structure allows an end user to simply drop a Mod folder into their **\chrome** folder to install a mod, theme, or custom CSS.
 
-- Instead of copying the entire CSS of a mod into a userChrome.css file, the user only needs to add a single import line in their userChrome.css.
+- Instead of copying entire CSS files into a userChrome.css, the user only needs to add a single import line in their userChrome.css.
 
 - Mod creators can take advantage of this by making their custom css projects modular. Only want one feature of a project? Only use the import statement for that particular module. 
 
