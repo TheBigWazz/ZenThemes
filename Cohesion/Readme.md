@@ -4,36 +4,27 @@
 
 # Cohesion
 
-A cohesive, transparent, and integrated style for Multiple Toolbar layout in [Zen Browser](https://zen-browser.app/)
+A cohesive, transparent, and integrated style for [Zen Browser](https://zen-browser.app/)
 
-# Partly working on zen b.0 - more updates coming soon
+https://github.com/user-attachments/assets/e19e1a3d-c3ea-42a1-a655-4b9353463ca5
 
-https://github.com/user-attachments/assets/df5f3a31-9d01-4969-961c-9c0aa331e2e2
+### Install and Config
+- Drop the Cohesion folder into your **chrome** folder
+- Add `@import "Cohesion/Cohesion.css";` to the top of your **userChrome.css** file
 
-## Config
-Set ```browser.tabs.allow_transparent_browser``` = ```true```
-
-In Zen settings > Home, set New Tabs to ```Blank Page```
-
-## V-0.0.2
-#### Changes:
-
-*-Add Twilight support*
-
-*-Add Beta support*
-
-*-Fixed Compact Mode top left and right corner radius*
-
+Enable the following in `about:config`
+- `browser.tabs.allow_transparent_browser` = `true`*
+- `zen.view.use-deprecated-urlbar` = `true`
 #### Known Issues:
 
-*-Currently not compatible with [Zen Sidebar At Right Side](https://zen-browser.app/mods/dd4f5461-1564-4e56-9f9d-f81e3c18f93c)*
+*- Currently not compatible with [Zen Sidebar At Right Side](https://zen-browser.app/mods/dd4f5461-1564-4e56-9f9d-f81e3c18f93c).*
 
-*-Floating Zen Sidebar is transparent*
+*- Currently not compatible with Collapsed Toolbar Mode.*
 
-*-Normal Sidebar is not transparent (Bookmarks, History, Synced Tabs)*
+*- Some HDR displays render an incorrect Alpha value for certian elements, even though they are consistant within the userChrome.css file. This is believed to be a Windows HDR bug.*
 
-*-Some HDR displays render an incorrect Alpha value for certian elements, even though they are consistant within the userChrome.css file. This is believed to be a Windows HDR bug.*
-
-*-Websites without a background will display the browser UI underneath the content.*
+*- Websites without a background will display the browser UI underneath the content.*
 
 *(Extensions like [Dark Reader](https://addons.mozilla.org/en-US/firefox/addon/darkreader/?utm_source=addons.mozilla.org&utm_medium=referral&utm_content=search) fix this by setting their own background.)*
+
+
