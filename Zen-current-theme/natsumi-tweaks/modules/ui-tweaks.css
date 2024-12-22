@@ -1,0 +1,217 @@
+/*
+
+Natsumi Browser - A userchrome for Zen Browser that makes things flow.
+
+Copyright (c) 2024-present Green (@greeeen-dev)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+Natsumi Browser uses code from others. The link to the original projects or
+their author(s) have been provided above the used code.
+
+*/
+
+/* ==== Easier to see tab labels ==== */
+@media not (-moz-bool-pref: "natsumi.sidebar.disable-bigger-tab-label") {
+  .tab-text {
+    font-size: 12px;
+  }
+}
+
+
+
+/* ==== Better Split View ==== */
+#zen-tabbox-wrapper:has(#tabbrowser-tabpanels[zen-split-view="true"]) {
+  margin-bottom: calc(var(--zen-element-separation) - calc(var(--zen-split-row-gap) / 2 + 1px)) !important;
+}
+
+.browserSidebarContainer[zen-split="true"] {
+  margin-bottom: calc(var(--zen-split-row-gap) / 2 + 1px) !important;
+}
+
+.zen-split-view-splitter {
+  &::before {
+    opacity: 0.4 !important;
+    transition: opacity 0.2s ease;
+    background: var(--natsumi-primary-color) !important;
+  }
+  
+  &:hover::before {
+    opacity: 1 !important;
+  }
+  
+  &:is([orient="horizontal"]) {
+    margin-top: calc(var(--zen-split-column-gap) / -1.4) !important;
+    height: calc(var(--zen-element-separation) * 2 - 3px) !important;
+    
+    &::before {
+      height: 3px;
+      width: 30px;
+      background: var(--zen-colors-border);
+      border-radius: 2px;
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      opacity: 0;
+      transition: opacity 0.1s ease-in-out;
+      pointer-events: none;
+    }
+  }
+}
+
+
+
+/* ==== Smoother workspace switching animation ==== */
+@keyframes custom-slide-in {
+  0% {
+    opacity: 0;
+    transform: translateX(200px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes custom-slide-in-reverse {
+  0% {
+    opacity: 0;
+    transform: translateX(-200px);
+  }
+  
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+#tabbrowser-tabs {
+  & .tabbrowser-tab {
+    &[fadein='true']:not([zen-essential='true']) {
+      #tabbrowser-tabs[zen-workspace-animation='previous'] & {
+        animation: custom-slide-in-reverse 0.2s ease !important;
+      }
+
+      #tabbrowser-tabs[zen-workspace-animation='next'] & {
+        animation: custom-slide-in 0.2s ease !important;
+      }
+    }
+  }
+}
+
+
+
+/* ==== Dialog box animation ==== */
+
+@keyframes overlay-appear {
+  0% {
+    background-color: transparent;
+  }
+  
+  100% {
+    background-color: rgba(28, 27, 34, 0.45);
+  }
+}
+
+@keyframes dialog-appear {
+  0% {
+    opacity: 0;
+    margin-top: 50px;
+    margin-bottom: -50px;
+  }
+  
+  100% {
+    opacity: 1;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+
+.browserStack .dialogOverlay:not([hidden="true"]) {
+  animation: overlay-appear 0.3s ease;
+  
+  .dialogBox {
+    animation: dialog-appear 0.3s ease;
+  }
+}
+
+/* can't get bg fadein to work here for some reason, help would be appreciated */
+
+@keyframes menupopup-appear {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
+}
+
+#window-modal-dialog[open] {
+  animation: dialog-appear 0.3s ease;
+}
+
+/* ==== Menu items animation ==== */
+
+/* I could just use button to remove a lot of these, but that'd be risky */
+.dialog-button-box button, menulist, richlistitem, .urlbar-page-action,
+#tracking-protection-icon-container, .identity-box-button,
+.panel-subview-body toolbarbutton, .panel-subview-footer-button,
+.subviewbutton-back, .panel-info-button, .protections-popup-footer-button,
+.bookmark-item, .zen-workspace-button, #PanelUI-zen-workspaces-reorder-mode,
+#PanelUI-zen-workspaces-new, menupopup menuitem, menupopup menu,
+#PanelUI-zen-profiles-list .PanelUI-zen-profiles-item,
+#PanelUI-zen-profiles-actions toolbarbutton,
+#TabsToolbar-customization-target toolbarbutton, .findbar-container toolbarbutton,
+#sidebar-switcher-target {
+  transition: background-color 0.2s ease;
+}
+
+menulist[open="true"] menupopup {
+  animation: menupopup-appear 0.2s ease;
+}
+
+#downloadsHistory, .downloadButton, #editBookmarkPanelRemoveButton, #editBookmarkPanelDoneButton,
+.findbar-closebutton {
+  transition: 0.2s ease !important;
+}
+
+#PanelUI-zen-workspaces-list {
+  .zen-workspace-button {
+    &:is([active]) {
+      .zen-workspace-icon {
+        border: 1px solid var(--toolbarbutton-icon-fill-attention) !important;
+        background: color-mix(in srgb, var(--toolbarbutton-icon-fill-attention) 50%, transparent) !important;
+        &::before {
+          display: none;
+        }
+      }
+
+      /*noinspection CssInvalidFunction*/
+      .zen-workspace-name {
+        color: color-mix(in srgb, var(--toolbarbutton-icon-fill-attention) 70%, light-dark(black, white)) !important;
+      }
+    }
+  }
+}
+
+/* Elongate the pinned tabs section */
+#vertical-pinned-tabs-container {
+  @media (-moz-bool-pref: "natsumi.sidebar.unlimited-pinned-tabs") {
+    max-height: none !important;
+  }
+}

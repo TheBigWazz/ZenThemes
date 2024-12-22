@@ -1,40 +1,36 @@
-# Current CSS Preview
+# My Personal CSS for Zen
+
+This is a combination of Cohesion and Natsumi-Tweaks for Cohesion.
 
 Below are my customizations, mods, toolbar layout, extensions, and theme colors.
 
-**This exact set up has only been tested/used on Windows 11.*
+**I have only tested this on Windows 11.*
 
- 
+*[uCL](https://github.com/greeeen-dev/userchrome-loader) Structure supported*
 
-https://github.com/user-attachments/assets/1e880c38-5c36-4667-9d56-2ac59b9aaaff
-
-
-
-
+https://github.com/user-attachments/assets/e19e1a3d-c3ea-42a1-a655-4b9353463ca5
 
 ## Step-by-step
 
-Follow these steps if you want the same as the screenshot:
+__1.__ : [Zen Settings](https://github.com/TheBigWazz/ZenThemes/tree/main/Zen-current-theme#Zen-Settings)
 
-__Step 0__ : [Zen Settings](https://github.com/TheBigWazz/ZenThemes/tree/main/Zen-current-theme#Zen-Settings)
+__2.__ : [about:config](https://github.com/TheBigWazz/ZenThemes/tree/main/Zen-current-theme#aboutconfig-options)
 
-__Step 1__ : [about:config](https://github.com/TheBigWazz/ZenThemes/tree/main/Zen-current-theme#aboutconfig-options)
+__3.__ : [Toolbar Layout](https://github.com/TheBigWazz/ZenThemes/tree/main/Zen-current-theme#toolbar-layout)
 
-__Step 2__ : [Toolbar Layout](https://github.com/TheBigWazz/ZenThemes/tree/main/Zen-current-theme#toolbar-layout)
+__4.__ : [Extensions](https://github.com/TheBigWazz/ZenThemes/tree/main/Zen-current-theme#extensions)
 
-__Step 3__ : [Extensions](https://github.com/TheBigWazz/ZenThemes/tree/main/Zen-current-theme#extensions)
+__5.__ : [Install via uCL](https://github.com/TheBigWazz/ZenThemes/tree/main/Zen-current-theme#userchromecss)
 
-__Step 4__ : [userChrome.css](https://github.com/TheBigWazz/ZenThemes/tree/main/Zen-current-theme#userchromecss)
+__6.__ : [userContent.css](https://github.com/TheBigWazz/ZenThemes/tree/main/Zen-current-theme#usercontentcss)
 
-__Step 5__ : [userContent.css](https://github.com/TheBigWazz/ZenThemes/tree/main/Zen-current-theme#usercontentcss)
+__7.__ : [Mica For Everyone](https://github.com/TheBigWazz/ZenThemes/tree/main/Zen-current-theme#mica-for-everyone)
 
-__Step 6__ : [Mica For Everyone](https://github.com/TheBigWazz/ZenThemes/tree/main/Zen-current-theme#mica-for-everyone)
+__8.__ : [Mods](https://github.com/TheBigWazz/ZenThemes/tree/main/Zen-current-theme#mods)
 
-__Step 7__ : [Mods](https://github.com/TheBigWazz/ZenThemes/tree/main/Zen-current-theme#mods)
+__9.__ : [Gradients](https://github.com/TheBigWazz/ZenThemes/tree/main/Zen-current-theme#gradients)
 
-__Step 8__ : [Gradients](https://github.com/TheBigWazz/ZenThemes/tree/main/Zen-current-theme#gradients)
-
-## Zen Settings
+## 1. Zen Settings
 
 - Look and Feel 
   - Select '__Multiple Toolbars__'
@@ -49,26 +45,51 @@ __Step 8__ : [Gradients](https://github.com/TheBigWazz/ZenThemes/tree/main/Zen-c
   - Homepage and new windows: Firefox Home (default)
   - New tabs: Firefox Home (default)
 
+## 2. About:Config Options
 
-## About:Config Options
+### Zen Options:
 
-Allow transparency:
+- ```browser.tabs.allow_transparent_browser``` = ```true```
+  - *Allows transparency**
 
-```browser.tabs.allow_transparent_browser``` = ```true```*
+- ```zen.workspaces.show-workspace-indicator``` = ```false```
+  - *Hide the Workspace Indicator*
 
-Hide the Workspace Indicator:
+- ```zen.view.use-deprecated-urlbar``` = ```true```
+  - *Use the Connected URL style instead of Floating*
 
-```zen.workspaces.show-workspace-indicator``` = ```false```
+>[!Note]
+>**Websites without a background will display the browser UI underneath the content.*
+>
+>*Extensions like [Dark Reader](https://addons.mozilla.org/en-US/firefox/addon/darkreader/?utm_source=addons.mozilla.org&utm_medium=referral&utm_content=search) fix this by setting their own background.*
 
-Use the Connected URL style instead of Floating:
+---
 
-```zen.view.use-deprecated-urlbar``` = ```true```
+### Natsumi-Tweaks Options:
+*These options need to be manually added in `about:config`*
 
-**Websites without a background will display the browser UI underneath the content.*
+- ```natsumi.theme.clip-path-force-polygon``` = ```true```
+  - *Uses polygon instead of inset for URLbar and Zen Sidebar blurring. Enable if you need this for compatibility with other userchromes/Mods*
 
-*Extensions like [Dark Reader](https://addons.mozilla.org/en-US/firefox/addon/darkreader/?utm_source=addons.mozilla.org&utm_medium=referral&utm_content=search) fix this by setting their own background.*
+- ```natsumi.sidebar.blur-zen-sidebar``` = ```true```
+  - *Blurs Zen Sidebar background. This may cause some lag when you have both Zen Sidebar and Natsumi URLbar opened at the same time*
 
-## Toolbar Layout
+- ```natsumi.sidebar.containers-no-inactive-border``` = ```true```
+  - *Hides the container tabs indicator border when the tab is not selected*
+
+> [!WARNING]
+> The developer of Zen Browser recommends **against** using custom CSS to implement Tab Groups like
+> Natsumi's for the time being. Proceed at your own risk.
+>
+>- ```natsumi.sidebar.enable-tab-groups``` = ```true```
+>   - *Enables Natsumi Tab Group Style*
+>
+>- `browser.tabs.groups.enabled` = ```true```
+>   - *Enable Tab Groups*
+
+---
+
+## 3. Toolbar Layout
 
 - Right click on the Tab Bar and select 'Customize Toolbar'
 - Click and drag items to arrange them in this same order:
@@ -77,38 +98,65 @@ Use the Connected URL style instead of Floating:
 
 ```[Account]```-```[Bookmark toolbar items]```-```[Proton Pass]```-```[4x Spacers]```-```[Nav buttons]```-```[URL Bar]```-```[Copy URL button]```-```[4x Spacers]```
 
-## Extensions
+## 4. Extensions
 * [Copy Tab URL](https://addons.mozilla.org/en-US/firefox/addon/zen-copy-tab-url/) *Adds the Copy URL button to the URL bar.*
 * [Proton Pass](https://addons.mozilla.org/en-US/firefox/addon/proton-pass/) *Is the purple diamond at the far left of the URL bar.*
 * [Dark Reader](https://addons.mozilla.org/en-US/firefox/addon/darkreader/?utm_source=addons.mozilla.org&utm_medium=referral&utm_content=search) *Fixes missing backgrounds on websites.*
 
-## userChrome.css
+## 5. Install via uCL
+### What is uCL?
+- [uCL (userChrome-Loader)](https://github.com/greeeen-dev/userchrome-loader) is an alternitive method of structuring custom CSS to make it easier for users to swap in and out specific Modules of code from the community. This method is more similar to how Zen Browser already structrues its Mods. In addition to being a simpler setup process, it's a much easier structure to debug and maintain. 
+
+- Using uCL Structure allows an end user to simply drop a Mod folder into their **\chrome** folder to install a mod, theme, or custom CSS.
+
+- Instead of copying entire CSS files into a userChrome.css, the user only needs to add a single import line in their userChrome.css.
+
+- Mod creators can take advantage of this by making their custom css projects modular. Only want one feature of a project? Only use the import statement for that particular module. 
 
 ### Instructions:
 
-If you have not already made your own, follow the [Zen Live Editing](https://docs.zen-browser.app/guides/live-editing) steps first to make your own userChrome.css file.
+1. If you have not already, follow the [Zen Live Editing](https://docs.zen-browser.app/guides/live-editing) guide to first make your own userChrome.css file.
 
-If you already have a userChrome.css file, copy and paste my [userChrome.css]() into yours. Remember to save. 
+2. Download the **"Wazz"**, **"Cohesion"**, and **"natsumi-tweaks"** folders from above and drop them into your **"chrome"** folder. 
 
-You can copy the entire file or specific parts. It's mostly labled so you should be able to pick out exactly what you want. 
+3. Add these import statements to your **userChrome.css**:
+```
+/* Personal Changes */
+@import "Wazz/Wazz.css";
+
+/* Cohesion */
+@import "Cohesion/Cohesion.css";
+
+/* Natsumi */
+@import "natsumi-tweaks/natsumi-tweaks.css";
+```
+
+
+> [!Note]
+> - Remove any of my personal CSS / Cohesion CSS from your **userChrome.css** file if you have previously used it.
+> - It's now all being called via the import statements in your **userChrome.css** file.
+> - You may still add other custom CSS to your userChrome.css underneath the imports.
+> - You can Live Edit mod files, just search for the Module name in the Style Browser (Ctrl+Alt+Shift+I)
 
 ### What it does:
-*Community contributions are credited inside the file.*
+*Community contributions are credited inside the Modules.*
 
 - Hides Pinned Tab Reset Button
 - Styles Workspace Buttons
-- Styles Tab Groups and makes them Workspace specific
-- Hides the workspace 
 - URL Bar Loading animation
-- Mini Container icon (dot)
-- [Cohesion]() Mod
+- Mini Container icon in URL (dot instead of full icon)
+- [Cohesion](https://github.com/TheBigWazz/ZenThemes/tree/main/Cohesion) Mod
+- [Natsumi](https://github.com/greeeen-dev/natsumi-browser/) Tweaks
 
-## userContent.css
+> [!Note]
+> Thanks to uCL structure, if you want to disable any of the features, simply remove the corresponding import statement from **"Wazz.css"**
+
+## 6. userContent.css
 
 ### Instructions:
 
-- Inside the same __\chrome__ folder that your userChrome.css file is in, save '__[userContent.css]()__'
-- Inside the same __\chrome__ folder, save '__[zen-logo.svg]()__'
+- Inside the same __"chrome"__ folder that your userChrome.css file is in, save '__[userContent.css]()__'
+- Inside the same __"chrome"__ folder, save '__[zen-logo.svg]()__'
 
 ### What it does:
 
@@ -116,9 +164,14 @@ You can copy the entire file or specific parts. It's mostly labled so you should
 
 - Adds Zen Logo on New Tab page, Home page, Blank Page, and Private Browsing page
 - Adds transparency on New Tab Page/Firefox Home page
-- I made a tweak to remove the search bar from Firefox Home because I favor using the URL bar instead
 
-## Mica For Everyone
+I made a tweak to remove the search bar from Firefox Home because I favor using the URL bar instead.
+
+If you want the search bar back in Firefox Home, delete line 77 from **userContent.css**
+
+![image](https://github.com/user-attachments/assets/eb8f90a8-5b31-465d-a104-a4329655b3da)
+
+## 7. Mica For Everyone
 
 - Download and install from their repo: https://github.com/MicaForEveryone/MicaForEveryone
 - After installing, open and click the '__+__' button in the bottom left corner
@@ -126,12 +179,12 @@ You can copy the entire file or specific parts. It's mostly labled so you should
 - Type ```zen```
 
 
-## Mods
+## 8. Mods
 These are all the mods I use:
 
+* [Natsumi](https://github.com/greeeen-dev/natsumi-browser/) - [Natsumi Tweaks for Cohesion](https://github.com/TheBigWazz/ZenThemes/tree/main/natsumi-tweaks)
 * [Cohesion](https://github.com/TheBigWazz/ZenThemes/tree/main/Cohesion)
 * [Bottom Essentials](https://zen-browser.app/mods/477bc813-c333-4747-813e-00e0420ceec0)
-* [Better Active Tab](https://zen-browser.app/mods/d8b79d4a-6cba-4495-9ff6-d6d30b0e94fe)
 * [Better Unloaded Tabs](https://zen-browser.app/mods/f7c71d9a-bce2-420f-ae44-a64bd92975ab)
 * [Cleaner Extension Menu](https://zen-browser.app/mods/1e86cf37-a127-4f24-b919-d265b5ce29a0)
 * [Cleaned URL Bar](https://zen-browser.app/mods/a5f6a231-e3c8-4ce8-8a8e-3e93efd6adec)
@@ -148,12 +201,11 @@ These are all the mods I use:
 * [Super URL Bar](https://zen-browser.app/mods/d93e67f8-e5e1-401e-9b82-f9d5bab231e6)
 
   **Super URL Bar Settings:**
-  * [x] Adjusts the border radius of the url bar and its items
   * Centeres the text inside the URL Bar: ```Always Centered```
   * Enable a background blur when the URL bar is focused & select its intensity: ```Really Strong```
   * [x] Always open websites in a new tab when using url bar
 
-## Gradients
+## 9. Gradients
 
 ![image](https://github.com/user-attachments/assets/fb165906-7601-4421-8a52-40b8dc3441e9)
 

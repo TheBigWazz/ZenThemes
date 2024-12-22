@@ -1,0 +1,9 @@
+/* === Cohesion (Start) === */
+
+@import "modules/intergrated-urlbar.css";
+@import "modules/transparent-styles.css";
+@import "modules/multi-toolbar-style.css";
+@import "modules/single-toolbar-style.css";
+@import "modules/compact-toolbar-style.css";
+
+/* === Cohesion (End) === */

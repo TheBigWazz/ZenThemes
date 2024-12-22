@@ -1,0 +1,229 @@
+/* === Single Toolbar Mode - Tabs on Left === */
+@media (-moz-bool-pref: "zen.view.use-single-toolbar") {
+  
+  /* ==========================================
+     1. Base State - No Sidebars Displayed 
+     ========================================== */
+  #browser:not(:has(#sidebar-box[checked="true"])):not(:has(#zen-sidebar-web-panel:not([hidden]))) {
+    /* Browser Container */
+    .browserSidebarContainer {
+      border-radius: 10px 10px 10px 10px !important;
+    }
+  }
+
+  /* ==========================================
+     2. Only Normal Sidebar on Left
+     ========================================== */
+  #browser:has(#sidebar-box[checked="true"][style*="order: 1"]):not(:has(#zen-sidebar-web-panel:not([hidden]))) {
+    /* Browser Container */
+    .browserSidebarContainer {
+        border-radius: 0px 10px 10px 0px !important;
+    }
+
+    /* Sidebar */
+    #sidebar-box {
+        border-radius: 10px 0px 0px 10px !important;
+    }
+  }
+
+  /* ==========================================
+     3. Only Normal Sidebar on Right
+     ========================================== */
+  #browser:has(#sidebar-box[checked="true"]:not([style*="order: 1"])):not(:has(#zen-sidebar-web-panel:not([hidden]))) {
+    /* Browser Container */
+    .browserSidebarContainer {
+        border-radius: 10px 0px 0px 10px !important;
+    }
+  }
+
+  /* ==========================================
+     4. Only Zen Sidebar on Left
+     ========================================== */
+  #browser:has(#zen-sidebar-web-panel:not([hidden])):not(:has(#sidebar-box[checked="true"])) {
+    /* Browser Container */
+    .browserSidebarContainer {
+        border-radius: 0px 10px 10px 0px !important;
+    }
+
+    /* Zen Sidebar */
+    #zen-sidebar-web-panel {
+        border-radius: 10px 0px 0px 10px !important;
+    }
+  }
+
+  /* ==========================================
+     5. Only Zen Sidebar Floating
+     ========================================== */
+  #browser:has(#zen-sidebar-web-panel[pinned="true"]:not([hidden])):not(:has(#sidebar-box[checked="true"])) {
+    /* Browser Container */
+    .browserSidebarContainer {
+        border-radius: 10px 10px 10px 10px !important;
+    }
+  }
+
+  /* ==========================================
+     6. Both Sidebars - Normal on Left
+     ========================================== */
+  #browser:has(#sidebar-box[checked="true"][style*="order: 1"])
+          :has(#zen-sidebar-web-panel:not([hidden])) {
+    /* Browser Container */
+    .browserSidebarContainer {
+        border-radius: 0px 10px 10px 0px !important;
+    }
+
+    /* Normal Sidebar */
+    #sidebar-box {
+        border-radius: 10px 0px 0px 10px !important;
+    }
+  }
+
+  /* ==========================================
+     7. Both Sidebars - Normal on Right
+     ========================================== */
+  #browser:has(#sidebar-box[checked="true"]:not([style*="order: 1"]))
+          :has(#zen-sidebar-web-panel:not([hidden])) {
+    /* Browser Container */
+    .browserSidebarContainer {
+        border-radius: 0px 0px 0px 0px !important;
+    }
+
+    /* Sidebar */
+    #sidebar-box {
+        background-color: rgba(0, 0, 0, 0) !important;
+    }
+
+    #sidebar-header {
+        background-color: rgba(0, 0, 0, 0.2) !important;
+    }
+            
+    /* Splitter */
+    #sidebar-splitter {
+    }
+
+    /* Zen Sidebar */
+    #zen-sidebar-web-panel {
+        border-radius: 10px 0px 0px 10px !important;
+    }
+  }
+
+  /* ==========================================
+     8. Normal Sidebar on Left + Floating Zen
+     ========================================== */
+  #browser:has(#sidebar-box[checked="true"][style*="order: 1"])
+          :has(#zen-sidebar-web-panel[pinned="true"]:not([hidden])) {
+    /* Browser Container */
+    .browserSidebarContainer {
+        border-radius: 0px 10px 10px 0px !important;
+    }
+            
+    /* Sidebar */
+    #sidebar-box {
+        border-radius: 10px 0px 0px 10px !important;
+    }
+  }
+
+  /* ==========================================
+     9. Normal Sidebar on Right + Floating Zen
+     ========================================== */
+  #browser:has(#sidebar-box[checked="true"]:not([style*="order: 1"]))
+          :has(#zen-sidebar-web-panel[pinned="true"]:not([hidden])) {
+    /* Browser Container */
+    .browserSidebarContainer {
+        border-radius: 10px 0px 0px 10px !important;
+    }
+
+    /* Main Browser Panel */
+    #tabbrowser-tabpanels {
+    }
+            
+    /* Sidebar */
+    #sidebar-box {
+        background-color: rgba(0, 0, 0, 0) !important;
+    }
+
+    #sidebar-header {
+        background-color: rgba(0, 0, 0, 0.2) !important;
+    }
+  }
+}
+
+/* === Single Toolbar Mode - Tabs on Right === */
+@media (-moz-bool-pref: "zen.view.use-single-toolbar") and (-moz-bool-pref: "zen.tabs.vertical.right-side") {
+  
+  /* ==========================================
+     1. Base State - No Sidebars Displayed 
+     ========================================== */
+  #browser:not(:has(#sidebar-box[checked="true"])):not(:has(#zen-sidebar-web-panel:not([hidden]))) {
+  }
+
+  /* ==========================================
+     2. Only Normal Sidebar on Left
+     ========================================== */
+  #browser:has(#sidebar-box[checked="true"][style*="order: 1"]):not(:has(#zen-sidebar-web-panel:not([hidden]))) {
+
+    /* Sidebar */
+    #sidebar-box {
+        border-radius: 10px 0px 0px 10px !important;
+    }
+  }
+
+  /* ==========================================
+     3. Only Normal Sidebar on Right
+     ========================================== */
+  #browser:has(#sidebar-box[checked="true"]:not([style*="order: 1"])):not(:has(#zen-sidebar-web-panel:not([hidden]))) {
+    
+    /* Sidebar */
+    #sidebar-box {
+        border-radius: 0px 10px 10px 0px !important;
+  }
+
+  /* ==========================================
+     4. Only Zen Sidebar on Left
+     ========================================== */
+  #browser:has(#zen-sidebar-web-panel:not([hidden])):not(:has(#sidebar-box[checked="true"])) {
+  }
+
+  /* ==========================================
+     5. Only Zen Sidebar Floating
+     ========================================== */
+  #browser:has(#zen-sidebar-web-panel[pinned="true"]:not([hidden])):not(:has(#sidebar-box[checked="true"])) {
+  }
+
+  /* ==========================================
+     6. Both Sidebars - Normal on Left
+     ========================================== */
+  #browser:has(#sidebar-box[checked="true"][style*="order: 1"])
+          :has(#zen-sidebar-web-panel:not([hidden])) {
+  }
+
+  /* ==========================================
+     7. Both Sidebars - Normal on Right
+     ========================================== */
+  #browser:has(#sidebar-box[checked="true"]:not([style*="order: 1"]))
+          :has(#zen-sidebar-web-panel:not([hidden])) {
+
+    /* Sidebar */
+    #sidebar-box {
+        border-radius: 0px 10px 10px 0px !important;
+    }
+  }
+
+  /* ==========================================
+     8. Normal Sidebar on Left + Floating Zen
+     ========================================== */
+  #browser:has(#sidebar-box[checked="true"][style*="order: 1"])
+          :has(#zen-sidebar-web-panel[pinned="true"]:not([hidden])) {
+  }
+
+  /* ==========================================
+     9. Normal Sidebar on Right + Floating Zen
+     ========================================== */
+  #browser:has(#sidebar-box[checked="true"]:not([style*="order: 1"]))
+          :has(#zen-sidebar-web-panel[pinned="true"]:not([hidden])) {
+            
+    /* Normal Sidebar */
+    #sidebar-box {
+        border-radius: 0px 10px 10px 0px !important;
+    }
+  }
+}

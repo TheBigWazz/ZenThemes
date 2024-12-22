@@ -1,0 +1,67 @@
+/* Base sidebar styling */
+#sidebar-box {
+  background-color: rgba(0, 0, 0, .2) !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Sidebar panels */
+.sidebar-panel {
+  background: transparent !important;
+  background-color: rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Special case for checked sidebar */
+#browser #sidebar-box[checked="true"]:not([style*="order: 1"]) .sidebar-panel {
+  background: transparent !important;
+  background-color: rgba(0, 0, 0, 0) !important;
+}
+
+/* Search box styling */
+#sidebar-search-container > #search-box,
+#viewButton {
+  padding: 4px 8px !important;
+  appearance: none !important;
+  background-color: transparent !important;
+  border-radius: 10px !important;
+  border: none !important;
+}
+
+#sidebar-search-container > #search-box:hover,
+#viewButton:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+#sidebar-search-container > #search-box:active,
+#viewButton:active {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Header styling */
+#sidebar-header {
+  font-size: 1.333em;
+  padding: 5px !important;
+  border-bottom: 0 solid var(--sidebar-border-color) !important;
+}
+
+#sidebar-header #sidebar-close {
+  display: none !important;
+}
+
+/* Bookmark toolbar */
+#PersonalToolbar:not([collapsed="true"]) {
+  background: rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Findbar */
+findbar {
+  background: none !important;
+  border-top: none !important;
+}
+
+@media (-moz-bool-pref: "zen.view.use-single-toolbar") {
+  /* Bookmark toolbar */
+  #PersonalToolbar:not([collapsed="true"]) {
+  background: rgba(0, 0, 0, 0) !important;
+  }
+}

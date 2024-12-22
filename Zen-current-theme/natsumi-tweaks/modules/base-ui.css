@@ -1,0 +1,414 @@
+/*
+
+Natsumi Browser - A userchrome for Zen Browser that makes things flow.
+
+Copyright (c) 2024 Green (@greeeen-dev)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+Natsumi Browser uses code from others. The link to the original projects or
+their author(s) have been provided above the used code.
+
+*/
+
+/* ==== Base UI (Sidebars and tabs) ==== */
+/* Based on https://github.com/lunar-os/ZenCss with my own tweaks added */
+
+.browserSidebarContainer {
+  background-color: rgba(0, 0, 0, 0.2) !important; /* Browser Container transparency */
+}
+
+@media (-moz-bool-pref: "natsumi.sidebar.blur-zen-sidebar") {
+  #zen-sidebar-web-panel[pinned] {
+    /* Zen Sidebar transparency. May cause lag when URLbar is also opened. */
+    
+    background: color-mix(in srgb, var(--natsumi-colors-tertiary) 80%, transparent) !important;
+    backdrop-filter: blur(10px);
+  }
+}
+
+/* Add borders for pinned tabs (including Essentials) */
+
+.tabbrowser-tab[pinned] .tab-background {
+	border-top: 1px solid #ffffff1f !important;
+	border-bottom: 1px solid #0000001f !important;
+}
+
+.tab-icon-overlay {
+  display: none !important;
+}
+
+#TabsToolbar #firefox-view-button[open] > .toolbarbutton-icon, .tab-background:is([selected], [multiselected]) {
+	box-shadow: none !important;
+  border-top: 1px solid #ffffff2d !important;
+	border-bottom: 1px solid #0000002d !important;
+  background-color: rgba(255, 255, 255, 0.17);
+  
+  @media (prefers-color-scheme: light) {
+    border-top: 1px solid #8888882d !important;
+    background-color: var(--tab-selected-bgcolor) !important;
+  }
+}
+
+.tabbrowser-tab[pinned] .tab-background:is([selected], [multiselected]) {
+	border-top: 1px solid #ffffff1f !important;
+	border-bottom: 1px solid #0000001f !important;
+}
+
+.tabbrowser-tab .tab-background{
+  transition: background-color 0.2s ease;
+}
+
+.tabbrowser-tab[pinned]:not([zen-essential="true"]) .tab-stack .tab-background {
+  border: 0px solid #ffffff26 !important;
+}
+
+.tabbrowser-tab[pinned]:not([zen-essential="true"]) .tab-stack .tab-background:is([selected], [multiselected]) {
+  border-top: 1px solid #ffffff2d !important;
+	border-bottom: 1px solid #0000002d !important;
+  border-left: 0 !important;
+  border-right: 0 !important;
+  background-color: rgba(255, 255, 255, 0.17) !important;
+  
+  @media (prefers-color-scheme: light) {
+    border-top: 1px solid #8888882d !important;
+    background-color: var(--tab-selected-bgcolor) !important;
+  }
+}
+
+#zen-workspaces-button {
+  background-color: rgba(255, 255, 255, 0.04) !important;
+  box-shadow: 0 1px 10px rgba(0,0,0,0.1) !important;
+  border-radius: 8px !important;
+  border: 1px solid #ffffff0c !important;
+}
+
+.close-icon:hover {
+  background-color: rgba(255, 100, 100, 0.90) !important;
+  transition: background-color 0.1s ease-in;
+  border-radius: 10px 10px, 10px, 10px !important;
+}
+
+.close-icon {
+  border-radius: 10px 10px, 10px, 10px !important;
+}
+
+#zen-workspaces-button {
+  .subviewbutton {
+    transition: background 0.3s !important;
+    &[active="true"] {
+      background: rgba(255, 255, 255, 0.1) !important;
+      transition: 0.3s !important;
+      border: 1px solid #ffffff0a !important;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.062) !important;
+
+      @media (prefers-color-scheme: light) {
+        background: rgba(255, 255, 255, 0.7) !important;
+      }
+    }
+
+    &:hover {
+      background: rgba(255, 255, 255, 1) !important;
+      transition: 0.3s !important;
+    }
+
+    &:after {
+      display: none !important;
+    }
+  }
+}
+
+#zen-current-workspace-indicator {
+  padding: 10px calc(4px + var(--tab-inline-padding)) !important;
+  font-weight: 500 !important; 
+}
+
+.tab-label:not([fadein]){
+  display: flex !important;
+}
+
+#urlbar-background {
+	border: 1px solid #ffffff13 !important;
+}
+
+/* Shrink on click */
+/* Zen already has this, but this increases the shrink magnitude */
+
+.tabbrowser-tab {
+  & .tab-stack {
+    opacity: 1;
+    transition: transform 0.2s ease;
+    
+    & .tab-background, .tab-content .tab-icon-stack, .tab-content .tab-label-container {
+      opacity: 1 !important;
+      transition: background 0.2s ease, opacity 0.2s ease;
+    }
+  }
+}
+
+.tabbrowser-tab:active {
+  scale: unset !important;
+  
+  & .tab-stack {
+    transform: scale(0.95, 0.95) !important;
+    
+    &:has(.tab-close-button:active) {
+      & .tab-background, .tab-content .tab-icon-stack, .tab-content .tab-label-container {
+        opacity: 0.3 !important;
+      }
+      
+      transform: unset !important;
+    }
+  }
+}
+
+/* Shrink essentials more */
+
+#zen-essentials-container .tabbrowser-tab:active {
+  & .tab-stack {
+    transform: scale(0.90, 0.90) !important;
+  }
+}
+
+/* Reset pinned tabs icon transition */
+
+.reset-icon {
+	transition: background-color 0.1s ease-out;
+}
+
+.reset-icon:hover {
+	transition: background-color 0.1s ease-in;
+}
+
+/* Firefox sidebar panel transparency */
+
+@media not (-moz-bool-pref: "natsumi.sidebar.disable-panel-transparency") {
+  /*noinspection CssUnknownProperty*/
+  #sidebar-box {
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+
+    /*noinspection CssUnknownProperty*/
+    #sidebar-header {
+      border-bottom: none !important;
+    }
+  }
+}
+
+/* Multiple toolbars patch */
+
+@media not (-moz-bool-pref: "zen.view.use-single-toolbar") {
+  #identity-box {
+    margin-inline-end: 5px !important;
+  }
+}
+
+/* Patch and restore List all tabs button */
+
+#alltabs-button {
+  display: flex !important;
+}
+
+/* Remove toolbar button badge if not needed */
+
+toolbarbutton[badged="true"]:not([badge]) {
+  & .toolbarbutton-badge {
+    display: none !important;
+  }
+  
+  & .toolbarbutton-badge-stack {
+    background-color: transparent !important;
+  }
+}
+
+/* Icons patch */
+
+#TabsToolbar-customization-target .toolbarbutton-icon {
+  border-radius: 0 !important;
+}
+
+/* Toolbar patches */
+
+@media (-moz-bool-pref: "zen.view.sidebar-expanded") {
+  #zen-sidebar-top-buttons-customization-target {
+    toolbarbutton {
+      margin: 1px !important;
+    }
+    toolbarbutton:first-child {
+      margin-left: 5px !important;
+    }
+  }
+}
+
+#PersonalToolbar {
+  padding-left: 0 !important;
+}
+
+@media (-moz-bool-pref: "natsumi.theme.better-findbar-addon") {
+  findbar {
+    opacity: 1;
+    transition: opacity 0.1s ease, scale 0.1s ease, left 0.1s ease !important;
+  }
+
+  findbar[hidden] {
+    opacity: 0;
+    left: 33.5% !important;
+    scale: 0.5 0.5;
+  }
+}
+
+.toolbarbutton-badge-stack, toolbarbutton image {
+  transition: background-color 0.2s ease, transform 0.2s ease !important;
+}
+
+toolbarbutton:active {
+  transition: background-color 0.2s ease, transform 0.2s ease !important;
+}
+
+toolbarbutton[open] {
+  transition: background-color 0.2s ease, transform 0.2s ease !important;
+}
+
+/* Tab alert animation */
+
+@keyframes alert {
+  0% {
+    background: transparent;
+  }
+  
+  50% {
+    background: var(--natsumi-primary-color);
+  }
+  
+  100% {
+    background: transparent;
+  }
+}
+
+.tabbrowser-tab[attention] {
+  .tab-background {
+    animation: alert 2s ease infinite;
+  }
+  
+  .tab-content {
+    background: none !important;
+  }
+}
+
+/* Container tabs */
+
+.tabbrowser-tab[usercontextid], .tabbrowser-tab[usercontextid][pinned]:not([zen-essential="true"]) {
+  --gradient-width: var(--container-gradient-width);
+  
+  .tab-background {
+    overflow: hidden !important;
+    border: 1px solid var(--identity-icon-color) !important;
+    
+    @media (-moz-bool-pref: "natsumi.sidebar.containers-dashed-border") {
+      border: 1px dashed var(--identity-icon-color) !important;
+    }
+    
+    @media (-moz-bool-pref: "natsumi.sidebar.containers-no-inactive-border") {
+      border: none !important;
+    }
+    
+    .tab-context-line {
+      --container-angle: 90deg;
+      @media (-moz-bool-pref: "natsumi.sidebar.right-gradient") {
+        --container-angle: 270deg;
+        margin-left: auto !important;
+      }
+      transition: width 0.2s ease;
+      width: var(--gradient-width) !important;
+      height: 100% !important;
+      background: linear-gradient(
+        var(--container-angle),
+        color-mix(in srgb, var(--identity-icon-color) 50%, transparent) 0%,
+        transparent
+      ) !important;
+      
+      @media (-moz-bool-pref: "natsumi.sidebar.containers-thicker-gradient") {
+        background: linear-gradient(var(--container-angle), var(--identity-icon-color), var(--identity-icon-color), transparent) !important;
+      }
+    }
+  }
+  
+  &:hover {
+    --gradient-width: var(--container-gradient-width-expanded);
+  }
+  
+  &:is([selected="true"]) {
+    --gradient-width: var(--container-gradient-width-expanded);
+    
+    .tab-background {
+      border: 1px solid var(--identity-icon-color) !important;
+    }
+  }
+  
+  &:is([zenDefaultUserContextId="true"]) {
+    @media (-moz-bool-pref: "zen.workspaces.hide-default-container-indicator") {
+      .tab-background {
+        border: none !important;
+      }
+      
+      .tab-context-line {
+        display: none !important;
+      }
+    }
+  }
+}
+
+/* Tab hover effect */
+
+.tabbrowser-tab:not([usercontextid]) {
+  .tab-background::before {
+    content: "";
+    display: flex !important;
+    height: 100%;
+    width: 0;
+    background: linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--natsumi-primary-color) 35%, transparent) 0%,
+      transparent
+    );
+    transition: width 0.1s ease;
+    
+    @media (-moz-bool-pref: "natsumi.sidebar.right-gradient") {
+      background: linear-gradient(
+        270deg,
+        color-mix(in srgb, var(--natsumi-primary-color) 35%, transparent) 0%,
+        transparent
+      );
+      margin-left: auto;
+    }
+  }
+  
+  &:is([selected], [multiselected]) {
+    .tab-background::before {
+      width: 50% !important;
+    }
+  }
+  
+  &:hover {
+    .tab-background::before {
+      width: 25%;
+    }
+  }
+}

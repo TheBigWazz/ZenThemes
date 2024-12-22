@@ -1,0 +1,33 @@
+/* ==== Config ==== */
+
+/*
+Feel free to change these values to whatever you want, as long
+as they use the correct format.
+*/
+
+* {
+  /* Accent color */
+  --natsumi-accent-color: var(--zen-primary-color);
+
+  /* Natsumi URLbar appear animations */
+  --urlbar-appear-animation-duration: 0.25s;
+  --urlbar-results-animation-duration: 0s;
+  --urlbar-individual-result-animation-duration: .5s;
+  --urlbar-individual-result-animation-delay: 0.05s;
+  --urlbar-individual-result-animation-delay-offset: 0s;
+  --urlbar-individual-result-expand-size: 1.1;
+
+  /* Natsumi border reload animations */
+  --reload-border-animation-duration: 0.2s;
+  --reload-border-animation-rotation-duration: 2s;
+  --reload-border-animation-exit-duration: 1s;
+  --reload-border-margin: 4px;
+
+  /* Natsumi URLbar reload animations */
+  --reload-urlbar-animation-duration: 0.2s;
+  --reload-urlbar-animation-fadein-duration: 2s;
+
+  /* Container tabs gradient */
+  --container-tabs-normal-gradient-width: 75%;
+  --container-tabs-expanded-gradient-width: 100%;
+}

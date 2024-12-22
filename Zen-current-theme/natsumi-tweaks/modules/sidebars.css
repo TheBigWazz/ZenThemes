@@ -1,0 +1,129 @@
+/*
+
+Natsumi Browser - A userchrome for Zen Browser that makes things flow.
+
+Copyright (c) 2024-present Green (@greeeen-dev)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+Natsumi Browser uses code from others. The link to the original projects or
+their author(s) have been provided above the used code.
+
+*/
+
+/* ==== Firefox sidebar panel tweaks ==== */
+
+@media not (-moz-bool-pref: "natsumi.sidebar.disable-panel-transparency") {
+  /*noinspection CssUnknownProperty*/
+  #sidebar-box {
+    border: none !important;
+    box-shadow: none !important;
+
+    @media not (-moz-bool-pref: "natsumi.sidebar.floating-panel") {
+      background-color: transparent !important;
+    }
+
+    /*noinspection CssUnknownProperty*/
+    #sidebar-header {
+      border-bottom: none !important;
+    }
+  }
+}
+
+@media (-moz-bool-pref: "natsumi.sidebar.floating-panel") {
+  :has(#sidebar-box[checked]) {
+    #tabbrowser-tabpanels {
+      margin-left: 4px !important;
+
+      &:is([zen-split-view]) {
+        margin-left: 0.5px !important;
+      }
+    }
+  }
+
+  /*noinspection CssInvalidFunction*/
+  #sidebar-box {
+    position: absolute;
+    height: calc(100% - 40px);
+    min-width: 180px !important;
+    min-height: 180px !important;
+    max-width: calc(100% - 40px);
+    max-height: calc(100% - 40px);
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+    z-index: 999;
+    opacity: 1;
+    transition: margin-left 0.2s ease, opacity 0.2s ease !important;
+
+    @media (-moz-bool-pref: "natsumi.sidebar.panel-glass-effect") {
+      background-color: var(--natsumi-glass-background) !important;
+      backdrop-filter: blur(10px) !important;
+      box-shadow: 0 0 10px color-mix(in srgb, var(--natsumi-colors-secondary) 75%, light-dark(black, white)) !important;
+      border: 1px solid light-dark(rgba(20, 20, 20, 0.2), rgba(235, 235, 235, 0.3)) !important;
+
+      /*noinspection CssInvalidFunction*/
+      #sidebar-header {
+        margin-left: 8px;
+        margin-right: 8px;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        border-bottom: 1px solid light-dark(rgba(20, 20, 20, 0.2), rgba(235, 235, 235, 0.3)) !important;
+      }
+    }
+
+    @media (-moz-bool-pref: "natsumi.sidebar.panel-resizable") {
+      resize: both;
+    }
+
+    &:is([hidden]) {
+      display: flex !important;
+      margin-left: 0;
+      opacity: 0;
+      pointer-events: none !important;
+    }
+  }
+}
+
+/* ==== Tabs sidebar tweaks ==== */
+
+@media (-moz-bool-pref: "natsumi.sidebar.tabs-glass-effect") {
+  @media (-moz-bool-pref: "zen.view.compact") {
+    /*noinspection CssInvalidFunction*/
+    @media (-moz-bool-pref: "zen.view.compact.hide-tabbar") {
+      #titlebar {
+        background: var(--natsumi-glass-background) !important;
+        border: 1px solid light-dark(rgba(20, 20, 20, 0.2), rgba(235, 235, 235, 0.3)) !important;
+        box-shadow: 0 0 10px color-mix(in srgb, var(--natsumi-colors-secondary) 75%, light-dark(black, white)) !important;
+      }
+
+      #tabbrowser-arrowscrollbox-periphery::before{
+        background: light-dark(rgba(20, 20, 20, 0.2), rgba(235, 235, 235, 0.3)) !important;
+      }
+
+
+      /*noinspection CssInvalidFunction*/
+      @media (-moz-bool-pref: "zen.view.show-bottom-border") {
+        #TabsToolbar-customization-target::after {
+          background: light-dark(rgba(20, 20, 20, 0.2), rgba(235, 235, 235, 0.3)) !important;
+        }
+      }
+    }
+  }
+}

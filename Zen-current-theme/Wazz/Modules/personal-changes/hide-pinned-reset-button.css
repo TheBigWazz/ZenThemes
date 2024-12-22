@@ -1,0 +1,4 @@
+/* Hide the reset button for pinned tabs */
+.tab-reset-button {
+    display: none !important;
+}

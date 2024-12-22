@@ -1,0 +1,6 @@
+/* Hide current workspace indicator */
+#zen-current-workspace-indicator {
+    display: none !important;
+    padding: 10px calc(4px + var(--tab-inline-padding)) !important;
+    font-weight: 500 !important; 
+}
