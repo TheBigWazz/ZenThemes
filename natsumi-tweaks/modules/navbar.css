@@ -27,7 +27,31 @@ their author(s) have been provided above the used code.
 
 */
 
-/* ==== Hide Natsumi not loaded banner (load was successful) ==== */
-* {
-  --natsumi-fail-display: none !important;
+/* ==== Navbar tweaks ==== */
+@media (-moz-bool-pref: "zen.view.compact") {
+  @media (-moz-bool-pref: "zen.view.compact.hide-toolbar") {
+    @media (-moz-bool-pref: "natsumi.navbar.floating-navbar") {
+      #zen-appcontent-navbar-container {
+        width: calc(100vw - 20px) !important;
+        left: 10px !important;
+        margin-top: 10px !important;
+        border-radius: var(--zen-border-radius) !important;
+        padding: 0 !important;
+      }
+    }
+
+    /*noinspection CssInvalidFunction*/
+    @media (-moz-bool-pref: "natsumi.navbar.glass-effect") {
+      #zen-appcontent-navbar-container {
+        background: var(--natsumi-glass-background) !important;
+        border: 1px solid light-dark(rgba(20, 20, 20, 0.2), rgba(235, 235, 235, 0.3)) !important;
+        box-shadow: 0 0 10px color-mix(in srgb, var(--natsumi-colors-secondary) 75%, light-dark(black, white)) !important;
+
+        @media not (-moz-bool-pref: "natsumi.navbar.floating-navbar") {
+          padding: 0 !important;
+          width: calc(100vw - 2px) !important;
+        }
+      }
+    }
+  }
 }

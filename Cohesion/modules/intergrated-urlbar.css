@@ -1,0 +1,57 @@
+/* --- Integrated URL Bar --- */
+
+/* Webview Styles */
+@media not (-moz-bool-pref: "zen.view.compact") {
+  #browser { 
+    --urlbar-min-width: 28px !important;
+  }
+
+  /* Nav bar style and transparency level */
+  #nav-bar {
+    --zen-toolbar-height: 45px;
+    background-color: rgba(0, 0, 0, 0.2) !important;
+    border-radius: 10px 10px 0 0 !important;
+    padding-left: 6px !important;
+    margin: 6px 6px 0 1px !important;
+    box-shadow: none !important;
+  }  
+
+  .browserSidebarContainer {
+    background-color: rgba(0, 0, 0, 0.2) !important;
+    margin-top: 0px !important;
+    margin-right: 0px !important;
+    box-shadow: none !important;
+    border-radius: 10px 10px 10px 10px !important;
+  }
+
+  /* Toolbar spacing */
+  #navigator-toolbox {
+    padding-top: 8px !important;
+  }
+}
+
+@media (-moz-bool-pref: "zen.view.use-single-toolbar") {
+  #browser { 
+    --urlbar-min-width: initial !important;
+  }
+
+  #nav-bar {
+    background-color: initial !important;
+    border-radius: initial !important;
+    padding-left: 4px!important;
+    margin: initial !important;
+    box-shadow: initial !important;
+  }
+
+  .browserSidebarContainer {
+    background-color: initial !important;
+    margin-top: initial !important;
+    margin-right: initial !important;
+    box-shadow: initial !important;
+    border-radius: initial !important;
+  }
+
+  #navigator-toolbox {
+    padding-top: initial !important;
+  }
+}

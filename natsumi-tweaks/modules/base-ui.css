@@ -99,6 +99,16 @@ their author(s) have been provided above the used code.
   border: 1px solid #ffffff0c !important;
 }
 
+.close-icon:hover {
+  background-color: rgba(255, 100, 100, 0.90) !important;
+  transition: background-color 0.1s ease-in;
+  border-radius: 10px 10px, 10px, 10px !important;
+}
+
+.close-icon {
+  border-radius: 10px 10px, 10px, 10px !important;
+}
+
 #zen-workspaces-button {
   .subviewbutton {
     transition: background 0.3s !important;

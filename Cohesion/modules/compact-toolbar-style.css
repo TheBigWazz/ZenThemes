@@ -1,0 +1,374 @@
+/* === Compact Mode - Tabs on Left === */
+@media (-moz-bool-pref: 'zen.view.compact') {
+  
+  /* ==========================================
+     1. Base State - No Sidebars Displayed 
+     ========================================== */
+  #browser:not(:has(#sidebar-box[checked="true"])):not(:has(#zen-sidebar-web-panel:not([hidden]))) {
+    /* Browser Container */
+    .browserSidebarContainer {
+      border-radius: 10px 10px 10px 10px !important;
+      box-shadow: none !important;
+  }
+}
+
+  /* ==========================================
+     2. Only Normal Sidebar on Left
+     ========================================== */
+  #browser:has(#sidebar-box[checked="true"][style*="order: 1"]):not(:has(#zen-sidebar-web-panel:not([hidden]))) {
+    /* Browser Container */
+    .browserSidebarContainer {
+      border-radius: 0px 10px 10px 0px !important;
+      box-shadow: none !important;
+    }
+
+    /* Main Browser Panel */
+    #tabbrowser-tabpanels {
+      margin-left: 0px !important;
+    }
+
+    /* Sidebar */
+    #sidebar-box {
+      margin-top: 1px !important;
+      margin-bottom: 1px !important;
+      border-radius: 10px 0px 0px 10px !important;
+    }
+  }
+
+  /* ==========================================
+     3. Only Normal Sidebar on Right
+     ========================================== */
+  #browser:has(#sidebar-box[checked="true"]:not([style*="order: 1"])):not(:has(#zen-sidebar-web-panel:not([hidden]))) {
+    /* Browser Container */
+    .browserSidebarContainer {
+      border-radius: 10px 0px 0px 10px !important;
+      box-shadow: none !important;
+    }
+
+    /* Main Browser Panel */
+    #tabbrowser-tabpanels {
+    }
+
+    /* Sidebar */
+    #sidebar-box {
+      margin-top: 1px !important;
+      margin-bottom: 1px !important;
+      margin-left: -1px !important;
+      border-radius: 0px 10px 10px 0px !important;
+    }
+  }
+
+  /* ==========================================
+     4. Only Zen Sidebar on Left
+     ========================================== */
+  #browser:has(#zen-sidebar-web-panel:not([hidden])):not(:has(#sidebar-box[checked="true"])) {
+    /* Browser Container */
+    .browserSidebarContainer {
+      border-radius: 0px 10px 10px 0px !important;
+      box-shadow: none !important;
+    }
+
+    /* Main Browser Panel */
+    #tabbrowser-tabpanels {
+    }
+
+    /* Zen Sidebar */
+    #zen-sidebar-web-panel {
+      margin-top: -5px !important;
+      margin-bottom: 1px !important;
+      border-radius: 10px 0px 0px 10px !important;
+    }
+  }
+
+  /* ==========================================
+     5. Only Zen Sidebar Floating
+     ========================================== */
+  #browser:has(#zen-sidebar-web-panel[pinned="true"]:not([hidden])):not(:has(#sidebar-box[checked="true"])) {
+    /* Browser Container */
+    .browserSidebarContainer {
+      border-radius: 10px 10px 10px 10px !important;
+      box-shadow: none !important;
+    }
+  }
+
+  /* ==========================================
+     6. Both Sidebars - Normal on Left
+     ========================================== */
+  #browser:has(#sidebar-box[checked="true"][style*="order: 1"])
+          :has(#zen-sidebar-web-panel:not([hidden])) {
+    /* Browser Container */
+    .browserSidebarContainer {
+      border-radius: 0px 10px 10px 0px !important;
+      box-shadow: none !important;
+    }
+
+    /* Main Browser Panel */
+    #tabbrowser-tabpanels {
+    }
+
+    /* Normal Sidebar */
+    #sidebar-box {
+      margin-top: 1px !important;
+      border-radius: 10px 0px 0px 10px !important;
+    }
+
+    /* Zen Sidebar */
+    #zen-sidebar-web-panel {
+      margin-top: -5px !important;
+    }
+  }
+
+  /* ==========================================
+     7. Both Sidebars - Normal on Right
+     ========================================== */
+  #browser:has(#sidebar-box[checked="true"]:not([style*="order: 1"]))
+          :has(#zen-sidebar-web-panel:not([hidden])) {
+    /* Browser Container */
+    .browserSidebarContainer {
+      border-radius: 0px 0px 0px 0px !important;
+      box-shadow: none !important;
+    }
+
+    /* Sidebar */
+    #sidebar-box {
+      margin-top: 1px !important;
+      margin-left: -5px !important;
+    }
+
+    /* Zen Sidebar */
+    #zen-sidebar-web-panel {
+      margin-top: -5px !important;
+      border-radius: 10px 0px 0px 10px !important;
+    }
+  }
+
+  /* ==========================================
+     8. Normal Sidebar on Left + Floating Zen
+     ========================================== */
+  #browser:has(#sidebar-box[checked="true"][style*="order: 1"])
+          :has(#zen-sidebar-web-panel[pinned="true"]:not([hidden])) {
+    /* Browser Container */
+    .browserSidebarContainer {
+      border-radius: 0px 10px 10px 0px !important;
+      box-shadow: none !important;
+    }
+            
+    /* Sidebar */
+    #sidebar-box {
+      margin-top: 1px !important;
+      border-radius: 10px 0px 0px 10px !important;
+    }
+  }
+
+  /* ==========================================
+     9. Normal Sidebar on Right + Floating Zen
+     ========================================== */
+  #browser:has(#sidebar-box[checked="true"]:not([style*="order: 1"]))
+          :has(#zen-sidebar-web-panel[pinned="true"]:not([hidden])) {
+    /* Browser Container */
+    .browserSidebarContainer {
+      border-radius: 10px 0px 0px 10px !important;
+      box-shadow: none !important;
+    }
+
+    /* Main Browser Panel */
+    #tabbrowser-tabpanels {
+    }
+            
+    /* Normal Sidebar */
+    #sidebar-box {
+      margin-top: 1px !important;
+      margin-left: -5px !important;
+    }
+  }
+}
+
+
+/* === Compact Mode - Tabs on Right === */
+
+@media (-moz-bool-pref: "zen.view.compact") and (-moz-bool-pref: "zen.tabs.vertical.right-side") {
+  
+  /* ==========================================
+     1. Base State - No Sidebars Displayed 
+     ========================================== */
+  #browser:not(:has(#sidebar-box[checked="true"])):not(:has(#zen-sidebar-web-panel:not([hidden]))) {
+    /* Browser Container */
+    .browserSidebarContainer {
+      border-radius: 10px 10px 10px 10px !important;
+      box-shadow: none !important;
+      margin-left: 0px !important;
+      margin-right: 0px !imoprtant;
+  }
+}
+
+  /* ==========================================
+     2. Only Normal Sidebar on Left
+     ========================================== */
+  #browser:has(#sidebar-box[checked="true"][style*="order: 1"]):not(:has(#zen-sidebar-web-panel:not([hidden]))) {
+    /* Browser Container */
+    .browserSidebarContainer {
+      border-radius: 0px 10px 10px 0px !important;
+      box-shadow: none !important;
+    }
+
+    /* Main Browser Panel */
+    #tabbrowser-tabpanels {
+      margin-right: 0px !important;
+    }
+
+    /* Sidebar */
+    #sidebar-box {
+      margin-top: 1px !important;
+      margin-bottom: 1px !important;
+      margin-right: 1px !important;
+      margin-left: 0px !important;
+      border-radius: 10px 0px 0px 10px !important;
+    }
+  }
+
+  /* ==========================================
+     3. Only Normal Sidebar on Right
+     ========================================== */
+  #browser:has(#sidebar-box[checked="true"]:not([style*="order: 1"])):not(:has(#zen-sidebar-web-panel:not([hidden]))) {
+    /* Browser Container */
+    .browserSidebarContainer {
+      border-radius: 10px 0px 0px 10px !important;
+      box-shadow: none !important;
+    }
+
+    /* Sidebar */
+    #sidebar-box {
+      margin-top: 1px !important;
+      margin-bottom: 0px !important;
+      margin-left: 0px !important;
+      border-radius: 0px 10px 10px 0px !important;
+    }
+  }
+
+  /* ==========================================
+     4. Only Zen Sidebar on Left
+     ========================================== */
+  #browser:has(#zen-sidebar-web-panel:not([hidden])):not(:has(#sidebar-box[checked="true"])) {
+    /* Browser Container */
+    .browserSidebarContainer {
+      border-radius: 0px 10px 10px 0px !important;
+      box-shadow: none !important;
+    }
+
+    /* Zen Sidebar */
+    #zen-sidebar-web-panel {
+      margin-top: -5px !important;
+      margin-bottom: 0px !important;
+      margin-left: 0px !important;
+      border-radius: 10px 0px 0px 10px !important;
+    }
+  }
+
+  /* ==========================================
+     5. Only Zen Sidebar Floating
+     ========================================== */
+  #browser:has(#zen-sidebar-web-panel[pinned="true"]:not([hidden])):not(:has(#sidebar-box[checked="true"])) {
+    /* Browser Container */
+    .browserSidebarContainer {
+      border-radius: 10px 10px 10px 10px !important;
+      box-shadow: none !important;
+      margin-right: 0px !important;
+    }
+  }
+
+  /* ==========================================
+     6. Both Sidebars - Normal on Left
+     ========================================== */
+  #browser:has(#sidebar-box[checked="true"][style*="order: 1"])
+          :has(#zen-sidebar-web-panel:not([hidden])) {
+    /* Browser Container */
+    .browserSidebarContainer {
+      border-radius: 0px 10px 10px 0px !important;
+      box-shadow: none !important;
+      margin-right: 0px !important;
+    }
+
+    /* Normal Sidebar */
+    #sidebar-box {
+      margin-top: 1px !important;
+      margin-left: 0px !important;
+      margin-right: 6px !important;
+      border-radius: 10px 0px 0px 10px !important;
+    }
+
+    /* Zen Sidebar */
+    #zen-sidebar-web-panel {
+      margin-top: -5px !important;
+    }
+  }
+
+  /* ==========================================
+     7. Both Sidebars - Normal on Right
+     ========================================== */
+  #browser:has(#sidebar-box[checked="true"]:not([style*="order: 1"]))
+          :has(#zen-sidebar-web-panel:not([hidden])) {
+    /* Browser Container */
+    .browserSidebarContainer {
+      border-radius: 0px 0px 0px 0px !important;
+      box-shadow: none !important;
+    }
+
+    /* Sidebar */
+    #sidebar-box {
+      margin-top: 1px !important;
+      margin-left: 0px !important;
+      border-radius: 0px 10px 10px 0px !important;
+    }
+
+    /* Zen Sidebar */
+    #zen-sidebar-web-panel {
+      margin-top: -5px !important;
+      border-radius: 10px 0px 0px 10px !important;
+    }
+  }
+
+  /* ==========================================
+     8. Normal Sidebar on Left + Floating Zen
+     ========================================== */
+  #browser:has(#sidebar-box[checked="true"][style*="order: 1"])
+          :has(#zen-sidebar-web-panel[pinned="true"]:not([hidden])) {
+    /* Browser Container */
+    .browserSidebarContainer {
+      border-radius: 0px 10px 10px 0px !important;
+      box-shadow: none !important;
+    }
+            
+    /* Sidebar */
+    #sidebar-box {
+      margin-top: 1px !important;
+      margin-left: 0px !important;
+      margin-right: 0px !important;
+      border-radius: 10px 0px 0px 10px !important;
+    }
+  }
+
+  /* ==========================================
+     9. Normal Sidebar on Right + Floating Zen
+     ========================================== */
+  #browser:has(#sidebar-box[checked="true"]:not([style*="order: 1"]))
+          :has(#zen-sidebar-web-panel[pinned="true"]:not([hidden])) {
+    /* Browser Container */
+    .browserSidebarContainer {
+      border-radius: 10px 0px 0px 10px !important;
+      box-shadow: none !important;
+      
+    }
+
+    /* Main Browser Panel */
+    #tabbrowser-tabpanels {
+      margin-left: -3px !important;
+    }
+            
+    /* Normal Sidebar */
+    #sidebar-box {
+      margin-top: 1px !important;
+      margin-left: 0px !important;
+      border-radius: 0px 10px 10px 0px !important;
+    }
+  }
+}

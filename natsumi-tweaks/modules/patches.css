@@ -2,7 +2,7 @@
 
 Natsumi Browser - A userchrome for Zen Browser that makes things flow.
 
-Copyright (c) 2024 Green (@greeeen-dev)
+Copyright (c) 2024-present Green (@greeeen-dev)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -32,6 +32,7 @@ their author(s) have been provided above the used code.
 /* Allow URLbar and Zen Sidebar blurring */
 /* Disable this through config if too much GPU is being used */
 
+/* Removing this block to ensure compatibility with Cohesion. It messes up Normal Sidebar radius somehow and breaks cohesive look.
 @media not (-moz-bool-pref: "natsumi.theme.disable-blur") {
   browser {
     clip-path: inset(0% 0% 0% 0% round var(--zen-webview-border-radius, var(--zen-border-radius)));
@@ -41,14 +42,20 @@ their author(s) have been provided above the used code.
     }
   }
 }
+*/
 
 :root {
-  &:is([inDOMFullscreen="true"]) {
-    /* Patches collapsed view */
-    #navigator-toolbox {
-      padding-top: 0 !important;
+  &:is([inFullscreen]) {
+    /* Patches collapsed view on macOS */
+    @media (-moz-platform: macos) {
+      @media not (-moz-bool-pref: "zen.view.sidebar-expanded") {
+        #navigator-toolbox {
+          margin-top: -3px !important;
+        }
+      }
     }
-
+  }
+  &:is([inDOMFullscreen="true"]) {
     #zen-sidebar-top-buttons-customization-target {
       padding-top: 3px !important;
     }

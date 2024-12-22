@@ -2,7 +2,7 @@
 
 Natsumi Browser - A userchrome for Zen Browser that makes things flow.
 
-Copyright (c) 2024 Green (@greeeen-dev)
+Copyright (c) 2024-present Green (@greeeen-dev)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -36,8 +36,8 @@ The below code applies your config (or default values if needed) and they should
 Edit the natsumi-config.css file instead.
  */
 
-/* Colors */
 * {
+  /* Colors */
   --natsumi-primary-color: var(--natsumi-accent-color, var(--zen-primary-color));
   --natsumi-colors-primary: color-mix(in srgb, var(--natsumi-primary-color) 50%, black 50%);
   --natsumi-colors-secondary: color-mix(in srgb, var(--natsumi-colors-primary) 20%, white 80%);
@@ -57,6 +57,9 @@ Edit the natsumi-config.css file instead.
       --natsumi-colors-primary-foreground: color-mix(in srgb, var(--natsumi-primary-color) 80%, white 20%);
     }
   }
+
+  /* Glass effect */
+  --natsumi-glass-background: color-mix(in srgb, var(--natsumi-colors-secondary) 75%, transparent);
 }
 
 /* URL bar appear animation */
