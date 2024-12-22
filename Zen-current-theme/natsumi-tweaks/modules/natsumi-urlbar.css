@@ -423,17 +423,19 @@ their author(s) have been provided above the used code.
         }
       }
 
-      #urlbar-background {
-        backdrop-filter: blur(10px);
-        background: color-mix(in srgb, var(--natsumi-colors-secondary) 75%, transparent) !important;
-        transition: backdrop-filter 0.5s ease, background 0.5s ease;
+/*noinspection CssInvalidFunction*/
+#urlbar-background {
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 100px color-mix(in srgb, var(--natsumi-colors-primary) 100%, light-dark(black, white)) !important;
+  background: var(--natsumi-glass-background) !important;
+  transition: backdrop-filter 0.5s ease, background 0.5s ease;
 
-        @media (-moz-bool-pref: "natsumi.urlbar.disable-transparency") {
-          transition: none;
-          backdrop-filter: none;
-          background: var(--natsumi-colors-secondary) !important;
-        }
-      }
+  @media (-moz-bool-pref: "natsumi.urlbar.disable-transparency") {
+    transition: none;
+    backdrop-filter: none;
+    background: var(--natsumi-colors-secondary) !important;
+  }
+}      
 
       @media not (-moz-bool-pref: "natsumi.debug.legacy") {
         #identity-box {
@@ -481,6 +483,12 @@ their author(s) have been provided above the used code.
             margin-left: 4px !important;
           }
         }
+      }
+
+      /* Force icon size */
+      #identity-icon {
+        width: 16px !important;
+        height: 16px !important;
       }
     }
 

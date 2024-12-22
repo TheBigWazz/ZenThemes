@@ -27,7 +27,25 @@ their author(s) have been provided above the used code.
 
 */
 
-/* ==== Hide Natsumi not loaded banner (load was successful) ==== */
-* {
-  --natsumi-fail-display: none !important;
+/* ==== Zen Sidebar (web panels) tweaks ==== */
+
+@media (-moz-bool-pref: "natsumi.sidebar.blur-zen-sidebar") {
+  /*noinspection CssInvalidFunction*/
+  #zen-sidebar-web-panel[pinned] {
+    /* Zen Sidebar transparency. May cause lag when URLbar is also opened. */
+
+    background: color-mix(in srgb, var(--natsumi-colors-tertiary) 80%, transparent) !important;
+    backdrop-filter: blur(10px);
+
+    @media (-moz-bool-pref: "natsumi.sidebar.zen-sidebar-glass-effect") {
+      background: var(--natsumi-glass-background) !important;
+      box-shadow: 0 0 10px color-mix(in srgb, var(--natsumi-colors-secondary) 75%, light-dark(black, white)) !important;
+      border: 1px solid light-dark(rgba(20, 20, 20, 0.2), rgba(235, 235, 235, 0.3)) !important;
+
+      /*noinspection CssInvalidFunction*/
+      #zen-sidebar-web-header, #zen-sidebar-panels-wrapper {
+        border-color: light-dark(rgba(20, 20, 20, 0.2), rgba(235, 235, 235, 0.3)) !important;
+      }
+    }
+  }
 }

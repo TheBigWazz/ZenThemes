@@ -2,7 +2,7 @@
 
 Natsumi Browser - A userchrome for Zen Browser that makes things flow.
 
-Copyright (c) 2024 Green (@greeeen-dev)
+Copyright (c) 2024-present Green (@greeeen-dev)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -175,7 +175,9 @@ their author(s) have been provided above the used code.
 .bookmark-item, .zen-workspace-button, #PanelUI-zen-workspaces-reorder-mode,
 #PanelUI-zen-workspaces-new, menupopup menuitem, menupopup menu,
 #PanelUI-zen-profiles-list .PanelUI-zen-profiles-item,
-#PanelUI-zen-profiles-actions toolbarbutton {
+#PanelUI-zen-profiles-actions toolbarbutton,
+#TabsToolbar-customization-target toolbarbutton, .findbar-container toolbarbutton,
+#sidebar-switcher-target {
   transition: background-color 0.2s ease;
 }
 
@@ -183,7 +185,8 @@ menulist[open="true"] menupopup {
   animation: menupopup-appear 0.2s ease;
 }
 
-#downloadsHistory, .downloadButton, #editBookmarkPanelRemoveButton, #editBookmarkPanelDoneButton {
+#downloadsHistory, .downloadButton, #editBookmarkPanelRemoveButton, #editBookmarkPanelDoneButton,
+.findbar-closebutton {
   transition: 0.2s ease !important;
 }
 
@@ -203,5 +206,12 @@ menulist[open="true"] menupopup {
         color: color-mix(in srgb, var(--toolbarbutton-icon-fill-attention) 70%, light-dark(black, white)) !important;
       }
     }
+  }
+}
+
+/* Elongate the pinned tabs section */
+#vertical-pinned-tabs-container {
+  @media (-moz-bool-pref: "natsumi.sidebar.unlimited-pinned-tabs") {
+    max-height: none !important;
   }
 }
