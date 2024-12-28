@@ -36,8 +36,8 @@ their author(s) have been provided above the used code.
 @import "modules/tab-groups.css";
 /* @import "modules/horizontal-tabs.css"; */
 @import "modules/natsumi-urlbar.css";
-/* @import "modules/natsumi-loading.css"; */
-/* @import "modules/natsumi-findbar.css"; */
+@import "modules/natsumi-loading.css";
+@import "modules/natsumi-findbar.css";
 @import "modules/web-panel.css";
 @import "modules/sidebars.css";
 @import "modules/navbar.css";
